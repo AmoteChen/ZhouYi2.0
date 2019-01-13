@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
+    tools:context="example.com.zhouyi_20.MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="0dp" android:orientation="horizontal"
+        android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
+        android:layout_weight="7" android:background="#eff2fb">
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
+            android:layout_weight="1">
+            <LinearLayout android:layout_weight="0.3"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_n" android:showDividers="middle">
+                <TextView
+                    android:id="@+id/liuyaoresult_liushou_caption"
+                    android:textColor="#7e7e82" android:gravity="center" android:textStyle="normal"
+                    android:autoSizeMaxTextSize="25dp" android:autoSizeMinTextSize="8dp" android:textSize="12dp"
+                    android:autoSizeTextType="uniform"
+                    android:text="六神"
+                    android:layout_width="match_parent" android:layout_height="match_parent"
+                    android:background="#fbfcfc"/>
+            </LinearLayout>
+            <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle">
+                <TextView
+                    android:id="@+id/liuyaoresult_liushou_1"
+                    android:textColor="#6c6b70" android:gravity="center"
+                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
+                    android:autoSizeTextType="uniform" android:text="白虎"
+                    android:layout_width="match_parent" android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle">
+                <TextView
+                    android:id="@+id/liuyaoresult_liushou_2"
+                    android:textColor="#6c6b70" android:gravity="center"
+                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
+                    android:autoSizeTextType="uniform" android:text="螣蛇"
+                    android:layout_width="match_parent" android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle">
+                <TextView
+                    android:id="@+id/liuyaoresult_liushou_3"
+                    android:textColor="#6c6b70" android:gravity="center"
+                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
+                    android:autoSizeTextType="uniform" android:text="勾陈"
+                    android:layout_width="match_parent" android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle">
+                <TextView
+                    android:id="@+id/liuyaoresult_liushou_4"
+                    android:textColor="#6c6b70" android:gravity="center"
+                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
+                    android:autoSizeTextType="uniform" android:text="朱雀"
+                    android:layout_width="match_parent" android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle">
+                <TextView
+                    android:id="@+id/liuyaoresult_liushou_5"
+                    android:textColor="#6c6b70" android:gravity="center"
+                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
+                    android:autoSizeTextType="uniform" android:text="青龙"
+                    android:layout_width="match_parent" android:layout_height="match_parent" />
+            </LinearLayout>
+            <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle">
+                <TextView
+                    android:id="@+id/liuyaoresult_liushou_6"
+                    android:textColor="#6c6b70" android:gravity="center"
+                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
+                    android:autoSizeTextType="uniform" android:text="玄武"
+                    android:layout_width="match_parent" android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_n" android:showDividers="middle"
+                android:layout_weight="0.3">
+                <TextView
+                    android:id="@+id/liuyaoresult_liuqin_1_caption"
+                    android:textColor="#7e7e82" android:gravity="center" android:textStyle="normal"
+                    android:autoSizeMaxTextSize="25dp" android:autoSizeMinTextSize="8dp" android:textSize="12dp"
+                    android:text="六亲"
+                    android:autoSizeTextType="uniform"
+                    android:layout_width="match_parent" android:layout_height="match_parent"
+                    android:background="#fbfcfc"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+                android:divider="@drawable/liuyao_result_table_line_h"
+                android:orientation="vertical" android:showDividers="middle">
+                <TextView
+                    android:id="@+id/liuyaoresult_liuqin_1_1"
+                    android:textColor="#763869" android:gravity="center"
+                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
+                    android:autoSizeTextType="uniform" android:text="父母"
+                    android:layout_width="match_parent" android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+                android:divider="@drawable/liuyao_result_table_line_h"
+                android:orientation="vertical" android:showDividers="middle"
+                >
+                <TextView
+                    android:id="@+id/liuyaoresult_liuqin_1_2"
+                    android:textColor="#763869" android:gravity="center"
+                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
+                    android:autoSizeTextType="uniform" android:text="父母"
+                    android:layout_width="match_parent" android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+                android:divider="@drawable/liuyao_result_table_line_h"
+                android:orientation="vertical" android:showDividers="middle">
+                <TextView
+                    android:id="@+id/liuyaoresult_liuqin_1_3"
+                    android:textColor="#763869" android:gravity="center"
+                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
+                    android:autoSizeTextType="uniform" android:text="父母"
+                    android:layout_width="match_parent" android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+                android:divider="@drawable/liuyao_result_table_line_h"
+                android:orientation="vertical" android:showDividers="middle">
+                <TextView
+                    android:id="@+id/liuyaoresult_liuqin_1_4"
+                    android:textColor="#763869" android:gravity="center"
+                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
+                    android:autoSizeTextType="uniform" android:text="父母"
+                    android:layout_width="match_parent" android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+                android:divider="@drawable/liuyao_result_table_line_h"
+                android:orientation="vertical" android:showDividers="middle">
+                <TextView
+                    android:id="@+id/liuyaoresult_liuqin_1_5"
+                    android:textColor="#763869" android:gravity="center"
+                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
+                    android:autoSizeTextType="uniform" android:text="父母"
+                    android:layout_width="match_parent" android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+                android:divider="@drawable/liuyao_result_table_line_h"
+                android:orientation="vertical" android:showDividers="middle">
+                <TextView
+                    android:id="@+id/liuyaoresult_liuqin_1_6"
+                    android:textColor="#763869" android:gravity="center"
+                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
+                    android:autoSizeTextType="uniform" android:text="父母"
+                    android:layout_width="match_parent" android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
+            android:layout_weight="2">
+            <LinearLayout android:layout_weight="0.3"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_n" android:showDividers="middle">
+                <TextView
+                    android:textColor="#7e7e82"
+                    android:gravity="center" android:textStyle="bold"
+                    android:autoSizeMaxTextSize="25dp" android:autoSizeMinTextSize="8dp" android:textSize="15dp"
+                    android:text="本卦"
+                    android:autoSizeTextType="uniform"
+                    android:layout_width="match_parent" android:layout_height="match_parent"
+                    android:background="#fbfcfc"/>
+            </LinearLayout>
+            <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/liuyaoresult_gua_image_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:id="@+id/liuyaoresult_shiying_1" android:gravity="center"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
+                        android:autoSizeMaxTextSize="20dp" android:autoSizeMinTextSize="15dp" android:textSize="15dp"
+                        android:textColor="#fd1401" android:autoSizeTextType="uniform"
+                        android:text="世" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                    android:id="@+id/liuyaoresult_gua_image_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                    <TextView
+                        android:id="@+id/liuyaoresult_shiying_2" android:gravity="center"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
+                        android:autoSizeMaxTextSize="20dp" android:autoSizeMinTextSize="15dp" android:textSize="15dp"
+                        android:textColor="#fd1401" android:autoSizeTextType="uniform"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                    android:id="@+id/liuyaoresult_gua_image_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/liuyaoresult_shiying_3" android:gravity="center"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
+                        android:autoSizeMaxTextSize="20dp" android:autoSizeMinTextSize="15dp" android:textSize="15dp"
+                        android:textColor="#fd1401" android:autoSizeTextType="uniform" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/liuyaoresult_gua_image_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/liuyaoresult_shiying_4" android:gravity="center"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
+                        android:autoSizeMaxTextSize="20dp" android:autoSizeMinTextSize="15dp" android:textSize="15dp"
+                        android:textColor="#fd1401" android:autoSizeTextType="uniform" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/liuyaoresult_gua_image_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/liuyaoresult_shiying_5" android:gravity="center"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
+                        android:autoSizeMaxTextSize="20dp" android:autoSizeMinTextSize="15dp" android:textSize="15dp"
+                        android:textColor="#fd1401" android:autoSizeTextType="uniform" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout android:layout_weight="1"
+                android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
+                android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/liuyaoresult_gua_image_6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/liuyaoresult_shiying_6" android:gravity="center"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true" android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
+                        android:autoSizeMaxTextSize="20dp" android:autoSizeMinTextSize="15dp" android:textSize="15dp"
+                        android:textColor="#fd1401" android:autoSizeTextType="uniform" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
+            android:layout_weight="2">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
+            android:layout_weight="4">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
+            android:layout_weight="3">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
+            android:layout_weight="1.5">
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="0dp" android:orientation="horizontal"
+        android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
+        android:layout_weight="3.8">
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
