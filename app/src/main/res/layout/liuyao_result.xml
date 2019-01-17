@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
-    tools:context="example.com.zhouyi_20.MainActivity">
+    tools:context="example.com.zhouyi_20.activity.liuyao.MainActivity">
     <LinearLayout
         android:layout_width="match_parent" android:layout_height="0dp" android:orientation="horizontal"
         android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
@@ -313,7 +313,7 @@
                 android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
                 android:layout_weight="0.3">
                 <TextView
-                    android:textColor="#7e7e82"
+                    android:textColor="#000000"
                     android:gravity="center" android:textStyle="bold"
                     android:autoSizeMaxTextSize="20dp" android:autoSizeMinTextSize="8dp" android:textSize="15dp"
                     android:text="六冲"
@@ -493,7 +493,7 @@
                 android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
                 android:layout_weight="0.3">
                 <TextView
-                    android:textColor="#7e7e82"
+                    android:textColor="#000000"
                     android:gravity="center" android:textStyle="bold"
                     android:autoSizeMaxTextSize="25dp" android:autoSizeMinTextSize="8dp" android:textSize="15dp"
                     android:text="六冲"
@@ -517,6 +517,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+                    android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
                     android:layout_weight="3">
                     <LinearLayout
                         android:layout_width="match_parent" android:layout_height="0dp" android:orientation="horizontal"
@@ -1063,10 +1064,27 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent" android:layout_height="0dp" android:orientation="horizontal"
+        android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
         android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"
         android:layout_weight="3.8">
-
+        <LinearLayout
+            android:id="@+id/point_position"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="horizontal"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="11">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/liuyao_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v4.view.ViewPager>
+        </LinearLayout>
     </LinearLayout>
 
 

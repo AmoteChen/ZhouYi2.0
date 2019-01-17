@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="0dp" android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="8">
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="0.5"></LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="干禄" />
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="子" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="往亡" />
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="申" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="天喜" />
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="子" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="劫煞" />
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="寅" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="羊刃" />
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="丑" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="桃花" />
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="午" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="驿马" />
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="亥" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="贵人" />
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                android:text="卯巳" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="0.5"></LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp" android:layout_height="match_parent"
+        android:background="@drawable/cyss_background"
+        android:layout_weight="1">
+    </LinearLayout>
+</LinearLayout>
