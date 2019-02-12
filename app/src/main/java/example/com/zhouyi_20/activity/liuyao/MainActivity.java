@@ -96,7 +96,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private void point_draw(){
-
-    }
 }

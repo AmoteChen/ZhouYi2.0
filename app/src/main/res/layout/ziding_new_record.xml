@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="4.7" android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1">
+            </LinearLayout>
+            <ImageButton
+                android:id="@+id/bengua_view"
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="4.5"/>
+            <TextView
+                android:id="@+id/bengua_text"
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="3">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1" android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1">
+            </LinearLayout>
+            <ImageButton
+                android:id="@+id/biangua_view"
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="4.5"/>
+            <TextView
+                android:id="@+id/biangua_text"
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="3">
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="6" android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="3" android:orientation="vertical">
+            <ImageView
+                android:id="@+id/shanggua_view"
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <ImageView
+                android:id="@+id/xiagua_view"
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="8" android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1" android:orientation="horizontal">
+                <ImageButton
+                    android:id="@+id/sg_1_1"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number0"/>
+                <ImageButton
+                    android:id="@+id/sg_1_2"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number1"/>
+                <ImageButton
+                    android:id="@+id/sg_1_3"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number2"/>
+                <ImageButton
+                    android:id="@+id/sg_1_4"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number3"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1" android:orientation="horizontal">
+                <ImageButton
+                    android:id="@+id/sg_2_1"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number4"/>
+                <ImageButton
+                    android:id="@+id/sg_2_2"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number5"/>
+                <ImageButton
+                    android:id="@+id/sg_2_3"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number6"/>
+                <ImageButton
+                    android:id="@+id/sg_2_4"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number7"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1" android:orientation="horizontal">
+                <ImageButton
+                    android:id="@+id/xg_1_1"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number0"/>
+                <ImageButton
+                    android:id="@+id/xg_1_2"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number1"/>
+                <ImageButton
+                    android:id="@+id/xg_1_3"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number2"/>
+                <ImageButton
+                    android:id="@+id/xg_1_4"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number3"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1" android:orientation="horizontal">
+                <ImageButton
+                    android:id="@+id/xg_2_1"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number4"/>
+                <ImageButton
+                    android:id="@+id/xg_2_2"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number5"/>
+                <ImageButton
+                    android:id="@+id/xg_2_3"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number6"/>
+                <ImageButton
+                    android:id="@+id/xg_2_4"
+                    android:layout_width="0dp" android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/number7"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
