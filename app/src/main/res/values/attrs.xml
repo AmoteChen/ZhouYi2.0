@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="item_view">
+        <attr name="show_leftimg" format="integer" />
+        <attr name="show_text" format="string" />
+        <attr name="show_login" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="info_item_edit">
+        <attr name="show_name" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="info_item_jump">
+        <attr name="show_name2" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="about_item_jump">
+        <attr name="show_about_name" format="string"/>
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.mine.mine_about">
+
+    <RelativeLayout
+        android:id="@+id/About_Head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/about_logo"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/login_title"/>
+        <TextView
+            android:id="@+id/about_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_logo"
+            android:gravity="center"
+            android:text="周易"
+            android:textColor="#111111"
+            android:textSize="30dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/about_Name"
+            android:gravity="center"
+            android:text="V 1.1.1.1000"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/about_body_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/Login_Head_layout"
+        android:layout_centerVertical="true">
+        <example.com.zhouyi_20.activity.mine.about_item_jump
+            android:id="@+id/about_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:show_about_name="版本更新" />
+        <example.com.zhouyi_20.activity.mine.about_item_jump
+            android:id="@+id/about_help"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:show_about_name="帮助" />
+        <example.com.zhouyi_20.activity.mine.about_item_jump
+            android:id="@+id/about_website"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:show_about_name="官网" />
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_weight="0.08">
+        <TextView
+            android:id="@+id/about_yinsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="隐私条款"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/about_line"
+            android:gravity="center"/>
+        <ImageView
+            android:id="@+id/about_line"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:background="#303f9e" />
+        <TextView
+            android:id="@+id/about_fuwu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务政策"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/about_line"/>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:text="Copyright © 1990-2018 Niaoniao. All Rights Reserved."
+        android:gravity="center"/>
+
+</LinearLayout>

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
-    tools:context="example.com.zhouyi_20.activity.liuyao.MainActivity">
+    tools:context="example.com.zhouyi_20.activity.liuyao.LiuYaoResult">
     <LinearLayout
         android:layout_width="match_parent" android:layout_height="0dp" android:orientation="horizontal"
         android:divider="@drawable/liuyao_result_table_line_h" android:showDividers="middle"

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.Zhouyi_fragment">
+
+    <example.com.zhouyi_20.tool.CustomViewPager
+        android:id="@+id/main_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </example.com.zhouyi_20.tool.CustomViewPager>
+    <LinearLayout
+        android:id="@+id/main_bottom_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <Button
+            android:id="@+id/main_bt_zhouyi"
+            android:background="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="周易" />
+        <Button
+            android:id="@+id/main_bt_history"
+            android:background="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="历史"/>
+        <Button
+            android:id="@+id/main_bt_mine"
+            android:background="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="我的"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

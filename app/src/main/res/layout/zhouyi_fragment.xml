@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/main_bt_guayao"
+        android:src="@drawable/gua_yao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/main_bt_shuzi"
+        app:layout_constraintBottom_toTopOf="@id/main_bt_shijian"/>
+
+    <ImageView
+        android:id="@+id/main_bt_shuzi"
+        android:src="@drawable/shu_zi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/main_bt_guayao"
+        app:layout_constraintBottom_toTopOf="@id/main_bt_zidingyi"/>
+
+    <ImageView
+        android:id="@+id/main_bt_shijian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/shi_zhong"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/main_bt_zidingyi"
+        app:layout_constraintTop_toBottomOf="@id/main_bt_guayao" />
+
+    <ImageView
+        android:id="@+id/main_bt_zidingyi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/shou_zhi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/main_bt_shijian"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_bt_shuzi" />
+</android.support.constraint.ConstraintLayout>

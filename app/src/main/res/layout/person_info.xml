@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+    <!--tools:context=".activity.mMine_fragmentmain">-->
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#a2848484"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="账号信息"
+            android:textColor="#a2848484"
+            android:textSize="13sp"/>
+        <example.com.zhouyi_20.activity.mine.info_item_edit
+            android:id="@+id/person_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:show_name="用户名：" />
+        <example.com.zhouyi_20.activity.mine.info_item_edit
+            android:id="@+id/true_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:show_name="姓名：" />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#a2848484"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="个人信息"
+            android:textColor="#a2848484"
+            android:textSize="13sp"/>
+        <example.com.zhouyi_20.activity.mine.info_item_jump
+            android:id="@+id/person_birth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:show_name2="生日："
+            android:clickable="true"
+            android:onClick="onBirth"/>
+        <example.com.zhouyi_20.activity.mine.info_item_jump
+            android:id="@+id/person_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:show_name2="电话：" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:background="#303f9e"
+            android:text="保存"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            android:onClick="onSave"/>
+    </RelativeLayout>
+</LinearLayout>

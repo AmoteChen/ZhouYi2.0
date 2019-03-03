@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="vertical">
+    <!--tools:context=".activity.mMine_fragmentmain">-->
+
+    <ImageView
+        android:id="@+id/item_bottom2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#e9e5e5" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/item_bottom2"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/super_info_name"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="6"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="昵称："
+            android:textColor="#050000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/super_info_text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/info_name2"
+            android:clickable="false"
+            android:textSize="20sp"
+            />
+        <ImageView
+            android:id="@+id/item_iright"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/right"/>
+    </LinearLayout>
+</RelativeLayout>

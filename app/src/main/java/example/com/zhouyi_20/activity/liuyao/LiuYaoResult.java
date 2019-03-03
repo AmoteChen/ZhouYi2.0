@@ -11,7 +11,7 @@ import java.util.List;
 
 import example.com.zhouyi_20.R;
 
-public class MainActivity extends AppCompatActivity {
+public class LiuYaoResult extends AppCompatActivity {
 
     private ViewPager viewPager;
     private List<Fragment> fragmentList = new ArrayList<Fragment>();
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         //初始时刻生成三个点
         int page = fragmentList.size();
         for (int i = 0; i < page; i++) {
-            Change_Point point = new Change_Point(MainActivity.this);
+            Change_Point point = new Change_Point(LiuYaoResult.this);
             //将第二个点变为选中颜色
             if (i == 1) {
                 point.setSelected(true);
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 //清空后画点
                 int page = fragmentList.size();
                 for (int i = 0; i < page; i++) {
-                    Change_Point point = new Change_Point(MainActivity.this);
+                    Change_Point point = new Change_Point(LiuYaoResult.this);
                     if (i == position) {
                         point.setSelected(true);
                     } else {
