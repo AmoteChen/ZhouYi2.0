@@ -10,7 +10,7 @@ import example.com.zhouyi_20.R;
  * Created by ChenSiyuan on 2019/2/26.
  */
 
-public class ZidingNewRecord extends AppCompatActivity {
+public class Zidinggua extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

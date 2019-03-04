@@ -1,4 +1,4 @@
-package example.com.zhouyi_20.activity.liuyao;
+package example.com.zhouyi_20.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -10,16 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import example.com.zhouyi_20.R;
+import example.com.zhouyi_20.activity.liuyao.Change_Point;
+import example.com.zhouyi_20.activity.liuyao.FragmentAdapter;
+import example.com.zhouyi_20.activity.liuyao.liuyao_fragment_1;
+import example.com.zhouyi_20.activity.liuyao.liuyao_fragment_2;
+import example.com.zhouyi_20.activity.liuyao.liuyao_fragment_3;
 
-public class LiuYaoResult extends AppCompatActivity {
+public class Suangua_Result extends AppCompatActivity {
 
     private ViewPager viewPager;
     private List<Fragment> fragmentList = new ArrayList<Fragment>();
 
     private FragmentAdapter fragmentAdapter;
-    private liuyao_fragment_1 liuyao_fragment_1;
-    private liuyao_fragment_2 liuyao_fragment_2;
-    private liuyao_fragment_3 liuyao_fragment_3;
+    private example.com.zhouyi_20.activity.liuyao.liuyao_fragment_1 liuyao_fragment_1;
+    private example.com.zhouyi_20.activity.liuyao.liuyao_fragment_2 liuyao_fragment_2;
+    private example.com.zhouyi_20.activity.liuyao.liuyao_fragment_3 liuyao_fragment_3;
 
     private LinearLayout point_position;
     @Override
@@ -44,7 +49,7 @@ public class LiuYaoResult extends AppCompatActivity {
         //初始时刻生成三个点
         int page = fragmentList.size();
         for (int i = 0; i < page; i++) {
-            Change_Point point = new Change_Point(LiuYaoResult.this);
+            Change_Point point = new Change_Point(Suangua_Result.this);
             //将第二个点变为选中颜色
             if (i == 1) {
                 point.setSelected(true);
@@ -75,7 +80,7 @@ public class LiuYaoResult extends AppCompatActivity {
                 //清空后画点
                 int page = fragmentList.size();
                 for (int i = 0; i < page; i++) {
-                    Change_Point point = new Change_Point(LiuYaoResult.this);
+                    Change_Point point = new Change_Point(Suangua_Result.this);
                     if (i == position) {
                         point.setSelected(true);
                     } else {

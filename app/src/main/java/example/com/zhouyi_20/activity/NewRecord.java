@@ -1,4 +1,4 @@
-package example.com.zhouyi_20.activity.liuyao;
+package example.com.zhouyi_20.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,15 +10,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import example.com.zhouyi_20.R;
+import example.com.zhouyi_20.activity.Ziding.Zidinggua;
 import example.com.zhouyi_20.activity.liuyao.LiuYaoJinqiangua;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-public class LiuYaoNewRecord extends AppCompatActivity implements View.OnClickListener {
+public class NewRecord extends AppCompatActivity implements View.OnClickListener {
     Button btn_ok;
     Button btn_cancel;
     Spinner yongshen;
@@ -26,12 +28,15 @@ public class LiuYaoNewRecord extends AppCompatActivity implements View.OnClickLi
     public static String yongshen_selected;
     public static String shiyou_string;
 
+    public TextView textView_way;
+    public EditText bugua_date_text;
+    public String way;
+    public String from;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.liuyao_new_record);
-
-        initial();
+        setContentView(R.layout.new_record);
 
         btn_ok=(Button)findViewById(R.id.liuyao_new_record_ok_btn);
         btn_ok.setOnClickListener(this);
@@ -39,12 +44,29 @@ public class LiuYaoNewRecord extends AppCompatActivity implements View.OnClickLi
         btn_cancel.setOnClickListener(this);
         yongshen=(Spinner)findViewById(R.id.yongshen_spinner);
         shiyou=(EditText)findViewById(R.id.liuyao_new_record_shiyou);
-        spinner_init();
+        textView_way=(TextView)findViewById(R.id.liuyao_new_record_way);
+        bugua_date_text=(EditText)findViewById(R.id.liuyao_new_record_bugua_date);
+
+        Intent intent = getIntent();
+        way = intent.getStringExtra("way");
+        from = intent.getStringExtra("from");
+
+        if(intent.getStringExtra("from").equals("liuyao")||intent.getStringExtra("from").equals("ziding")){
+            initial();
+            way_init(way);
+            spinner_init();
+        }
+        if(intent.getStringExtra("from").equals("history")){
+            String way = intent.getStringExtra("way").toString();
+            String time = intent.getStringExtra("time").toString();
+            String reason = intent.getStringExtra("reason").toString();
+            spinner_init();
+            history_init(way,time,reason);
+        }
 
     }
 
     private void initial(){
-        EditText bugua_date_text=(EditText)findViewById(R.id.liuyao_new_record_bugua_date);
 
         Calendar cal= Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
@@ -70,6 +92,15 @@ public class LiuYaoNewRecord extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    private void way_init(String way){
+        textView_way.setText(way);
+    }
+    private void history_init(String way,String time,String reason){
+        textView_way.setText(way);
+        bugua_date_text.setText(time);
+        shiyou.setText(reason);
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -78,8 +109,17 @@ public class LiuYaoNewRecord extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.liuyao_new_record_ok_btn:
                 getShiyou();
-                Intent to_LiuyaoJinqiangua=new Intent(this,LiuYaoJinqiangua.class);
-                startActivity(to_LiuyaoJinqiangua);
+                if(way.equals("六爻")&&from.equals("liuyao")){
+                    Intent to_LiuyaoJinqiangua=new Intent(this,LiuYaoJinqiangua.class);
+                    startActivity(to_LiuyaoJinqiangua);}
+                if(way.equals("自定")&&from.equals("ziding")){
+                    Intent to_Zidinggua=new Intent(this,Zidinggua.class);
+                    startActivity(to_Zidinggua);
+                }
+                if(from.equals("history")){
+                    Intent to_result=new Intent(this,Suangua_Result.class);
+                    startActivity(to_result);
+                }
                 break;
             default:
                 break;

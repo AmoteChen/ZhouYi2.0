@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 
 /**
  * Created by ChenSiyuan on 2019/3/3.
+ 此类用于生成不能够滑动的ViewPager
  */
 
 public class CustomViewPager extends ViewPager {

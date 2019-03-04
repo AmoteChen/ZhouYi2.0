@@ -5,18 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import example.com.zhouyi_20.R;
-import example.com.zhouyi_20.activity.Ziding.ZidingNewRecord;
-import example.com.zhouyi_20.activity.liuyao.LiuYaoNewRecord;
-import example.com.zhouyi_20.activity.mine.Mine_fragment;
 import example.com.zhouyi_20.activity.mine.item_view;
 import example.com.zhouyi_20.object.HttpsConnect;
 import example.com.zhouyi_20.object.HttpsListener;
@@ -97,11 +92,15 @@ public class Zhouyi_fragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.main_bt_guayao:
-                Intent to_LiuyaoNewRecord=new Intent(getActivity(),LiuYaoNewRecord.class);
+                Intent to_LiuyaoNewRecord=new Intent(getActivity(),NewRecord.class);
+                to_LiuyaoNewRecord.putExtra("way", "六爻");
+                to_LiuyaoNewRecord.putExtra("from","liuyao");
                 startActivity(to_LiuyaoNewRecord);
                 break;
             case R.id.main_bt_zidingyi:
-                Intent to_ZidingNewRecord=new Intent(getActivity(),ZidingNewRecord.class);
+                Intent to_ZidingNewRecord=new Intent(getActivity(),NewRecord.class);
+                to_ZidingNewRecord.putExtra("way","自定");
+                to_ZidingNewRecord.putExtra("from","ziding");
                 startActivity(to_ZidingNewRecord);
             default:
                 break;

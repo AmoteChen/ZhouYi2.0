@@ -8,11 +8,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import example.com.zhouyi_20.R;
-import example.com.zhouyi_20.activity.DivinationInfo;
+import example.com.zhouyi_20.activity.NewRecord;
 import example.com.zhouyi_20.object.Divination;
 
 import java.util.List;
-
+/**
+ * DivinationAdapter类，用于管理历史中的Divination
+ * <p>
+ *
+ *
+ */
 public class DivinationAdapter extends RecyclerView.Adapter<DivinationAdapter.ViewHolder> {
 
     private List<Divination> divinations;
@@ -41,9 +46,13 @@ public class DivinationAdapter extends RecyclerView.Adapter<DivinationAdapter.Vi
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 Divination divination = divinations.get(position);
-                Intent to_divination_info = new Intent(v.getContext(), DivinationInfo.class);
-                to_divination_info.putExtra("id", divination.getId());
-                v.getContext().startActivity(to_divination_info);
+                Intent to_record = new Intent(v.getContext(), NewRecord.class);
+                to_record.putExtra("id", divination.getId());
+                to_record.putExtra("time",divination.getTime());
+                to_record.putExtra("reason", divination.getReason());
+                to_record.putExtra("way",divination.getway());
+                to_record.putExtra("from","history");
+                v.getContext().startActivity(to_record);
             }
         });
         return holder;

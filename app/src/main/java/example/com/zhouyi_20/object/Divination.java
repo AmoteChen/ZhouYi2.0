@@ -1,5 +1,8 @@
 package example.com.zhouyi_20.object;
 
+/**
+ 此类是历史纪录里面的各项
+ **/
 public class Divination {
     private String time;
     private String id;

@@ -31,18 +31,18 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activity.liuyao.LiuYaoResult"></activity>
+        <activity android:name=".activity.Suangua_Result"></activity>
         <activity android:name=".activity.mine.mine_about"/>
         <activity android:name=".activity.Login" />
         <activity android:name=".activity.Register" />
         <activity android:name=".activity.DivinationInfo" />
         <activity android:name=".activity.mine.info_main"></activity>
         <activity android:name=".activity.mine.util.PermissionsActivity"></activity>
-        <activity android:name=".activity.liuyao.LiuYaoNewRecord"
+        <activity android:name=".activity.NewRecord"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:configChanges="orientation|keyboardHidden"/>
         <activity android:name=".activity.liuyao.LiuYaoJinqiangua"/>
-        <activity android:name=".activity.Ziding.ZidingNewRecord"/>
+        <activity android:name=".activity.Ziding.Zidinggua"/>
 
 
 

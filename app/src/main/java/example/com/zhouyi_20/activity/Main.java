@@ -1,24 +1,17 @@
 package example.com.zhouyi_20.activity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import example.com.zhouyi_20.R;
 import example.com.zhouyi_20.activity.liuyao.FragmentAdapter;
-import example.com.zhouyi_20.activity.liuyao.LiuYaoNewRecord;
-import example.com.zhouyi_20.activity.liuyao.liuyao_fragment_1;
-import example.com.zhouyi_20.activity.liuyao.liuyao_fragment_2;
-import example.com.zhouyi_20.activity.liuyao.liuyao_fragment_3;
 import example.com.zhouyi_20.activity.mine.Mine_fragment;
 import example.com.zhouyi_20.tool.CustomViewPager;
 

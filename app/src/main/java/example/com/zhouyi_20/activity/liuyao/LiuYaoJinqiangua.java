@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import example.com.zhouyi_20.R;
+import example.com.zhouyi_20.activity.Suangua_Result;
 import example.com.zhouyi_20.util.DensityUtil;
 
 import java.util.Arrays;
@@ -123,7 +124,7 @@ public class LiuYaoJinqiangua extends AppCompatActivity implements View.OnClickL
 
     // 结束当前活动
     private void finishJinqiangua(){
-        Intent to_liuyao_result=new Intent(this,LiuYaoResult.class);
+        Intent to_liuyao_result=new Intent(this,Suangua_Result.class);
         Bundle bundle=new Bundle();
         bundle.putSerializable("LiuYaoData",jinqiangua_Result);
         to_liuyao_result.putExtras(bundle);
