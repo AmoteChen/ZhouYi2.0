@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import example.com.zhouyi_20.R;
 import example.com.zhouyi_20.activity.Ziding.Zidinggua;
@@ -23,15 +26,25 @@ import java.util.TimeZone;
 public class NewRecord extends AppCompatActivity implements View.OnClickListener {
     Button btn_ok;
     Button btn_cancel;
-    Spinner yongshen;
-    EditText shiyou;
+    Spinner yongshen_spinner;
+    EditText shiyou_edit;
+    EditText name_edit;
+    EditText note_edit;
+    //此处数据用于判断和具体的算卦处理
     public static String yongshen_selected;
     public static String shiyou_string;
+    public static String name_string;
 
-    public TextView textView_way;
-    public EditText bugua_date_text;
-    public String way;
+    private TextView textView_way;
+    private EditText bugua_date_text;
     public String from;
+
+    //此处数据用于向卦象页面发送数据
+    public String way;
+    public String date;
+    public String name;
+    public String reason;
+    public String note;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,8 +55,12 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
         btn_ok.setOnClickListener(this);
         btn_cancel=(Button)findViewById(R.id.liuyao_new_record_cancel_btn);
         btn_cancel.setOnClickListener(this);
-        yongshen=(Spinner)findViewById(R.id.yongshen_spinner);
-        shiyou=(EditText)findViewById(R.id.liuyao_new_record_shiyou);
+
+        yongshen_spinner =(Spinner)findViewById(R.id.yongshen_spinner);
+        shiyou_edit =(EditText)findViewById(R.id.liuyao_new_record_shiyou);
+        name_edit= (EditText)findViewById(R.id.liuyao_new_record_name);
+        note_edit=(EditText)findViewById(R.id.liuyao_new_record_note);
+
         textView_way=(TextView)findViewById(R.id.liuyao_new_record_way);
         bugua_date_text=(EditText)findViewById(R.id.liuyao_new_record_bugua_date);
 
@@ -54,14 +71,17 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
         if(intent.getStringExtra("from").equals("liuyao")||intent.getStringExtra("from").equals("ziding")){
             initial();
             way_init(way);
+
             spinner_init();
         }
         if(intent.getStringExtra("from").equals("history")){
             String way = intent.getStringExtra("way").toString();
             String time = intent.getStringExtra("time").toString();
             String reason = intent.getStringExtra("reason").toString();
+            String name = intent.getStringExtra("name").toString();
+            String note = intent.getStringExtra("note").toString();
             spinner_init();
-            history_init(way,time,reason);
+            history_init(way,time,reason,name,note);
         }
 
     }
@@ -73,7 +93,7 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
         String year= String.valueOf(cal.get(Calendar.YEAR));
         String month= String.valueOf(cal.get(Calendar.MONTH)+1);
         String day= String.valueOf(cal.get(Calendar.DATE));
-        String date=year+"年"+month+"月"+day+"日";
+        date=year+"年"+month+"月"+day+"日";
         bugua_date_text.setText(date);
     }
 
@@ -87,18 +107,21 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
         list.add("世");
         list.add("应");
         ArrayAdapter adapter2 = new ArrayAdapter(this, R.layout.yongshen_item, R.id.yongshen_textview,list);
-        yongshen.setAdapter(adapter2);
-        yongshen.setOnItemSelectedListener(new spinner2Listener());
+        yongshen_spinner.setAdapter(adapter2);
+        yongshen_spinner.setOnItemSelectedListener(new spinner2Listener());
 
     }
 
     private void way_init(String way){
         textView_way.setText(way);
     }
-    private void history_init(String way,String time,String reason){
+    private void history_init(String way,String time,String reason,String name,String note){
         textView_way.setText(way);
         bugua_date_text.setText(time);
-        shiyou.setText(reason);
+        shiyou_edit.setText(reason);
+        name_edit.setText(name);
+        note_edit.setText(note);
+
     }
 
     @Override
@@ -108,12 +131,30 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
                 finish();
                 break;
             case R.id.liuyao_new_record_ok_btn:
-                getShiyou();
+                if(getShiyou_edit().isEmpty()||getName().isEmpty()) {
+                    Toast.makeText(NewRecord.this,"事由或姓名不能为空",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if(way.equals("六爻")&&from.equals("liuyao")){
+                    BindDate();
                     Intent to_LiuyaoJinqiangua=new Intent(this,LiuYaoJinqiangua.class);
+                    to_LiuyaoJinqiangua.putExtra("date",date);
+                    to_LiuyaoJinqiangua.putExtra("way",way);
+                    to_LiuyaoJinqiangua.putExtra("reason",reason);
+                    to_LiuyaoJinqiangua.putExtra("name",name);
+                    to_LiuyaoJinqiangua.putExtra("note",note);
+                    to_LiuyaoJinqiangua.putExtra("yongshen",yongshen_selected);
                     startActivity(to_LiuyaoJinqiangua);}
+
                 if(way.equals("自定")&&from.equals("ziding")){
+                    BindDate();
                     Intent to_Zidinggua=new Intent(this,Zidinggua.class);
+                    to_Zidinggua.putExtra("date",date);
+                    to_Zidinggua.putExtra("way",way);
+                    to_Zidinggua.putExtra("reason",reason);
+                    to_Zidinggua.putExtra("name",name);
+                    to_Zidinggua.putExtra("note",note);
+                    to_Zidinggua.putExtra("yongshen",yongshen_selected);
                     startActivity(to_Zidinggua);
                 }
                 if(from.equals("history")){
@@ -141,8 +182,19 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    public String getShiyou(){
-        shiyou_string = shiyou.getText().toString();
+    public String getShiyou_edit(){
+        shiyou_string = shiyou_edit.getText().toString();
         return shiyou_string;
     }
+    public String getName(){
+        name_string = name_edit.getText().toString();
+        return name_string;
+    }
+
+    private void BindDate(){
+        name = name_edit.getText().toString();
+        reason = shiyou_edit.getText().toString();
+        note = note_edit.getText().toString();
+    }
+
 }

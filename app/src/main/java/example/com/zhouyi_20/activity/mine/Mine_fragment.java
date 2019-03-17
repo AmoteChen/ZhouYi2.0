@@ -32,6 +32,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import example.com.zhouyi_20.R;
 import example.com.zhouyi_20.activity.History_fragment;
 import example.com.zhouyi_20.activity.Login;
+import example.com.zhouyi_20.activity.Main;
 import example.com.zhouyi_20.activity.mine.util.FileStorage;
 import example.com.zhouyi_20.activity.mine.util.PermissionsActivity;
 import example.com.zhouyi_20.activity.mine.util.PermissionsChecker;
@@ -43,6 +44,8 @@ import java.io.IOException;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
+import static example.com.zhouyi_20.activity.Main.setFragment_set;
 
 /**
  * Created by ChenSiyuan on 2018/9/20.
@@ -197,7 +200,7 @@ public class Mine_fragment extends Fragment implements View.OnClickListener {
 
                     User.setState(false);
                     Toast.makeText(getActivity(),"当前账户已注销",Toast.LENGTH_SHORT).show();
-                    getActivity().finish();
+                    restartApplication();
 
                 }
                 break;
@@ -387,7 +390,17 @@ public class Mine_fragment extends Fragment implements View.OnClickListener {
     }
 
 
+    private void restartApplication() {
+        final Intent intent =  new Intent();
 
+        //要求重新初始化碎片布局
+        setFragment_set(false);
+
+        intent.setClass(getContext(),Main.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
+    }
 
 
 

@@ -18,6 +18,8 @@ import example.com.zhouyi_20.object.User;
 
 import org.json.JSONObject;
 
+import static example.com.zhouyi_20.activity.Main.setFragment_set;
+
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private EditText et_name;
@@ -82,6 +84,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         exception.printStackTrace();
                     }
                 });
+
+
                 break;
             case R.id.login_bt_register:
                 Intent toRegister = new Intent(this, Register.class);
@@ -154,7 +158,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         editor.commit();
 
                         User.setState(true);
-                        finish();
+                        restartApplication();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -162,4 +166,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             }
         });
     }
+
+    private void restartApplication() {
+        final Intent intent = new Intent();
+
+        //要求重新初始化碎片布局
+        setFragment_set(false);
+
+        intent.setClass(Login.this,Main.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
+    }
+
 }

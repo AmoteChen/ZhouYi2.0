@@ -41,7 +41,8 @@ public class HttpsConnect {
                     connection.setDoOutput(true);
                     connection.setRequestProperty("Content-type", "application/json;charset=UTF-8");
                     connection.setRequestProperty("Accept", "application/json");
-                    connection.setRequestProperty("token", User.getToken());
+                    connection.setRequestProperty("x-zhouyi-token", User.getToken());
+                    connection.setRequestProperty("x-zhouyi-userid", User.getId());
 
                     DataOutputStream ostream = new DataOutputStream(connection.getOutputStream());
                     ostream.write(jsonData.toString().getBytes());

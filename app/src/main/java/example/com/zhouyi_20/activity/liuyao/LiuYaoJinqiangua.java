@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -20,8 +21,14 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import example.com.zhouyi_20.R;
 import example.com.zhouyi_20.activity.Suangua_Result;
+import example.com.zhouyi_20.object.HttpsConnect;
+import example.com.zhouyi_20.object.HttpsListener;
+import example.com.zhouyi_20.object.User;
 import example.com.zhouyi_20.util.DensityUtil;
 
 import java.util.Arrays;
@@ -54,6 +61,18 @@ public class LiuYaoJinqiangua extends AppCompatActivity implements View.OnClickL
     AlertDialog alertDialog;
     int settingRow;
     int settingCase;
+
+    //所有的与后端交互的数据
+    private String userid;
+    private String date;
+    private String name;
+    private String reason;
+    private String note;
+    private String way;
+    private String yongshen;
+    private int[] guaxiang = new int[6];
+
+    private final String address ="http://120.76.128.110:12510/app/newRecord";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -139,6 +158,21 @@ public class LiuYaoJinqiangua extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.liuyao_jinqiangua_ok_btn:
                 finishJinqiangua();
+                for(int i = 0;i<6;i++){
+                guaxiang[i]=jinqiangua_Result[i].intValue();
+                }
+                getData();
+                HttpsConnect.sendRequest(address, "POST", getJsonData(), new HttpsListener() {
+                    @Override
+                    public void success(String response) {
+                        catchResponse(response);
+                    }
+
+                    @Override
+                    public void failed(Exception exception) {
+                        exception.printStackTrace();
+                    }
+                });
                 break;
 
             // 下面6个按钮用于随机选择对应行的金钱卦
@@ -453,5 +487,54 @@ public class LiuYaoJinqiangua extends AppCompatActivity implements View.OnClickL
             default:
                 return "";
         }
+    }
+
+    private void getData(){
+        Intent intent = getIntent();
+        userid = User.getId();
+        date = intent.getStringExtra("date");
+        name = intent.getStringExtra("name");
+        reason = intent.getStringExtra("reason");
+        note = intent.getStringExtra("note");
+        way = intent.getStringExtra("way");
+        yongshen = intent.getStringExtra("yongshen");
+    }
+
+    private JSONObject getJsonData(){
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0;i<6;i++){
+            jsonArray.put(guaxiang[i]);
+        }
+        try{
+            jsonObject.put("userid",userid);
+            jsonObject.put("date",date);
+            jsonObject.put("name",name);
+            jsonObject.put("reason",reason);
+            jsonObject.put("note",note);
+            jsonObject.put("way",way);
+            jsonObject.put("yongshen",yongshen);
+            jsonObject.put("guaxiang",jsonArray);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    private void catchResponse(final String response) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    JSONObject jsonObject = new JSONObject(response);
+                    String result = jsonObject.getString("result");
+                    if(result.compareTo("success")==0){
+                        Toast.makeText(LiuYaoJinqiangua.this,"记录存储成功！",Toast.LENGTH_SHORT).show();
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

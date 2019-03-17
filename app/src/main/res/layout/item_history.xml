@@ -38,7 +38,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/item_hi_way"
+            android:id="@+id/item_hi_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/item_hi_date"
@@ -52,7 +52,7 @@
             android:id="@+id/item_hi_xingqi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/item_hi_way"
+            android:layout_alignBottom="@id/item_hi_name"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="2dp"

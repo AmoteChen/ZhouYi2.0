@@ -1,3 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ZHOUYI_2.0</string>
+    <string name="choose_shensha">选择神煞</string>
+    <string-array name="shensha">
+        <item>常用神煞</item>
+        <item>占感情</item>
+        <item>占疾病</item>
+        <item>占官禄</item>
+        <item>占求财</item>
+        <item>占胎孕</item>
+        <item>占官非</item>
+    </string-array>
 </resources>
+
+

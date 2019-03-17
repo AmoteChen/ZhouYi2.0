@@ -19,11 +19,11 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
                 <TextView
+                    android:id="@+id/liuyaoresult_zhi_month"
                     android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center|right"
                     android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
                     android:textStyle="normal" android:textColor="#000000"
-                    android:layout_weight="1"
-                    android:text="辰"/>
+                    android:layout_weight="1" />
                 <TextView
                     android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center|left"
                     android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
@@ -35,86 +35,146 @@
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#528252"
+                    android:id="@+id/liuyaoresult_zhi_month_1_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="土"/>
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#528252"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
+
                 <TextView
-                    android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#6393d5"
+                    android:id="@+id/liuyaoresult_zhi_month_1_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="旺"/>
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#6393d5"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#528252"
+                    android:id="@+id/liuyaoresult_zhi_month_2_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="土"/>
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#528252"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
+
                 <TextView
-                    android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#6393d5"
+                    android:id="@+id/liuyaoresult_zhi_month_2_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="旺"/>
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#6393d5"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#528252"
+                    android:id="@+id/liuyaoresult_zhi_month_3_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="土"/>
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#528252"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
+
                 <TextView
-                    android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#6393d5"
+                    android:id="@+id/liuyaoresult_zhi_month_3_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="旺"/>
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#6393d5"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#528252"
+                    android:id="@+id/liuyaoresult_zhi_month_4_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="土"/>
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#528252"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
+
                 <TextView
-                    android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#6393d5"
+                    android:id="@+id/liuyaoresult_zhi_month_4_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="旺"/>
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#6393d5"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#528252"
+                    android:id="@+id/liuyaoresult_zhi_month_5_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="土"/>
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#528252"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
+
                 <TextView
-                    android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#6393d5"
+                    android:id="@+id/liuyaoresult_zhi_month_5_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="旺"/>
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#6393d5"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -137,51 +197,81 @@
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#6f4972"
-                    android:text="父"/>
+                    android:id="@+id/liuyaoresult_qintable_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#6f4972"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#6f4972"
-                    android:text="父"/>
+                    android:id="@+id/liuyaoresult_qintable_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#6f4972"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#6f4972"
-                    android:text="父"/>
+                    android:id="@+id/liuyaoresult_qintable_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#6f4972"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#6f4972"
-                    android:text="父"/>
+                    android:id="@+id/liuyaoresult_qintable_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#6f4972"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#6f4972"
-                    android:text="父"/>
+                    android:id="@+id/liuyaoresult_qintable_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#6f4972"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -204,51 +294,81 @@
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#5e4a42"
-                    android:text="沐"/>
+                    android:id="@+id/liuyaoresult_daytable_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#5e4a42"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#5e4a42"
-                    android:text="沐"/>
+                    android:id="@+id/liuyaoresult_daytable_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#5e4a42"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#5e4a42"
-                    android:text="沐"/>
+                    android:id="@+id/liuyaoresult_daytable_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#5e4a42"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#5e4a42"
-                    android:text="沐"/>
+                    android:id="@+id/liuyaoresult_daytable_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#5e4a42"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center"
-                    android:autoSizeMaxTextSize="24dp" android:autoSizeMinTextSize="18dp" android:textSize="20dp"
-                    android:textStyle="normal" android:textColor="#5e4a42"
-                    android:text="沐"/>
+                    android:id="@+id/liuyaoresult_daytable_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autoSizeMaxTextSize="24dp"
+                    android:autoSizeMinTextSize="18dp"
+                    android:gravity="center"
+                    android:textColor="#5e4a42"
+                    android:textSize="20dp"
+                    android:textStyle="normal" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -434,11 +554,19 @@
                 android:layout_weight="2" android:ems="1" android:textColor="#acacac" android:textStyle="normal"
                 android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
                 android:text="变" />
+
             <TextView
-                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top|center_horizontal"
-                android:layout_weight="8" android:ems="1" android:textColor="#000000" android:textStyle="bold"
-                android:autoSizeMaxTextSize="35dp" android:autoSizeMinTextSize="20dp" android:textSize="25dp"
-                android:text="坤为地" />
+                android:id="@+id/liuyaoresult_right_biangua"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="8"
+                android:autoSizeMaxTextSize="35dp"
+                android:autoSizeMinTextSize="20dp"
+                android:ems="1"
+                android:gravity="top|center_horizontal"
+                android:textColor="#000000"
+                android:textSize="25dp"
+                android:textStyle="bold" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp" android:layout_height="match_parent"
@@ -466,11 +594,19 @@
                 android:layout_weight="2" android:ems="1" android:textColor="#acacac" android:textStyle="normal"
                 android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
                 android:text="本" />
+
             <TextView
-                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top|center_horizontal"
-                android:layout_weight="8" android:ems="1" android:textColor="#000000" android:textStyle="bold"
-                android:autoSizeMaxTextSize="35dp" android:autoSizeMinTextSize="20dp" android:textSize="25dp"
-                android:text="乾为天" />
+                android:id="@+id/liuyaoresult_right_bengui"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="8"
+                android:autoSizeMaxTextSize="35dp"
+                android:autoSizeMinTextSize="20dp"
+                android:ems="1"
+                android:gravity="top|center_horizontal"
+                android:textColor="#000000"
+                android:textSize="25dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
 
