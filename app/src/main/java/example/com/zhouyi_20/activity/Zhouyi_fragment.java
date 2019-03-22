@@ -55,6 +55,7 @@ public class Zhouyi_fragment extends Fragment implements View.OnClickListener {
                 to_ZidingNewRecord.putExtra("way","自定");
                 to_ZidingNewRecord.putExtra("from","ziding");
                 startActivity(to_ZidingNewRecord);
+                break;
             default:
                 break;
         }

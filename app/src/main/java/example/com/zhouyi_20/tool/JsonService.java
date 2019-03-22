@@ -32,11 +32,13 @@ public class JsonService {
             // 六亲
             liuqin_1 = dataObject_1.getString("six_relatives");
             wuxing_1=dataObject_1.getString("five_elements");
-            heavenly_stems_zhuanggua=dataObject_1.getString("heavenly_stems");
-            earthly_branches=dataObject_1.getString("earthly_branches");
+            heavenly_stems_zhuanggua = dataObject_1.getString("heavenly_stems");
+            earthly_branches = dataObject_1.getString("earthly_branches");
             //content
-            right_bengui=dataObject_1.getString("content");
-            Log.e("DAYT",right_bengui);
+            content_zhuanggua = dataObject_1.getString("content");
+            Log.e("DAYT", content_zhuanggua);
+            //times
+            times_zhuanggua = dataObject_1.getString("times");
 
             //空表
             kong_zhuanggua=new ArrayList();
@@ -56,9 +58,10 @@ public class JsonService {
             //变卦五行的部分
             wuxing_3=dataObject_2.getString("five_elements");
             //content
-            right_biangua=dataObject_2.getString("content");
-            Log.e("DAYww",right_biangua);
-
+            content_biangua=dataObject_2.getString("content");
+            Log.e("DAYww",content_biangua);
+            //times
+            times_biangua = dataObject_2.getString("times");
 
             //变卦部分的show下标
             JSONArray dataObject_show_biangua=dataObject_BG.getJSONArray("showIndex");
@@ -82,6 +85,11 @@ public class JsonService {
             //五行（伏神部分）
             wuxing_2=dataObject_3.getString("five_elements");
             Log.e("WX",wuxing_2);
+            //content
+            content_fushen = dataObject_3.getString("content");
+            //times
+            times_fushen= dataObject_3.getString("times");
+
             heavenly_stems_fushen=dataObject_3.getString("heavenly_stems");
             earthly_fushen=dataObject_3.getString("earthly_branches");
 
@@ -127,11 +135,25 @@ public class JsonService {
 
     //content
     //装卦里的content
-    private String right_bengui;
-    public String getRight_bengui(){return right_bengui;}
+    private String content_zhuanggua;
+    public String getContent_zhuanggua(){return content_zhuanggua;}
+    //装卦里的卦次
+    private String times_zhuanggua;
+    public String getTimes_zhuanggua(){return times_zhuanggua;}
+
     //变卦里的content
-    private String right_biangua;
-    public String getRight_biangua(){return right_biangua;}
+    private String content_biangua;
+    public String getContent_biangua(){return content_biangua;}
+    //变卦里的卦次
+    private String times_biangua;
+    public String getTimes_biangua(){return times_biangua;}
+
+    //伏神里的content
+    private String content_fushen;
+    public String getContent_fushen(){return content_fushen;}
+    //伏神里的卦次
+    private String times_fushen;
+    public String getTimes_fushen(){return times_fushen;}
 
 
     //五行，装卦里的那部分

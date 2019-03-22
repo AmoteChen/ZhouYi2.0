@@ -1,6 +1,7 @@
 package example.com.zhouyi_20.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -63,26 +64,14 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    protected void onResume(){
-        Log.e("onResume","Main_onResume");
-        super.onResume();
-
+        Log.e("TAGG","Main_onCreate");
         //先加载碎片内的信息再进行布局初始化，以防止布局已经设置后，信息不能刷新
-
-        fragment_init();
-
-        if(fragment_set){
+        if(fragment_init()){
             setContentView(R.layout.main);
 
-            Log.e("onResume","layout_seted");
-            viewPager = (CustomViewPager) findViewById(R.id.main_top_layout);
-            //禁止滑动
-            viewPager.setScanScroll(false);
+            Viewmanager();
+            Log.e("TAGG","layout_seted");
 
-            fragment_manage();
             bt_zhouyi = (Button)findViewById(R.id.main_bt_zhouyi);
             bt_zhouyi.setOnClickListener(this);
             bt_history = (Button)findViewById(R.id.main_bt_history);
@@ -128,7 +117,64 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
-    private void fragment_init() {
+    @Override
+    protected void onResume(){
+        super.onResume();
+        bt_zhouyi.setTextColor(Color.parseColor("#000000"));
+        bt_history.setTextColor(Color.parseColor("#6393d5"));
+        bt_mine.setTextColor(Color.parseColor("#000000"));
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Log.e("TAGG","Main_onRestart");
+
+        //先加载碎片内的信息再进行布局初始化，以防止布局已经设置后，信息不能刷新
+        if(fragment_init()){
+
+            Viewmanager();
+            Log.e("TAGG","layout_seted");
+
+
+            sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+            name = sp.getString("name", "");
+            account = sp.getString("account", "");
+            password = sp.getString("password", "");
+            token = sp.getString("token", "");
+            id = sp.getString("id", "-1");
+            state = sp.getBoolean("state", false);
+
+
+            User.setName(name);
+            User.setAccount(account);
+            User.setPassword(password);
+            User.setToken(token);
+            User.setId(id);
+            User.setState(state);
+
+
+            if (!token.equals("no token")) {
+                Toast.makeText(this, "checking", Toast.LENGTH_SHORT).show();
+                HttpsConnect.sendRequest(check_address, "POST", getCheckJsonData(), new HttpsListener() {
+                    @Override
+                    public void success(String response) {
+                        catchCheckResponse(response);
+                    }
+
+                    @Override
+                    public void failed(Exception exception) {
+                        exception.printStackTrace();
+                    }
+                });
+            } else {
+                Toast.makeText(this, "no token", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+    }
+    private boolean fragment_init() {
         fragmentList.clear();
         history_fragment = new History_fragment();
         mine_fragment = new Mine_fragment();
@@ -136,15 +182,23 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         fragmentList.add(zhouyi_fragment);
         fragmentList.add(history_fragment);
         fragmentList.add(mine_fragment);
+        Log.e("TAGG","fragment_seted");
         fragmentAdapter = new FragmentAdapter(this.getSupportFragmentManager(),fragmentList);
-        setFragment_set(true);
+
+        return true;
     }
-    private void fragment_manage(){
+
+    private void Viewmanager(){
+        viewPager = (CustomViewPager) findViewById(R.id.main_top_layout);
+        //禁止滑动
+        viewPager.setScanScroll(false);
+
         viewPager.invalidate();
         viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(fragmentAdapter);
+        Log.e("TAGG",fragmentList.toString());
         viewPager.setCurrentItem(1);
-
+        Log.e("TAGG","viewer_seted");
     }
 
     @Override

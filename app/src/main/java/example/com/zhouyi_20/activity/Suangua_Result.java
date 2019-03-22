@@ -64,7 +64,6 @@ public class Suangua_Result extends AppCompatActivity  {
     private LinearLayout biangua_layout;
     private LinearLayout fushen_layout;
 
-
     //变卦的本表
     private LinearLayout bg_layout_1;
     private LinearLayout bg_layout_2;
@@ -332,6 +331,31 @@ public class Suangua_Result extends AppCompatActivity  {
 
         String temp;
         try{
+            //表头
+            temp=jsonInstance.getContent_zhuanggua();
+            if(LiuHe(temp)){
+                printZG_Title();
+            }
+            temp=jsonInstance.getContent_biangua();
+            if(LiuHe(temp)){
+                printBG_Title();
+            }
+            temp=jsonInstance.getContent_fushen();
+            if(LiuHe(temp)){
+                printFS_Title();
+            }
+
+            temp = jsonInstance.getTimes_zhuanggua();
+            ZG_title_times(temp);
+
+            temp = jsonInstance.getTimes_biangua();
+            BG_title_times(temp);
+
+            temp = jsonInstance.getTimes_fushen();
+            FS_title_times(temp);
+
+
+
             // 从左往右第1列六亲
             temp=jsonInstance.getLiuqin_1();
             printLiuQin1(temp);
@@ -381,10 +405,10 @@ public class Suangua_Result extends AppCompatActivity  {
 
             //content
             //bengui
-            String ben_String=jsonInstance.getRight_bengui();
+            String ben_String=jsonInstance.getContent_zhuanggua();
 
             //biangua
-            String bian_String=jsonInstance.getRight_biangua();
+            String bian_String=jsonInstance.getContent_biangua();
 
             Bundle bundle = new Bundle();
             bundle.putString("day_string", day_String);
@@ -578,6 +602,77 @@ public class Suangua_Result extends AppCompatActivity  {
 
     /**************************** 以下函数用于填充数据到UI **************************/
 
+    //表头逻辑
+    private boolean LiuHe(String temp){
+        if(temp.equals("天地否")||temp.equals("水泽节")||temp.equals("山火贲")||temp.equals("雷地豫")||temp.equals("火山旅")||temp.equals("地雷复")||temp.equals("地天泰")||temp.equals("泽水困")){
+            return true;
+        }
+        else {return false;}
+    }
+    private void printZG_Title(){
+        TextView textView = (TextView)findViewById(R.id.result_change_title_1);
+        textView.setText("六合");
+    }
+    private void printBG_Title(){
+        TextView textView = (TextView)findViewById(R.id.result_change_title_2);
+        textView.setText("六合");
+    }
+    private void printFS_Title(){
+        TextView textView = (TextView)findViewById(R.id.result_change_title_3);
+        textView.setText("六合");
+    }
+
+    private void ZG_title_times(String temp){
+        if(temp.equals("归魂卦")){
+            TextView textView = (TextView)findViewById(R.id.result_change_title_1);
+            textView.setText("归魂");
+        }
+        if(temp.equals("游魂卦")){
+            TextView textView = (TextView)findViewById(R.id.result_change_title_1);
+            textView.setText("游魂");
+        }
+        if(temp.equals("本宫卦")){
+            TextView textView = (TextView)findViewById(R.id.result_change_title_1);
+            textView.setText("六冲");
+        }
+        else {
+            return;
+        }
+    }
+    private void BG_title_times(String temp){
+        if(temp.equals("归魂卦")){
+            TextView textView = (TextView)findViewById(R.id.result_change_title_2);
+            textView.setText("归魂");
+        }
+        if(temp.equals("游魂卦")){
+            TextView textView = (TextView)findViewById(R.id.result_change_title_2);
+            textView.setText("游魂");
+        }
+        if(temp.equals("本宫卦")){
+            TextView textView = (TextView)findViewById(R.id.result_change_title_2);
+            textView.setText("六冲");
+        }
+        else {
+            return;
+        }
+    }
+    private void FS_title_times(String temp){
+        if(temp.equals("归魂卦")){
+            TextView textView = (TextView)findViewById(R.id.result_change_title_3);
+            textView.setText("归魂");
+        }
+        if(temp.equals("游魂卦")){
+            TextView textView = (TextView)findViewById(R.id.result_change_title_3);
+            textView.setText("游魂");
+        }
+        if(temp.equals("本宫卦")){
+            TextView textView = (TextView)findViewById(R.id.result_change_title_3);
+            textView.setText("六冲");
+        }
+        else {
+            return;
+        }
+    }
     // 从左至右第一个六亲
     private void printLiuQin1(String liuqin){
         //标题

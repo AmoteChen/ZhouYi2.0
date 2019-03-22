@@ -60,24 +60,8 @@ public class History_fragment extends Fragment {
                 public void success(String response) {
                     catchResponse(response);
 
-                    slideRecyclerView = (SlideRecyclerView)view.findViewById(R.id.history_list);
-                    slideRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                    DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-                    itemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider_inset));
-                    slideRecyclerView.addItemDecoration(itemDecoration);
 
-                    historyAdapter = new HistoryAdapter(getContext(),divinations);
-                    slideRecyclerView.setAdapter(historyAdapter);
-                    historyAdapter.setOnDeleteClickListener(new HistoryAdapter.OnDeleteClickListener() {
-                        @Override
-                        public void onDeleteClick(View view, int position) {
-                            divinations.remove(position);
-                            historyAdapter.notifyDataSetChanged();
-                            slideRecyclerView.closeMenu();
-                        }
-                    });
 
-                    setFragment_set(true);
                 }
 
                 @Override
@@ -202,7 +186,7 @@ public class History_fragment extends Fragment {
                     Toast.makeText(getActivity(),reason,Toast.LENGTH_SHORT).show();
                     if(result.compareTo("success")==0){
                         JSONArray record = RootJsonObject.getJSONArray("record");
-
+                        divinations.clear();
                         for (int i =0;i<record.length();i++){
                             JSONObject eachObject = record.getJSONObject(i);
                             String _id = eachObject.getString("_id");
@@ -215,6 +199,23 @@ public class History_fragment extends Fragment {
                             String way = eachObject.getString("way");
                             divinations.add(new Divination(_id,reason1,userid,yongshen,date,"星期日",way,name,note));
                         }
+
+                        slideRecyclerView = (SlideRecyclerView)view.findViewById(R.id.history_list);
+                        slideRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                        DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+                        itemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider_inset));
+                        slideRecyclerView.addItemDecoration(itemDecoration);
+
+                        historyAdapter = new HistoryAdapter(getContext(),divinations);
+                        slideRecyclerView.setAdapter(historyAdapter);
+                        historyAdapter.setOnDeleteClickListener(new HistoryAdapter.OnDeleteClickListener() {
+                            @Override
+                            public void onDeleteClick(View view, int position) {
+                                divinations.remove(position);
+                                historyAdapter.notifyDataSetChanged();
+                                slideRecyclerView.closeMenu();
+                            }
+                        });
                     }
                 }catch (Exception e) {
                     e.printStackTrace();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -128,7 +129,7 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.liuyao_new_record_cancel_btn:
-                finish();
+                restartApplication();
                 break;
             case R.id.liuyao_new_record_ok_btn:
                 if(getShiyou_edit().isEmpty()||getName().isEmpty()) {
@@ -197,4 +198,22 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
         note = note_edit.getText().toString();
     }
 
+    private void restartApplication() {
+        final Intent intent =  new Intent();
+
+        intent.setClass(this,Main.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if(event.getKeyCode() == KeyEvent.KEYCODE_BACK ) {
+            Toast.makeText(this,"请点击取消按钮以返回",Toast.LENGTH_SHORT).show();
+            return true;
+        }else {
+            return super.dispatchKeyEvent(event);
+        }
+    }
 }

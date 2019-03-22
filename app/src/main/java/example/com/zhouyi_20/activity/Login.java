@@ -170,9 +170,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private void restartApplication() {
         final Intent intent = new Intent();
 
-        //要求重新初始化碎片布局
-        setFragment_set(false);
-
         intent.setClass(Login.this,Main.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

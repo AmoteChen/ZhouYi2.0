@@ -393,9 +393,6 @@ public class Mine_fragment extends Fragment implements View.OnClickListener {
     private void restartApplication() {
         final Intent intent =  new Intent();
 
-        //要求重新初始化碎片布局
-        setFragment_set(false);
-
         intent.setClass(getContext(),Main.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
