@@ -4,12 +4,17 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -34,6 +39,12 @@ public class liuyao_fragment_2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         view = inflater.inflate(R.layout.liuyao_fra_layout_2,container,false);
+        String str = "空";
+        SpannableStringBuilder style=new SpannableStringBuilder(str);
+        style.setSpan(new BackgroundColorSpan(getResources().getColor(R.color.black)),0,str.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        TextView textView= (TextView)view.findViewById(R.id.liuyao_kong_title);
+        textView.setText(style);
+
         try{
         Bundle bundle = getArguments();
         printDayTable(bundle.getString("day_string"));
@@ -134,12 +145,6 @@ public class liuyao_fragment_2 extends Fragment {
         String ganzhi_month=map.get("cM").toString();
         String ganzhi_day=map.get("cD").toString();
 
-//        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_day);
-//        textView.setText(ganzhi_day);
-//        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_month);
-//        textView.setText(ganzhi_month);
-//        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_year);
-//        textView.setText(ganzhi_year);
         textView=(TextView)view.findViewById(R.id.liuyaoresult_zhi_month);
         textView.setText(ganzhi_month.substring(1,2));
 
@@ -166,6 +171,83 @@ public class liuyao_fragment_2 extends Fragment {
         textView.setText(zhi_month_wuxing[3]);
         textView=(TextView)view.findViewById(R.id.liuyaoresult_zhi_month_5_1);
         textView.setText(zhi_month_wuxing[4]);
+
+        textView = (TextView)view.findViewById(R.id.liuyaoresult_richong);
+        if(ganzhi_day.substring(1,2).equals("子")){
+            textView.setText("午");
+        }
+        if(ganzhi_day.substring(1,2).equals("丑")){
+            textView.setText("未");
+        }
+        if(ganzhi_day.substring(1,2).equals("寅")){
+            textView.setText("申");
+        }
+        if(ganzhi_day.substring(1,2).equals("卯")){
+            textView.setText("酉");
+        }
+        if(ganzhi_day.substring(1,2).equals("辰")){
+            textView.setText("戌");
+        }
+        if(ganzhi_day.substring(1,2).equals("巳")){
+            textView.setText("亥");
+        }
+        if(ganzhi_day.substring(1,2).equals("午")){
+            textView.setText("子");
+        }
+        if(ganzhi_day.substring(1,2).equals("未")){
+            textView.setText("丑");
+        }
+        if(ganzhi_day.substring(1,2).equals("申")){
+            textView.setText("寅");
+        }
+        if(ganzhi_day.substring(1,2).equals("酉")){
+            textView.setText("卯");
+        }
+        if(ganzhi_day.substring(1,2).equals("戌")){
+            textView.setText("辰");
+        }
+        if(ganzhi_day.substring(1,2).equals("亥")){
+            textView.setText("巳");
+        }
+
+        textView = (TextView)view.findViewById(R.id.liuyaoresult_yuepo);
+        if(ganzhi_month.substring(1,2).equals("子")){
+            textView.setText("午");
+        }
+        if(ganzhi_month.substring(1,2).equals("丑")){
+            textView.setText("未");
+        }
+        if(ganzhi_month.substring(1,2).equals("寅")){
+            textView.setText("申");
+        }
+        if(ganzhi_month.substring(1,2).equals("卯")){
+            textView.setText("酉");
+        }
+        if(ganzhi_month.substring(1,2).equals("辰")){
+            textView.setText("戌");
+        }
+        if(ganzhi_month.substring(1,2).equals("巳")){
+            textView.setText("亥");
+        }
+        if(ganzhi_month.substring(1,2).equals("午")){
+            textView.setText("子");
+        }
+        if(ganzhi_month.substring(1,2).equals("未")){
+            textView.setText("丑");
+        }
+        if(ganzhi_month.substring(1,2).equals("申")){
+            textView.setText("寅");
+        }
+        if(ganzhi_month.substring(1,2).equals("酉")){
+            textView.setText("卯");
+        }
+        if(ganzhi_month.substring(1,2).equals("戌")){
+            textView.setText("辰");
+        }
+        if(ganzhi_month.substring(1,2).equals("亥")){
+            textView.setText("巳");
+        }
+
     }
 
 }

@@ -204,6 +204,10 @@ public class JsonService {
     //伏神表的show下标
     private static List show_fushen = new ArrayList();
     public static List getShow_fushen(){return show_fushen;}
+    //伏神表的kong下标
+    //伏神的空表貌似后台还没有算出来，始终返回的都是null
+    private List kong_fushen = new ArrayList();
+    public List getKong_fushen(){return kong_fushen;}
 
 
 }

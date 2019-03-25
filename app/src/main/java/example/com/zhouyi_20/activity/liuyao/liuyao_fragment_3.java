@@ -76,18 +76,18 @@ public class liuyao_fragment_3 extends Fragment {
                     shensha_16.setText("");
                     break;
                 case 1:
-                    shensha_1.setText("灾煞");
-                    shensha_2.setText("劫煞");
-                    shensha_3.setText("寡宿");
-                    shensha_4.setText("孤辰");
+                    shensha_1.setText("灾煞 驿马");
+                    shensha_2.setText("劫煞 月将");
+                    shensha_3.setText("寡宿 日德");
+                    shensha_4.setText("孤辰 贵人");
                     shensha_5.setText("桃花");
                     shensha_6.setText("红鸾");
                     shensha_7.setText("天喜");
                     shensha_8.setText("羊刃");
-                    shensha_9.setText("驿马");
-                    shensha_10.setText("月将");
-                    shensha_11.setText("日德");
-                    shensha_12.setText("贵人");
+                    shensha_9.setText("");
+                    shensha_10.setText("");
+                    shensha_11.setText("");
+                    shensha_12.setText("");
                     shensha_13.setText("");
                     shensha_14.setText("");
                     shensha_15.setText("");

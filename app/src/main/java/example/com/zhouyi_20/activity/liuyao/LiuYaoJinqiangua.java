@@ -137,8 +137,7 @@ public class LiuYaoJinqiangua extends AppCompatActivity implements View.OnClickL
 
         //随机设置卦象
         randomSetJinqiangua();
-
-        Toast.makeText(this,"摇一摇可以随机全部卦象!", Toast.LENGTH_LONG).show();
+        
     }
 
     // 结束当前活动

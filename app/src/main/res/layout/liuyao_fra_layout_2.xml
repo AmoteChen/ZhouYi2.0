@@ -453,11 +453,12 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
+                    android:id="@+id/liuyao_kong_title"
                     android:layout_width="wrap_content" android:layout_height="0dp" android:layout_gravity="center_horizontal|bottom"
                     android:gravity="bottom|center_horizontal"
-                    android:layout_weight="2" android:ems="1" android:textColor="#acacac" android:textStyle="normal"
+                    android:layout_weight="2" android:ems="1" android:textColor="#ffffff" android:textStyle="normal"
                     android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
-                    android:text="空"/>
+                    />
                 <TextView
                     android:layout_width="wrap_content" android:layout_height="0dp" android:layout_gravity="center"
                     android:gravity="top|center_horizontal"
@@ -498,11 +499,12 @@
                     android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
                     android:text="日冲"/>
                 <TextView
+                    android:id="@+id/liuyaoresult_richong"
                     android:layout_width="wrap_content" android:layout_height="0dp" android:layout_gravity="center"
                     android:gravity="top|center_horizontal"
                     android:layout_weight="2" android:ems="1" android:textColor="#000000" android:textStyle="bold"
                     android:autoSizeMaxTextSize="35dp" android:autoSizeMinTextSize="20dp" android:textSize="25dp"
-                    android:text="卯"/>
+                    />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp" android:layout_height="match_parent"
@@ -515,11 +517,11 @@
                     android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
                     android:text="月破"/>
                 <TextView
+                    android:id="@+id/liuyaoresult_yuepo"
                     android:layout_width="wrap_content" android:layout_height="0dp" android:layout_gravity="center"
                     android:gravity="top|center_horizontal"
                     android:layout_weight="2" android:ems="1" android:textColor="#000000" android:textStyle="bold"
-                    android:autoSizeMaxTextSize="35dp" android:autoSizeMinTextSize="20dp" android:textSize="25dp"
-                    android:text="戌"/>
+                    android:autoSizeMaxTextSize="35dp" android:autoSizeMinTextSize="20dp" android:textSize="25dp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

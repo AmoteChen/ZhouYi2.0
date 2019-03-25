@@ -110,6 +110,33 @@ public class Suangua_Result extends AppCompatActivity  {
     //伏神部分的点击计数器
     int fushen_count;
 
+    //空表
+    ArrayList<TextView> zg_kong;
+    ArrayList<TextView> bg_kong;
+    ArrayList<TextView> fs_kong;
+
+    //装卦的空部分的文本框
+    private TextView zg_kong_1;
+    private TextView zg_kong_2;
+    private TextView zg_kong_3;
+    private TextView zg_kong_4;
+    private TextView zg_kong_5;
+    private TextView zg_kong_6;
+    //变卦的空部分的文本框
+    private TextView bg_kong_1;
+    private TextView bg_kong_2;
+    private TextView bg_kong_3;
+    private TextView bg_kong_4;
+    private TextView bg_kong_5;
+    private TextView bg_kong_6;
+    //伏神的空部分的文本框
+    private TextView fs_kong_1;
+    private TextView fs_kong_2;
+    private TextView fs_kong_3;
+    private TextView fs_kong_4;
+    private TextView fs_kong_5;
+    private TextView fs_kong_6;
+
 
     // 懒得重新解析因此直接存储
     private Integer liuyaoIntegerData[];
@@ -208,6 +235,40 @@ public class Suangua_Result extends AppCompatActivity  {
         fs_qin.add(fs_qin_4);
         fs_qin.add(fs_qin_5);
         fs_qin.add(fs_qin_6);
+
+        zg_kong_1 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_1);
+        zg_kong_2 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_2);
+        zg_kong_3 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_3);
+        zg_kong_4 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_4);
+        zg_kong_5 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_5);
+        zg_kong_6 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_6);
+
+        zg_kong = new ArrayList<>();
+        zg_kong.add(zg_kong_1);
+        zg_kong.add(zg_kong_2);
+        zg_kong.add(zg_kong_3);
+        zg_kong.add(zg_kong_4);
+        zg_kong.add(zg_kong_5);
+        zg_kong.add(zg_kong_6);
+
+
+
+        //伏神部分的空表因为后端返回index逻辑好像没有做完，暂时不能够实现
+        fs_kong_1 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_1);
+        fs_kong_2 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_2);
+        fs_kong_3 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_3);
+        fs_kong_4 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_4);
+        fs_kong_5 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_5);
+        fs_kong_6 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_6);
+
+        fs_kong = new ArrayList<>();
+        fs_kong.add(fs_kong_1);
+        fs_kong.add(fs_kong_2);
+        fs_kong.add(fs_kong_3);
+        fs_kong.add(fs_kong_4);
+        fs_kong.add(fs_kong_5);
+        fs_kong.add(fs_kong_6);
+
 
 
 
@@ -372,8 +433,8 @@ public class Suangua_Result extends AppCompatActivity  {
             printShiying(temp);
             // 六兽
             printLiuShou();
-////            // 日期的格子
-//            printDate();
+            // 日期的格子
+            printDate();
             //五行(装卦表里的部分)
             temp=jsonInstance.getWuxing_1();
             printWuXing_zhuanggua(temp);
@@ -415,6 +476,19 @@ public class Suangua_Result extends AppCompatActivity  {
             bundle.putStringArrayList("qin_string", (ArrayList<String>) qin_list);
             bundle.putString("ben_string",ben_String);
             bundle.putString("bian_string",bian_String);
+
+            //kong部分
+            List list_zg=jsonInstance.getKong_zhuanggua();
+            for (int i=0;i<list_zg.size();i++){
+                int num = Integer.parseInt(list_zg.get(i).toString());
+                zg_kong.get(num).setBackgroundResource(R.drawable.right_triangle);
+            }
+            List list_bg=jsonInstance.getKong_biangua();
+            for (int i=0;i<list_bg.size();i++){
+                int num = Integer.parseInt(list_bg.get(i).toString());
+                bg_qin.get(num).setBackgroundResource(R.drawable.right_triangle);
+            }
+            Log.e("bi_kong",list_bg.toString());
 
             fragment_init();
             liuyao_fragment_2.setArguments(bundle);
@@ -964,7 +1038,6 @@ public class Suangua_Result extends AppCompatActivity  {
         // 农历日月年干支用Birth计算
         //五行用TianGanDiZhi计算
 
-        TianGanDiZhi ganzhi=new TianGanDiZhi(cal);
         cal.setTime(date);
         Birth birth = new Birth(cal);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
@@ -974,39 +1047,26 @@ public class Suangua_Result extends AppCompatActivity  {
         String ganzhi_year=map.get("cY").toString();
         String ganzhi_month=map.get("cM").toString();
         String ganzhi_day=map.get("cD").toString();
+        String ganzhi_hour=map.get("cH").toString();
 
-//        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_day);
-//        textView.setText(ganzhi_day);
-//        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_month);
-//        textView.setText(ganzhi_month);
-//        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_year);
-//        textView.setText(ganzhi_year);
-        textView=(TextView)findViewById(R.id.liuyaoresult_zhi_month);
-        textView.setText(ganzhi_month.substring(1,2)+ganzhi_month.substring(2,3));
+        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_day_1);
+        textView.setText(ganzhi_day.substring(0,1));
+        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_day_2);
+        textView.setText(ganzhi_day.substring(1,2));
+        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_month_1);
+        textView.setText(ganzhi_month.substring(0,1));
+        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_month_2);
+        textView.setText(ganzhi_month.substring(1,2));
+        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_year_1);
+        textView.setText(ganzhi_year.substring(0,1));
+        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_year_2);
+        textView.setText(ganzhi_year.substring(1,2));
+        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_hour_1);
+        textView.setText(ganzhi_hour.substring(0,1));
+        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_hour_2);
+        textView.setText(ganzhi_hour.substring(1,2));
 
-        // 金木水火土与旺相死囚生
-        textView=(TextView)findViewById(R.id.liuyaoresult_zhi_month_1_2);
-        textView.setText("旺");
-        textView=(TextView)findViewById(R.id.liuyaoresult_zhi_month_2_2);
-        textView.setText("相");
-        textView=(TextView)findViewById(R.id.liuyaoresult_zhi_month_3_2);
-        textView.setText("死");
-        textView=(TextView)findViewById(R.id.liuyaoresult_zhi_month_4_2);
-        textView.setText("囚");
-        textView=(TextView)findViewById(R.id.liuyaoresult_zhi_month_5_2);
-        textView.setText("休");
 
-        String zhi_month_wuxing[]=ganzhi.getWuXing();
-        textView=(TextView)findViewById(R.id.liuyaoresult_zhi_month_1_1);
-        textView.setText(zhi_month_wuxing[0]);
-        textView=(TextView)findViewById(R.id.liuyaoresult_zhi_month_2_1);
-        textView.setText(zhi_month_wuxing[1]);
-        textView=(TextView)findViewById(R.id.liuyaoresult_zhi_month_3_1);
-        textView.setText(zhi_month_wuxing[2]);
-        textView=(TextView)findViewById(R.id.liuyaoresult_zhi_month_4_1);
-        textView.setText(zhi_month_wuxing[3]);
-        textView=(TextView)findViewById(R.id.liuyaoresult_zhi_month_5_1);
-        textView.setText(zhi_month_wuxing[4]);
     }
 
     //五行（装卦表的形态1）
