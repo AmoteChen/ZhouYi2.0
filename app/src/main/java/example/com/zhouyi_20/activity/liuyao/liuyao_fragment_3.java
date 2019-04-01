@@ -20,7 +20,7 @@ import example.com.zhouyi_20.R;
 
 public class liuyao_fragment_3 extends Fragment {
     private Spinner spinner_shensha;
-    private TextView shensha_1,shensha_2,shensha_3,shensha_4,shensha_5,shensha_6,shensha_7,shensha_8;
+    private TextView shensha_total,shensha_1,shensha_2,shensha_3,shensha_4,shensha_5,shensha_6,shensha_7,shensha_8;
     private TextView shensha_9,shensha_10,shensha_11,shensha_12,shensha_13,shensha_14,shensha_15,shensha_16;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +29,7 @@ public class liuyao_fragment_3 extends Fragment {
         spinner_shensha = (Spinner)view.findViewById(R.id.spinner_shensha);
         spinner_shensha.setOnItemSelectedListener(new spinnerListener());
 
+        shensha_total = (TextView)view.findViewById(R.id.shensha_total);
         shensha_1 = (TextView)view.findViewById(R.id.shensha_text_1);
         shensha_2 = (TextView)view.findViewById(R.id.shensha_text_2);
         shensha_3 = (TextView)view.findViewById(R.id.shensha_text_3);
@@ -58,6 +59,7 @@ public class liuyao_fragment_3 extends Fragment {
                                    int position, long id) {
             switch(position){
                 case 0:
+                    shensha_total.setText("常用神煞");
                     shensha_1.setText("千禄");
                     shensha_2.setText("往亡");
                     shensha_3.setText("天喜");
@@ -76,6 +78,7 @@ public class liuyao_fragment_3 extends Fragment {
                     shensha_16.setText("");
                     break;
                 case 1:
+                    shensha_total.setText("占感情");
                     shensha_1.setText("灾煞 驿马");
                     shensha_2.setText("劫煞 月将");
                     shensha_3.setText("寡宿 日德");
@@ -94,6 +97,7 @@ public class liuyao_fragment_3 extends Fragment {
                     shensha_16.setText("");
                     break;
                 case 2:
+                    shensha_total.setText("占疾病");
                     shensha_1.setText("驿马");
                     shensha_2.setText("月将");
                     shensha_3.setText("日德");
@@ -112,6 +116,7 @@ public class liuyao_fragment_3 extends Fragment {
                     shensha_16.setText("");
                     break;
                 case 3:
+                    shensha_total.setText("占官禄");
                     shensha_1.setText("羊刃");
                     shensha_2.setText("月将");
                     shensha_3.setText("日德");
@@ -130,6 +135,7 @@ public class liuyao_fragment_3 extends Fragment {
                     shensha_16.setText("");
                     break;
                 case 4:
+                    shensha_total.setText("占求财");
                     shensha_1.setText("天喜");
                     shensha_2.setText("羊刃");
                     shensha_3.setText("劫煞");
@@ -148,6 +154,7 @@ public class liuyao_fragment_3 extends Fragment {
                     shensha_16.setText("");
                     break;
                 case 5:
+                    shensha_total.setText("占胎孕");
                     shensha_1.setText("寡宿");
                     shensha_2.setText("孤辰");
                     shensha_3.setText("灾煞");
@@ -166,6 +173,7 @@ public class liuyao_fragment_3 extends Fragment {
                     shensha_16.setText("");
                     break;
                 case 6:
+                    shensha_total.setText("占官非");
                     shensha_1.setText("贵人");
                     shensha_2.setText("驿马");
                     shensha_3.setText("月将");

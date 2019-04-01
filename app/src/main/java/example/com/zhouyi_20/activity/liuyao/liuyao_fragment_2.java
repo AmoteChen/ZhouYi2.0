@@ -49,6 +49,7 @@ public class liuyao_fragment_2 extends Fragment {
         Bundle bundle = getArguments();
         printDayTable(bundle.getString("day_string"));
         printQinTable(bundle.getStringArrayList("qin_string"));
+        printBianTable(bundle.getStringArrayList("bian_table"));
         printRightBengui(bundle.getString("ben_string"));
         printRightBiangua(bundle.getString("bian_string"));
         printDate();
@@ -109,6 +110,30 @@ public class liuyao_fragment_2 extends Fragment {
         if(qintable.get(4).toString()!="null"){textView.setText(qintable.get(4).toString());}
         else{textView.setText("");}
 
+    }
+    //填上变表
+    private void printBianTable(List biantable){
+        TextView textView;
+
+        textView = (TextView)view.findViewById(R.id.liuyaoresult_biantable_1);
+        if(biantable.get(0).toString()!="null"){textView.setText(biantable.get(0).toString());}
+        else{textView.setText("");}
+
+        textView = (TextView)view.findViewById(R.id.liuyaoresult_biantable_2);
+        if(biantable.get(1).toString()!="null"){textView.setText(biantable.get(1).toString());}
+        else{textView.setText("");}
+
+        textView = (TextView)view.findViewById(R.id.liuyaoresult_biantable_3);
+        if(biantable.get(2).toString()!="null"){textView.setText(biantable.get(2).toString());}
+        else{textView.setText("");}
+
+        textView = (TextView)view.findViewById(R.id.liuyaoresult_biantable_4);
+        if(biantable.get(3).toString()!="null"){textView.setText(biantable.get(3).toString());}
+        else{textView.setText("");}
+
+        textView = (TextView)view.findViewById(R.id.liuyaoresult_biantable_5);
+        if(biantable.get(4).toString()!="null"){textView.setText(biantable.get(4).toString());}
+        else{textView.setText("");}
     }
     //Bengui
     private void printRightBengui(String bengui){

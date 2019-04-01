@@ -115,6 +115,15 @@ public class JsonService {
                 qintable.add(dataObject_qin.get(i));
             }
 
+            JSONObject dataObject_biantable = dataObject.getJSONObject("bianYaoTable");
+            Log.e("bianyaoTable",dataObject_biantable.toString());
+            JSONArray dataObject_bian = dataObject_biantable.getJSONArray("bianYao");
+            biantable = new ArrayList();
+            for (int i =0;i<5;++i){
+                biantable.add(dataObject_bian.get(i));
+            }
+            Log.e("bianYao",dataObject_bian.toString());
+
 
 
 
@@ -188,6 +197,9 @@ public class JsonService {
     //亲表(下端那个）
     private List qintable = new ArrayList();
     public List getQintable(){return qintable;}
+    //变表
+    private List biantable = new ArrayList();
+    public List getBiantable(){return biantable;}
 
     //装卦表的kong下标
     private List kong_zhuanggua=new ArrayList();

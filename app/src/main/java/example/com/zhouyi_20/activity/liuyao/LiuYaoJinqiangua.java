@@ -146,6 +146,12 @@ public class LiuYaoJinqiangua extends AppCompatActivity implements View.OnClickL
         Bundle bundle=new Bundle();
         bundle.putSerializable("LiuYaoData",jinqiangua_Result);
         to_liuyao_result.putExtras(bundle);
+        to_liuyao_result.putExtra("date",date);
+        to_liuyao_result.putExtra("way",way);
+        to_liuyao_result.putExtra("reason",reason);
+        to_liuyao_result.putExtra("name",name);
+        to_liuyao_result.putExtra("note",note);
+        to_liuyao_result.putExtra("yongshen",yongshen);
         startActivity(to_liuyao_result);
     }
 
@@ -156,11 +162,11 @@ public class LiuYaoJinqiangua extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.liuyao_jinqiangua_ok_btn:
+                getData();
                 finishJinqiangua();
                 for(int i = 0;i<6;i++){
                 guaxiang[i]=jinqiangua_Result[i].intValue();
                 }
-                getData();
                 HttpsConnect.sendRequest(address, "POST", getJsonData(), new HttpsListener() {
                     @Override
                     public void success(String response) {

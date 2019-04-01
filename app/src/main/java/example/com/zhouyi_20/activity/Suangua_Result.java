@@ -460,6 +460,8 @@ public class Suangua_Result extends AppCompatActivity  {
 
 //            //日表
             String day_String=jsonInstance.getDaytable();
+            //变表
+            List bian_list = jsonInstance.getBiantable();
             //亲表（下端部分）
             List qin_list = jsonInstance.getQintable();
 
@@ -474,6 +476,7 @@ public class Suangua_Result extends AppCompatActivity  {
             Bundle bundle = new Bundle();
             bundle.putString("day_string", day_String);
             bundle.putStringArrayList("qin_string", (ArrayList<String>) qin_list);
+            bundle.putStringArrayList("bian_table",(ArrayList<String>) bian_list);
             bundle.putString("ben_string",ben_String);
             bundle.putString("bian_string",bian_String);
 
@@ -486,7 +489,7 @@ public class Suangua_Result extends AppCompatActivity  {
             List list_bg=jsonInstance.getKong_biangua();
             for (int i=0;i<list_bg.size();i++){
                 int num = Integer.parseInt(list_bg.get(i).toString());
-                bg_qin.get(num).setBackgroundResource(R.drawable.right_triangle);
+                bg_qin.get(num).setBackgroundResource(R.drawable.small_triangle);
             }
             Log.e("bi_kong",list_bg.toString());
 
