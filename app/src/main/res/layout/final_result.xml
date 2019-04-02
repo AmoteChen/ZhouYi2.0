@@ -728,12 +728,12 @@
                     android:showDividers="middle">
 
                     <TextView
+                        android:id="@+id/biangua_branches_1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:autoSizeMaxTextSize="20dp"
                         android:autoSizeMinTextSize="8dp"
                         android:gravity="center"
-                        android:text="壬"
                         android:textColor="#7e7e82"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -754,6 +754,7 @@
                         android:layout_weight="1"
                         android:orientation="horizontal">
                         <TextView
+                            android:id="@+id/huike_text_1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -771,6 +772,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/liuyaoresult_bg_dizhi_1"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
@@ -778,7 +780,6 @@
                                 android:autoSizeMinTextSize="18dp"
                                 android:autoSizeTextType="uniform"
                                 android:gravity="center"
-                                android:text="戌"
                                 android:textColor="#ca9256"
                                 android:textSize="20dp"
                                 android:textStyle="bold" />
@@ -818,6 +819,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/huike_text_2"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -835,6 +837,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/liuyaoresult_bg_dizhi_2"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
@@ -842,7 +845,6 @@
                                 android:autoSizeMinTextSize="18dp"
                                 android:autoSizeTextType="uniform"
                                 android:gravity="center"
-                                android:text="戌"
                                 android:textColor="#ca9256"
                                 android:textSize="20dp"
                                 android:textStyle="bold" />
@@ -882,6 +884,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/huike_text_3"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -899,6 +902,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/liuyaoresult_bg_dizhi_3"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
@@ -906,7 +910,6 @@
                                 android:autoSizeMinTextSize="18dp"
                                 android:autoSizeTextType="uniform"
                                 android:gravity="center"
-                                android:text="戌"
                                 android:textColor="#ca9256"
                                 android:textSize="20dp"
                                 android:textStyle="bold" />
@@ -957,12 +960,12 @@
                     android:showDividers="middle">
 
                     <TextView
+                        android:id="@+id/biangua_branches_2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:autoSizeMaxTextSize="20dp"
                         android:autoSizeMinTextSize="8dp"
                         android:gravity="center"
-                        android:text="壬"
                         android:textColor="#7e7e82"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -984,6 +987,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/huike_text_4"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -1001,6 +1005,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/liuyaoresult_bg_dizhi_4"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
@@ -1008,7 +1013,6 @@
                                 android:autoSizeMinTextSize="18dp"
                                 android:autoSizeTextType="uniform"
                                 android:gravity="center"
-                                android:text="戌"
                                 android:textColor="#ca9256"
                                 android:textSize="20dp"
                                 android:textStyle="bold" />
@@ -1048,6 +1052,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/huike_text_5"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -1065,6 +1070,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/liuyaoresult_bg_dizhi_5"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
@@ -1072,7 +1078,6 @@
                                 android:autoSizeMinTextSize="18dp"
                                 android:autoSizeTextType="uniform"
                                 android:gravity="center"
-                                android:text="戌"
                                 android:textColor="#ca9256"
                                 android:textSize="20dp"
                                 android:textStyle="bold" />
@@ -1112,6 +1117,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/huike_text_6"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -1129,6 +1135,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/liuyaoresult_bg_dizhi_6"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
@@ -1136,7 +1143,6 @@
                                 android:autoSizeMinTextSize="18dp"
                                 android:autoSizeTextType="uniform"
                                 android:gravity="center"
-                                android:text="戌"
                                 android:textColor="#ca9256"
                                 android:textSize="20dp"
                                 android:textStyle="bold" />

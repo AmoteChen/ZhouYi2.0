@@ -28,6 +28,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -112,7 +113,6 @@ public class Suangua_Result extends AppCompatActivity  {
 
     //空表
     ArrayList<TextView> zg_kong;
-    ArrayList<TextView> bg_kong;
     ArrayList<TextView> fs_kong;
 
     //装卦的空部分的文本框
@@ -122,13 +122,22 @@ public class Suangua_Result extends AppCompatActivity  {
     private TextView zg_kong_4;
     private TextView zg_kong_5;
     private TextView zg_kong_6;
-    //变卦的空部分的文本框
-    private TextView bg_kong_1;
-    private TextView bg_kong_2;
-    private TextView bg_kong_3;
-    private TextView bg_kong_4;
-    private TextView bg_kong_5;
-    private TextView bg_kong_6;
+    //装卦的下部文本框（会变的那个）
+    ArrayList<TextView> zg_bian_list;
+    private TextView zg_bian_1;
+    private TextView zg_bian_2;
+    private TextView zg_bian_3;
+    private TextView zg_bian_4;
+    private TextView zg_bian_5;
+    private TextView zg_bian_6;
+    //变卦的地支的文本框
+    ArrayList<TextView> bg_dizhi_list;
+    private TextView bg_dizhi_1;
+    private TextView bg_dizhi_2;
+    private TextView bg_dizhi_3;
+    private TextView bg_dizhi_4;
+    private TextView bg_dizhi_5;
+    private TextView bg_dizhi_6;
     //伏神的空部分的文本框
     private TextView fs_kong_1;
     private TextView fs_kong_2;
@@ -136,6 +145,15 @@ public class Suangua_Result extends AppCompatActivity  {
     private TextView fs_kong_4;
     private TextView fs_kong_5;
     private TextView fs_kong_6;
+
+    //回克逻辑的文本框
+    ArrayList<TextView> hk_list;
+    private TextView hk_1;
+    private TextView hk_2;
+    private TextView hk_3;
+    private TextView hk_4;
+    private TextView hk_5;
+    private TextView hk_6;
 
 
     // 懒得重新解析因此直接存储
@@ -251,6 +269,20 @@ public class Suangua_Result extends AppCompatActivity  {
         zg_kong.add(zg_kong_5);
         zg_kong.add(zg_kong_6);
 
+        zg_bian_1 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_1);
+        zg_bian_2 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_2);
+        zg_bian_3 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_3);
+        zg_bian_4 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_4);
+        zg_bian_5 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_5);
+        zg_bian_6 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_6);
+
+        zg_bian_list=new ArrayList<>();
+        zg_bian_list.add(zg_bian_1);
+        zg_bian_list.add(zg_bian_2);
+        zg_bian_list.add(zg_bian_3);
+        zg_bian_list.add(zg_bian_4);
+        zg_bian_list.add(zg_bian_5);
+        zg_bian_list.add(zg_bian_6);
 
 
         //伏神部分的空表因为后端返回index逻辑好像没有做完，暂时不能够实现
@@ -269,6 +301,35 @@ public class Suangua_Result extends AppCompatActivity  {
         fs_kong.add(fs_kong_5);
         fs_kong.add(fs_kong_6);
 
+        hk_1 = (TextView)findViewById(R.id.huike_text_1);
+        hk_2 = (TextView)findViewById(R.id.huike_text_2);
+        hk_3 = (TextView)findViewById(R.id.huike_text_3);
+        hk_4 = (TextView)findViewById(R.id.huike_text_4);
+        hk_5 = (TextView)findViewById(R.id.huike_text_5);
+        hk_6 = (TextView)findViewById(R.id.huike_text_6);
+
+        hk_list = new ArrayList<>();
+        hk_list.add(hk_1);
+        hk_list.add(hk_2);
+        hk_list.add(hk_3);
+        hk_list.add(hk_4);
+        hk_list.add(hk_5);
+        hk_list.add(hk_6);
+
+        bg_dizhi_1 = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_1);
+        bg_dizhi_2 = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_2);
+        bg_dizhi_3 = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_3);
+        bg_dizhi_4 = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_4);
+        bg_dizhi_5 = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_5);
+        bg_dizhi_6 = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_6);
+
+        bg_dizhi_list = new ArrayList<>();
+        bg_dizhi_list.add(bg_dizhi_1);
+        bg_dizhi_list.add(bg_dizhi_2);
+        bg_dizhi_list.add(bg_dizhi_3);
+        bg_dizhi_list.add(bg_dizhi_4);
+        bg_dizhi_list.add(bg_dizhi_5);
+        bg_dizhi_list.add(bg_dizhi_6);
 
 
 
@@ -276,7 +337,6 @@ public class Suangua_Result extends AppCompatActivity  {
     }
     //变卦控件可视性的初始化
     private void init_visible_biangua(){
-        if(biangua_show.size()!=0) {
             for(int i = 0;i<6;i++){
                 bg_List.get(i).setVisibility(View.INVISIBLE);
                 bg_qin.get(i).setVisibility(View.INVISIBLE);
@@ -287,13 +347,11 @@ public class Suangua_Result extends AppCompatActivity  {
                 bg_List.get(num).setVisibility(View.VISIBLE);
                 bg_qin.get(num).setVisibility(View.VISIBLE);
             }
-        }
     }
     //伏神控件可视性的初始化
     private void init_visible_fushen(){
 
         Log.e("FFFF",fushen_show.toString());
-        if(fushen_show.size()!=0) {
             for(int i = 0;i<6;i++){
                 fs_List.get(i).setVisibility(View.INVISIBLE);
                 fs_qin.get(i).setVisibility(View.INVISIBLE);
@@ -305,7 +363,6 @@ public class Suangua_Result extends AppCompatActivity  {
                 fs_qin.get(num).setVisibility(View.VISIBLE);
             }
         }
-    }
     //点击事件的初始化
     private void click_init(){
         biangua_layout.setOnClickListener(new View.OnClickListener() {
@@ -335,7 +392,7 @@ public class Suangua_Result extends AppCompatActivity  {
             //装卦表的点击跳转
             @Override
             public void onClick(View v) {
-                if(zhuanggua_count>2){zhuanggua_count=0;}
+                if(zhuanggua_count>5){zhuanggua_count=0;}
                 switch (zhuanggua_count){
                     case 0:
                         JsonService jsonInstance= JsonService.getInstance();
@@ -351,6 +408,19 @@ public class Suangua_Result extends AppCompatActivity  {
                     case 2:
                         printZhuanggua_3();
                         zhuanggua_count++;
+                        break;
+                    case 3:
+                        printZhuanggua_4();
+                        zhuanggua_count++;
+                        break;
+                    case 4:
+                        printZhuanggua_5();
+                        zhuanggua_count++;
+                        break;
+                    case 5:
+                        printZhuanggua_6();
+                        zhuanggua_count++;
+                        break;
                     default:
                         break;
                 }
@@ -441,14 +511,19 @@ public class Suangua_Result extends AppCompatActivity  {
             //Heaven表
             temp=jsonInstance.getHeavenly_stems();
             printHeaven(temp);
-
+            temp=jsonInstance.getHeavenly_stems_biangua();
+            printHeaven_biangua(temp);
             temp=jsonInstance.getHeavenly_stems_fushen();
             printHeaven_fushen(temp);
             //Earthly表
             temp=jsonInstance.getEarthly_branches();
             printEarthly(temp);
+            temp=jsonInstance.getEarthly_biangua();
+            printEarthly_biangua(temp);
             temp=jsonInstance.getEarthly_fushen();
             printEarthly_fushen(temp);
+
+
 
             //五行（伏神表里的部分）
             temp=jsonInstance.getWuxing_2();
@@ -480,18 +555,27 @@ public class Suangua_Result extends AppCompatActivity  {
             bundle.putString("ben_string",ben_String);
             bundle.putString("bian_string",bian_String);
 
+
             //kong部分
+            String kong_table = "";
             List list_zg=jsonInstance.getKong_zhuanggua();
             for (int i=0;i<list_zg.size();i++){
                 int num = Integer.parseInt(list_zg.get(i).toString());
                 zg_kong.get(num).setBackgroundResource(R.drawable.right_triangle);
+                kong_table+=zg_kong.get(num).getText().toString();
             }
+            bundle.putString("kong_table",kong_table);
+
+
             List list_bg=jsonInstance.getKong_biangua();
             for (int i=0;i<list_bg.size();i++){
                 int num = Integer.parseInt(list_bg.get(i).toString());
                 bg_qin.get(num).setBackgroundResource(R.drawable.small_triangle);
             }
             Log.e("bi_kong",list_bg.toString());
+
+            //回克逻辑
+            printHuiKe();
 
             fragment_init();
             liuyao_fragment_2.setArguments(bundle);
@@ -1221,6 +1305,87 @@ public class Suangua_Result extends AppCompatActivity  {
 
 
     }
+    //装卦表形态4
+    private void printZhuanggua_4(){
+        HashMap xing_map = new HashMap();
+        xing_map.put("子","卯");
+        xing_map.put("丑","未");
+        xing_map.put("寅","申");
+        xing_map.put("卯","子");
+        xing_map.put("辰","辰");
+        xing_map.put("巳","寅");
+        xing_map.put("午","午");
+        xing_map.put("未","戌");
+        xing_map.put("申","巳");
+        xing_map.put("酉","酉");
+        xing_map.put("戌","丑");
+        xing_map.put("亥","亥");
+        for (int i=0;i<6;i++){
+            zg_bian_list.get(i).setText("");
+        }
+        for (int i=0;i<6;i++){
+            for(int j=i+1;j<6;j++){
+                if(zg_kong.get(j).getText().toString().equals(xing_map.get(zg_kong.get(i).getText().toString()))){
+                    zg_bian_list.get(j).setText("刑");
+                    zg_bian_list.get(i).setText("刑");
+                }
+            }
+        }
+    }
+    //装卦表形态5
+    private void printZhuanggua_5(){
+        HashMap chong_map = new HashMap();
+        chong_map.put("子","午");
+        chong_map.put("丑","未");
+        chong_map.put("寅","申");
+        chong_map.put("卯","酉");
+        chong_map.put("辰","戌");
+        chong_map.put("巳","亥");
+        chong_map.put("午","子");
+        chong_map.put("未","丑");
+        chong_map.put("申","寅");
+        chong_map.put("酉","卯");
+        chong_map.put("戌","辰");
+        chong_map.put("亥","巳");
+        for (int i=0;i<6;i++){
+            zg_bian_list.get(i).setText("");
+        }
+        for (int i=0;i<6;i++){
+            for(int j=i+1;j<6;j++){
+                if(zg_kong.get(j).getText().toString().equals(chong_map.get(zg_kong.get(i).getText().toString()))){
+                    zg_bian_list.get(j).setText("冲");
+                    zg_bian_list.get(i).setText("冲");
+                }
+            }
+        }
+    }
+    //装卦表形态6
+    private void printZhuanggua_6(){
+        HashMap hai_map = new HashMap();
+        hai_map.put("子","未");
+        hai_map.put("丑","午");
+        hai_map.put("寅","巳");
+        hai_map.put("卯","辰");
+        hai_map.put("辰","卯");
+        hai_map.put("巳","寅");
+        hai_map.put("午","丑");
+        hai_map.put("未","子");
+        hai_map.put("申","亥");
+        hai_map.put("酉","戌");
+        hai_map.put("戌","酉");
+        hai_map.put("亥","申");
+        for (int i=0;i<6;i++){
+            zg_bian_list.get(i).setText("");
+        }
+        for (int i=0;i<6;i++){
+            for(int j=i+1;j<6;j++){
+                if(zg_kong.get(j).getText().toString().equals(hai_map.get(zg_kong.get(i).getText().toString()))){
+                    zg_bian_list.get(j).setText("害");
+                    zg_bian_list.get(i).setText("害");
+                }
+            }
+        }
+    }
     //填上装卦绿色那部分（不知道是什么了）
     private void printHeaven(String heavenly_stems){
         TextView textView= (TextView)findViewById(R.id.liuyaoresult_zhuanggua_2_1);
@@ -1231,7 +1396,16 @@ public class Suangua_Result extends AppCompatActivity  {
         textView= (TextView)findViewById(R.id.liuyaoresult_zhuanggua_2_4);
         textView.setText(temp);
     }
+    //填上变卦里面类似的部分
+    private void printHeaven_biangua(String heavenly_biangua){
+        TextView textView = (TextView)findViewById(R.id.biangua_branches_1);
+        String temp = heavenly_biangua.substring(2,3);
+        textView.setText(temp);
 
+        temp=heavenly_biangua.substring(6,7);
+        textView = (TextView)findViewById(R.id.biangua_branches_2);
+        textView.setText(temp);
+    }
     //填上伏神里面的类似部分
     private void printHeaven_fushen(String hevenly_fushen){
         TextView textView= (TextView)findViewById(R.id.liuyaoresult_fushen_1_2);
@@ -1268,7 +1442,32 @@ public class Suangua_Result extends AppCompatActivity  {
         textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_6);
         textView.setText(temp);
     }
+    //填上变卦表类似的部分
+    private void printEarthly_biangua(String earthly_biangua){
+        String temp = earthly_biangua.substring(2,3);
+        TextView textView = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_1);
+        textView.setText(temp);
 
+        temp = earthly_biangua.substring(6,7);
+        textView = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_2);
+        textView.setText(temp);
+
+        temp = earthly_biangua.substring(10,11);
+        textView = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_3);
+        textView.setText(temp);
+
+        temp = earthly_biangua.substring(14,15);
+        textView = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_4);
+        textView.setText(temp);
+
+        temp = earthly_biangua.substring(18,19);
+        textView = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_5);
+        textView.setText(temp);
+
+        temp = earthly_biangua.substring(22,23);
+        textView = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_6);
+        textView.setText(temp);
+    }
     // 填上伏神里面的类似部分
     private void printEarthly_fushen(String earthly_fushen){
         String temp = earthly_fushen.substring(2,3);
@@ -1347,6 +1546,103 @@ public class Suangua_Result extends AppCompatActivity  {
         textView = (TextView)findViewById(R.id.liuyaoresult_fushen_6_3);
         textView.setText(temp);
 
+    }
+
+    //回克逻辑
+    private void printHuiKe(){
+        HashMap HuiHe_map = new HashMap();
+        HuiHe_map.put("子","丑");
+        HuiHe_map.put("丑","子");
+        HuiHe_map.put("寅","亥");
+        HuiHe_map.put("卯","戌");
+        HuiHe_map.put("辰","酉");
+        HuiHe_map.put("巳","申");
+        HuiHe_map.put("午","未");
+        HuiHe_map.put("未","午");
+        HuiHe_map.put("申","巳");
+        HuiHe_map.put("酉","辰");
+        HuiHe_map.put("戌","卯");
+        HuiHe_map.put("亥","寅");
+
+        HashMap Ke_map = new HashMap();
+        Ke_map.put("子","巳午");
+        Ke_map.put("丑","子亥");
+        Ke_map.put("寅","丑辰未戌");
+        Ke_map.put("卯","丑辰未戌");
+        Ke_map.put("辰","子亥");
+        Ke_map.put("巳","申酉");
+        Ke_map.put("午","申酉");
+        Ke_map.put("未","子亥");
+        Ke_map.put("申","寅卯");
+        Ke_map.put("酉","寅卯");
+        Ke_map.put("戌","子亥");
+        Ke_map.put("亥","巳午");
+
+        HashMap Sheng_map = new HashMap();
+        Sheng_map.put("子","寅卯");
+        Sheng_map.put("丑","申酉");
+        Sheng_map.put("寅","巳午");
+        Sheng_map.put("卯","巳午");
+        Sheng_map.put("辰","申酉");
+        Sheng_map.put("巳","丑辰");
+        Sheng_map.put("午","丑辰");
+        Sheng_map.put("未","申酉");
+        Sheng_map.put("申","子亥");
+        Sheng_map.put("酉","子亥");
+        Sheng_map.put("戌","申酉");
+        Sheng_map.put("亥","寅卯");
+
+        HashMap Hua_map = new HashMap();
+        Hua_map.put(1,"丑辰未戌");
+        Hua_map.put(2,"亥子");
+        Hua_map.put(3,"寅卯");
+        Hua_map.put(4,"巳午");
+        Hua_map.put(5,"申酉");
+
+        for(int i=0;i<6;i++){
+            hk_list.get(i).setText("");
+            Log.e("zhuanggua",bg_dizhi_list.get(i).getText().toString());
+            if(HuiHe_map.get(bg_dizhi_list.get(i).getText().toString()).equals(zg_kong.get(i).getText().toString())){
+                Log.e("biangua111",zg_kong.get(i).getText().toString());
+                hk_list.get(i).setText("回合");
+            }
+
+            else if((Ke_map.get(bg_dizhi_list.get(i).getText()).toString()).contains(zg_kong.get(i).getText().toString())){
+                if( hk_list.get(i).equals("回合")) {
+                    hk_list.get(i).setText("合克");
+                    continue;
+                }
+                else {
+                    hk_list.get(i).setText("回克");
+                    continue;
+                }
+            }
+
+            else if((Sheng_map.get(bg_dizhi_list.get(i).getText()).toString()).contains(zg_kong.get(i).getText().toString())){
+                hk_list.get(i).setText("回生");
+                continue;
+            }
+
+            for (int j=1;j<6;j++){
+                if(Hua_map.get(j).toString().contains(bg_dizhi_list.get(i).getText().toString())&&Hua_map.get(j).toString().contains(zg_kong.get(i).getText().toString())){
+                    if("戌亥卯午酉".contains(bg_dizhi_list.get(i).getText().toString())){
+                        hk_list.get(i).setText("化进");
+                    }
+                    if(bg_dizhi_list.get(i).getText().toString().equals("未")&&"辰丑".contains(zg_kong.get(i).getText().toString())){
+                        hk_list.get(i).setText("化进");
+                    }
+                    if(bg_dizhi_list.get(i).getText().toString().equals("辰")&&zg_kong.get(i).getText().toString().equals("丑")){
+                        hk_list.get(i).setText("化进");
+                    }
+                    else {
+                        hk_list.get(i).setText("化退");
+                    }
+
+                }
+            }
+
+
+        }
     }
 
 

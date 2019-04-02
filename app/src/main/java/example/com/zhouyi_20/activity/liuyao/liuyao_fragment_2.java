@@ -52,6 +52,7 @@ public class liuyao_fragment_2 extends Fragment {
         printBianTable(bundle.getStringArrayList("bian_table"));
         printRightBengui(bundle.getString("ben_string"));
         printRightBiangua(bundle.getString("bian_string"));
+        printKongTable(bundle.getString("kong_table"));
         printDate();
         }catch (Exception e){
             e.printStackTrace();
@@ -144,6 +145,12 @@ public class liuyao_fragment_2 extends Fragment {
     private void printRightBiangua(String biangua){
         TextView textView = (TextView)view.findViewById(R.id.liuyaoresult_right_biangua);
         textView.setText(biangua);
+    }
+
+    //填上空表
+    private void printKongTable(String kong_table){
+        TextView textView = (TextView)view.findViewById(R.id.frg2_kong_table);
+        textView.setText(kong_table);
     }
 
     //日期等

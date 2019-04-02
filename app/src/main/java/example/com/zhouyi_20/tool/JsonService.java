@@ -59,10 +59,13 @@ public class JsonService {
             wuxing_3=dataObject_2.getString("five_elements");
             //content
             content_biangua=dataObject_2.getString("content");
+            //earthly_branches
+            earthly_biangua = dataObject_2.getString("earthly_branches");
+            //heavenly_stems
+            heavenly_stems_biangua = dataObject_2.getString("heavenly_stems");
             Log.e("DAYww",content_biangua);
             //times
             times_biangua = dataObject_2.getString("times");
-
             //变卦部分的show下标
             JSONArray dataObject_show_biangua=dataObject_BG.getJSONArray("showIndex");
             show_biangua=new ArrayList();
@@ -178,12 +181,16 @@ public class JsonService {
     //heavenly_stems
     private String heavenly_stems_zhuanggua;
     public String getHeavenly_stems(){return heavenly_stems_zhuanggua;}
+    private String heavenly_stems_biangua;
+    public String getHeavenly_stems_biangua(){return heavenly_stems_biangua;}
     private String heavenly_stems_fushen;
     public String getHeavenly_stems_fushen(){return heavenly_stems_fushen;}
 
     //earthly_branches
     private String earthly_branches;
     public String getEarthly_branches(){return earthly_branches;}
+    private String earthly_biangua;
+    public String getEarthly_biangua(){return earthly_biangua;}
     private String earthly_fushen;
     public String getEarthly_fushen(){return earthly_fushen;}
 
