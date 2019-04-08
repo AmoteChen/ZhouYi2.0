@@ -197,7 +197,8 @@ public class History_fragment extends Fragment {
                             String reason1 = eachObject.getString("reason");
                             String note = eachObject.getString("note");
                             String way = eachObject.getString("way");
-                            divinations.add(new Divination(_id,reason1,userid,yongshen,date,"星期日",way,name,note));
+                            JSONArray guaxiang = eachObject.getJSONArray("guaxiang");
+                            divinations.add(new Divination(_id,reason1,userid,yongshen,date,"星期日",way,name,note,guaxiang));
                         }
 
                         slideRecyclerView = (SlideRecyclerView)view.findViewById(R.id.history_list);

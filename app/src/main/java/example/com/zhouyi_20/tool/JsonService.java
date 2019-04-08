@@ -32,6 +32,10 @@ public class JsonService {
             // 六亲
             liuqin_1 = dataObject_1.getString("six_relatives");
             wuxing_1=dataObject_1.getString("five_elements");
+            //身
+            shen_gua=dataObject_1.getString("gua_shen");
+            Log.e("shen",shen_gua);
+
             heavenly_stems_zhuanggua = dataObject_1.getString("heavenly_stems");
             earthly_branches = dataObject_1.getString("earthly_branches");
             //content
@@ -119,7 +123,6 @@ public class JsonService {
             }
 
             JSONObject dataObject_biantable = dataObject.getJSONObject("bianYaoTable");
-            Log.e("bianyaoTable",dataObject_biantable.toString());
             JSONArray dataObject_bian = dataObject_biantable.getJSONArray("bianYao");
             biantable = new ArrayList();
             for (int i =0;i<5;++i){
@@ -159,6 +162,9 @@ public class JsonService {
     //变卦里的卦次
     private String times_biangua;
     public String getTimes_biangua(){return times_biangua;}
+    //身表
+    private String shen_gua;
+    public String getShen_gua(){return shen_gua;}
 
     //伏神里的content
     private String content_fushen;

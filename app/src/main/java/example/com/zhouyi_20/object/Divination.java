@@ -1,5 +1,7 @@
 package example.com.zhouyi_20.object;
 
+import org.json.JSONArray;
+
 /**
  此类是历史纪录里面的各项
  **/
@@ -13,6 +15,7 @@ public class Divination {
     private String name;
     private String yongshen;
     private String note;
+    private JSONArray guaxiang;
 
     public Divination() {
         this._id = "none";
@@ -24,11 +27,12 @@ public class Divination {
         this.name = "none";
         this.yongshen = "none";
         this.note = "none";
+        this.guaxiang = null;
     }
 
 
 
-    public Divination(String _id, String reason, String id, String yongshen,String time,String xingqi,String way,String name,String note) {
+    public Divination(String _id, String reason, String id, String yongshen,String time,String xingqi,String way,String name,String note,JSONArray guaxiang) {
         this._id = _id;
         this.time = time;
         this.id = id;
@@ -38,6 +42,7 @@ public class Divination {
         this.way = way;
         this.name = name;
         this.note = note;
+        this.guaxiang = guaxiang;
     }
 
 
@@ -105,4 +110,10 @@ public class Divination {
         return this.note;
     }
 
+    public void setGuaxiang(JSONArray guaxiang){
+        this.guaxiang = guaxiang;
+    }
+    public JSONArray getGuaxiang(){
+        return this.guaxiang;
+    }
 }

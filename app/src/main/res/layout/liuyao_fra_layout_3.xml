@@ -18,13 +18,25 @@
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
                 android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="干禄" />
+                 />
             <TextView
-                android:id="@+id/shensha_text_9"
+                android:id="@+id/shensha_dizhi_1"
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
                 android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="子" />
+                 />
+            <TextView
+                android:id="@+id/shensha_text_9"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
+            <TextView
+                android:id="@+id/shensha_dizhi_9"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
@@ -34,13 +46,25 @@
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
                 android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="往亡" />
+                 />
             <TextView
-                android:id="@+id/shensha_text_10"
+                android:id="@+id/shensha_dizhi_2"
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
                 android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="申" />
+                 />
+            <TextView
+                android:id="@+id/shensha_text_10"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
+            <TextView
+                android:id="@+id/shensha_dizhi_10"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
@@ -50,13 +74,25 @@
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
                 android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="天喜" />
+                 />
             <TextView
-                android:id="@+id/shensha_text_11"
+                android:id="@+id/shensha_dizhi_3"
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
                 android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="子" />
+                />
+            <TextView
+                android:id="@+id/shensha_text_11"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                />
+            <TextView
+                android:id="@+id/shensha_dizhi_11"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
@@ -66,13 +102,25 @@
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
                 android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="劫煞" />
+                 />
             <TextView
-                android:id="@+id/shensha_text_12"
+                android:id="@+id/shensha_dizhi_4"
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
                 android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="寅" />
+                 />
+            <TextView
+                android:id="@+id/shensha_text_12"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
+            <TextView
+                android:id="@+id/shensha_dizhi_12"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
@@ -82,13 +130,26 @@
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
                 android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="羊刃" />
+                 />
             <TextView
-                android:id="@+id/shensha_text_13"
+                android:id="@+id/shensha_dizhi_5"
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
                 android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="丑" />
+                 />
+            <TextView
+                android:id="@+id/shensha_text_13"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
+
+            <TextView
+                android:id="@+id/shensha_dizhi_13"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
@@ -98,13 +159,25 @@
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
                 android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="桃花" />
+                 />
             <TextView
-                android:id="@+id/shensha_text_14"
+                android:id="@+id/shensha_dizhi_6"
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
                 android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="午" />
+                 />
+            <TextView
+                android:id="@+id/shensha_text_14"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
+            <TextView
+                android:id="@+id/shensha_dizhi_14"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
@@ -114,13 +187,25 @@
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
                 android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="驿马" />
+                 />
             <TextView
-                android:id="@+id/shensha_text_15"
+                android:id="@+id/shensha_dizhi_7"
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
                 android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="亥" />
+                 />
+            <TextView
+                android:id="@+id/shensha_text_15"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
+            <TextView
+                android:id="@+id/shensha_dizhi_15"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp" android:layout_height="match_parent" android:orientation="vertical"
@@ -130,13 +215,25 @@
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="bottom"
                 android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="贵人" />
+                 />
             <TextView
-                android:id="@+id/shensha_text_16"
+                android:id="@+id/shensha_dizhi_8"
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
                 android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
                 android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
-                android:text="卯巳" />
+                 />
+            <TextView
+                android:id="@+id/shensha_text_16"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#acacac" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
+            <TextView
+                android:id="@+id/shensha_dizhi_16"
+                android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top"
+                android:layout_weight="1" android:ems="1" android:textColor="#000000" android:textStyle="bold"
+                android:autoSizeMaxTextSize="30dp" android:autoSizeMinTextSize="18dp" android:textSize="22dp"
+                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp" android:layout_height="match_parent"
@@ -157,7 +254,6 @@
             android:autoSizeMinTextSize="18dp"
             android:ems="1"
             android:gravity="center_horizontal"
-            android:text="常用神煞"
             android:textSize="22dp"
             android:textColor="#ffffff"
              />

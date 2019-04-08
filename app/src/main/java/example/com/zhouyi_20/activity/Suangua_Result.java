@@ -547,6 +547,10 @@ public class Suangua_Result extends AppCompatActivity  {
 
             //biangua
             String bian_String=jsonInstance.getContent_biangua();
+            //fushen
+            String fushen_String=jsonInstance.getContent_fushen();
+            //shen_gua
+            String shen_gua = jsonInstance.getShen_gua();
 
             Bundle bundle = new Bundle();
             bundle.putString("day_string", day_String);
@@ -554,6 +558,9 @@ public class Suangua_Result extends AppCompatActivity  {
             bundle.putStringArrayList("bian_table",(ArrayList<String>) bian_list);
             bundle.putString("ben_string",ben_String);
             bundle.putString("bian_string",bian_String);
+            bundle.putString("shou_string",fushen_String);
+            bundle.putString("shen_gua",shen_gua);
+//
 
 
             //kong部分
@@ -576,6 +583,7 @@ public class Suangua_Result extends AppCompatActivity  {
 
             //回克逻辑
             printHuiKe();
+            printDateQin();
 
             fragment_init();
             liuyao_fragment_2.setArguments(bundle);
@@ -1645,6 +1653,215 @@ public class Suangua_Result extends AppCompatActivity  {
         }
     }
 
+    //年月日里的亲表（极其暴力的实现）
+    private void printDateQin(){
+        ArrayList<TextView> fushen_list = new ArrayList<>();
+        ArrayList<TextView> liuqin_list = new ArrayList<>();
+
+        TextView fushen_1,fushen_2,fushen_3,fushen_4,fushen_5,fushen_6;
+        TextView liuqin_1,liuqin_2,liuqin_3,liuqin_4,liuqin_5,liuqin_6;
+        fushen_1 = (TextView)findViewById(R.id.liuyaoresult_fushen_1_1);
+        fushen_2 = (TextView)findViewById(R.id.liuyaoresult_fushen_2_1);
+        fushen_3 = (TextView)findViewById(R.id.liuyaoresult_fushen_3_1);
+        fushen_4 = (TextView)findViewById(R.id.liuyaoresult_fushen_4_1);
+        fushen_5 = (TextView)findViewById(R.id.liuyaoresult_fushen_5_1);
+        fushen_6 = (TextView)findViewById(R.id.liuyaoresult_fushen_6_1);
+
+        fushen_list.add(fushen_1);
+        fushen_list.add(fushen_2);
+        fushen_list.add(fushen_3);
+        fushen_list.add(fushen_4);
+        fushen_list.add(fushen_5);
+        fushen_list.add(fushen_6);
+
+        liuqin_1 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_1);
+        liuqin_2 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_2);
+        liuqin_3 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_3);
+        liuqin_4 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_4);
+        liuqin_5 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_5);
+        liuqin_6 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_6);
+
+        liuqin_list.add(liuqin_1);
+        liuqin_list.add(liuqin_2);
+        liuqin_list.add(liuqin_3);
+        liuqin_list.add(liuqin_4);
+        liuqin_list.add(liuqin_5);
+        liuqin_list.add(liuqin_6);
+
+        TextView textView = (TextView)findViewById(R.id.liuyaoresult_ganzhi_year_2);
+        TextView temp = (TextView)findViewById(R.id.liuqin_year);
+        String part = textView.getText().toString();
+        String full=new String();
+        switch (part){
+            case "丑":full = "丑辰未戌";
+                break;
+            case "辰":full = "丑辰未戌";
+                break;
+            case "未":full = "丑辰未戌";
+                break;
+            case "戌":full = "丑辰未戌";
+                break;
+            case "亥":full = "亥子";
+                break;
+            case "子":full = "亥子";
+                break;
+            case "寅":full = "寅卯";
+                break;
+            case "卯":full = "寅卯";
+                break;
+            case "巳":full = "巳午";
+                break;
+            case "午":full = "巳午";
+                break;
+            case "申":full = "申酉";
+                break;
+            case "酉":full = "申酉";
+                break;
+            default:
+                break;
+        }
+        for (int i = 0;i<6;i++){
+            if(full.contains(fushen_list.get(i).getText())){
+                if(liuqin_list.get(i).getText().toString().equals("子孙")){
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(1,2));
+                }
+                else {
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(0,1));
+                }
+            }
+        }
+
+        textView = (TextView)findViewById(R.id.liuyaoresult_ganzhi_month_2);
+        temp = (TextView)findViewById(R.id.liuqin_month);
+        part = textView.getText().toString();
+        full=new String();
+        switch (part){
+            case "丑":full = "丑辰未戌";
+                break;
+            case "辰":full = "丑辰未戌";
+                break;
+            case "未":full = "丑辰未戌";
+                break;
+            case "戌":full = "丑辰未戌";
+                break;
+            case "亥":full = "亥子";
+                break;
+            case "子":full = "亥子";
+                break;
+            case "寅":full = "寅卯";
+                break;
+            case "卯":full = "寅卯";
+                break;
+            case "巳":full = "巳午";
+                break;
+            case "午":full = "巳午";
+                break;
+            case "申":full = "申酉";
+                break;
+            case "酉":full = "申酉";
+                break;
+            default:
+                break;
+        }
+        for (int i = 0;i<6;i++){
+            if(full.contains(fushen_list.get(i).getText())){
+                if(liuqin_list.get(i).getText().toString().equals("子孙")){
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(1,2));
+                }
+                else {
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(0,1));
+                }
+            }
+        }
+
+        textView = (TextView)findViewById(R.id.liuyaoresult_ganzhi_day_2);
+        temp = (TextView)findViewById(R.id.liuqin_day);
+        part = textView.getText().toString();
+        full=new String();
+        switch (part){
+            case "丑":full = "丑辰未戌";
+                break;
+            case "辰":full = "丑辰未戌";
+                break;
+            case "未":full = "丑辰未戌";
+                break;
+            case "戌":full = "丑辰未戌";
+                break;
+            case "亥":full = "亥子";
+                break;
+            case "子":full = "亥子";
+                break;
+            case "寅":full = "寅卯";
+                break;
+            case "卯":full = "寅卯";
+                break;
+            case "巳":full = "巳午";
+                break;
+            case "午":full = "巳午";
+                break;
+            case "申":full = "申酉";
+                break;
+            case "酉":full = "申酉";
+                break;
+            default:
+                break;
+        }
+
+        for (int i = 0;i<6;i++){
+            if(full.contains(fushen_list.get(i).getText())){
+                if(liuqin_list.get(i).getText().toString().equals("子孙")){
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(1,2));
+                }
+                else {
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(0,1));
+                }
+            }
+        }
+
+        textView = (TextView)findViewById(R.id.liuyaoresult_ganzhi_hour_2);
+        temp = (TextView)findViewById(R.id.liuqin_hour);
+        part = textView.getText().toString();
+        full=new String();
+        switch (part){
+            case "丑":full = "丑辰未戌";
+                break;
+            case "辰":full = "丑辰未戌";
+                break;
+            case "未":full = "丑辰未戌";
+                break;
+            case "戌":full = "丑辰未戌";
+                break;
+            case "亥":full = "亥子";
+                break;
+            case "子":full = "亥子";
+                break;
+            case "寅":full = "寅卯";
+                break;
+            case "卯":full = "寅卯";
+                break;
+            case "巳":full = "巳午";
+                break;
+            case "午":full = "巳午";
+                break;
+            case "申":full = "申酉";
+                break;
+            case "酉":full = "申酉";
+                break;
+            default:
+                break;
+        }
+        for (int i = 0;i<6;i++){
+            if(full.contains(fushen_list.get(i).getText())){
+                if(liuqin_list.get(i).getText().toString().equals("子孙")){
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(1,2));
+                }
+                else {
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(0,1));
+                }
+            }
+        }
+
+    }
 
     //填上神表
     //前端实现，高能预警（在第二个版本的时候，这段逻辑被封存，真是谢天谢地。如果需要填神表，请根据文档理解逻辑再尝试实现）

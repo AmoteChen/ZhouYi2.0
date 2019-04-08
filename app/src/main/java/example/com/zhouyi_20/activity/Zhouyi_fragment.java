@@ -23,6 +23,7 @@ public class Zhouyi_fragment extends Fragment implements View.OnClickListener {
 
     private ImageView bt_guayao;
     private ImageView bt_ziding;
+    private ImageView bt_number;
 
 
 
@@ -34,6 +35,8 @@ public class Zhouyi_fragment extends Fragment implements View.OnClickListener {
 
         bt_guayao=(ImageView)view.findViewById(R.id.main_bt_guayao);
         bt_guayao.setOnClickListener(this);
+        bt_number=(ImageView)view.findViewById(R.id.main_bt_shuzi);
+        bt_number.setOnClickListener(this);
         bt_ziding=(ImageView)view.findViewById(R.id.main_bt_zidingyi);
         bt_ziding.setOnClickListener(this);
 
@@ -49,6 +52,12 @@ public class Zhouyi_fragment extends Fragment implements View.OnClickListener {
                 to_LiuyaoNewRecord.putExtra("way", "六爻");
                 to_LiuyaoNewRecord.putExtra("from","liuyao");
                 startActivity(to_LiuyaoNewRecord);
+                break;
+            case R.id.main_bt_shuzi:
+                Intent to_NumberNewRecord=new Intent(getActivity(),NewRecord.class);
+                to_NumberNewRecord.putExtra("way","数字");
+                to_NumberNewRecord.putExtra("from","number");
+                startActivity(to_NumberNewRecord);
                 break;
             case R.id.main_bt_zidingyi:
                 Intent to_ZidingNewRecord=new Intent(getActivity(),NewRecord.class);

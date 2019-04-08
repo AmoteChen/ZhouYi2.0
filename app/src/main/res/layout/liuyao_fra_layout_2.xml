@@ -478,11 +478,11 @@
                     android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
                     android:text="身"/>
                 <TextView
+                    android:id="@+id/shen_gua"
                     android:layout_width="wrap_content" android:layout_height="0dp" android:layout_gravity="center"
                     android:gravity="top|center_horizontal"
                     android:layout_weight="7" android:ems="1" android:textColor="#000000" android:textStyle="bold"
-                    android:autoSizeMaxTextSize="35dp" android:autoSizeMinTextSize="20dp" android:textSize="25dp"
-                    android:text="巳"/>
+                    android:autoSizeMaxTextSize="35dp" android:autoSizeMinTextSize="20dp" android:textSize="25dp" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -541,11 +541,11 @@
                 android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
                 android:text="首" />
             <TextView
+                android:id="@+id/liuyaoresult_right_shougua"
                 android:layout_width="wrap_content" android:layout_height="0dp" android:layout_gravity="center"
                 android:gravity="top|center_horizontal"
                 android:layout_weight="8" android:ems="1" android:textColor="#000000" android:textStyle="bold"
-                android:autoSizeMaxTextSize="35dp" android:autoSizeMinTextSize="20dp" android:textSize="25dp"
-                android:text="乾为天" />
+                android:autoSizeMaxTextSize="35dp" android:autoSizeMinTextSize="20dp" android:textSize="25dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp" android:layout_height="match_parent"
@@ -582,10 +582,10 @@
                 android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
                 android:text="互" />
             <TextView
+                android:id="@+id/liuyaoresult_right_hugua"
                 android:layout_width="wrap_content" android:layout_height="0dp" android:gravity="top|center_horizontal"
                 android:layout_weight="8" android:ems="1" android:textColor="#000000" android:textStyle="bold"
-                android:autoSizeMaxTextSize="35dp" android:autoSizeMinTextSize="20dp" android:textSize="25dp"
-                android:text="乾为天" />
+                android:autoSizeMaxTextSize="35dp" android:autoSizeMinTextSize="20dp" android:textSize="25dp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp" android:layout_height="match_parent"

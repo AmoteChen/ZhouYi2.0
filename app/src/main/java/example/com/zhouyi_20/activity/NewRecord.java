@@ -17,6 +17,7 @@ import android.widget.Toast;
 import org.json.JSONObject;
 
 import example.com.zhouyi_20.R;
+import example.com.zhouyi_20.activity.Number.Numbergua;
 import example.com.zhouyi_20.activity.Ziding.Zidinggua;
 import example.com.zhouyi_20.activity.liuyao.LiuYaoJinqiangua;
 
@@ -46,6 +47,8 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
     public String name;
     public String reason;
     public String note;
+    private Integer GuaXiang[] = new Integer[6];
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +72,7 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
         way = intent.getStringExtra("way");
         from = intent.getStringExtra("from");
 
-        if(intent.getStringExtra("from").equals("liuyao")||intent.getStringExtra("from").equals("ziding")){
+        if(intent.getStringExtra("from").equals("liuyao")||intent.getStringExtra("from").equals("ziding")||intent.getStringExtra("from").equals("number")){
             initial();
             way_init(way);
 
@@ -158,8 +161,32 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
                     to_Zidinggua.putExtra("yongshen",yongshen_selected);
                     startActivity(to_Zidinggua);
                 }
+                if(way.equals("数字")&&from.equals("number")){
+                    BindDate();
+                    Intent to_Numbergua=new Intent(this,Numbergua.class);
+                    to_Numbergua.putExtra("date",date);
+                    to_Numbergua.putExtra("way",way);
+                    to_Numbergua.putExtra("reason",reason);
+                    to_Numbergua.putExtra("name",name);
+                    to_Numbergua.putExtra("note",note);
+                    to_Numbergua.putExtra("yongshen",yongshen_selected);
+                    startActivity(to_Numbergua);
+                }
+
                 if(from.equals("history")){
+                    Intent intent = getIntent();
+                    GuaXiang = (Integer[]) intent.getSerializableExtra("LiuYaoData");
+                    BindDate();
                     Intent to_result=new Intent(this,Suangua_Result.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable("LiuYaoData",GuaXiang);
+                    to_result.putExtras(bundle);
+                    to_result.putExtra("date",date);
+                    to_result.putExtra("way",way);
+                    to_result.putExtra("reason",reason);
+                    to_result.putExtra("name",name);
+                    to_result.putExtra("note",note);
+                    to_result.putExtra("yongshen",yongshen_selected);
                     startActivity(to_result);
                 }
                 break;

@@ -1,10 +1,11 @@
 package example.com.zhouyi_20.activity.liuyao;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Spannable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.BackgroundColorSpan;
@@ -13,8 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.awt.Color;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -26,8 +31,13 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import example.com.zhouyi_20.R;
+import example.com.zhouyi_20.adapter.HistoryAdapter;
+import example.com.zhouyi_20.object.Divination;
+import example.com.zhouyi_20.object.HttpsConnect;
+import example.com.zhouyi_20.object.HttpsListener;
 import example.com.zhouyi_20.tool.Birth;
 import example.com.zhouyi_20.tool.TianGanDiZhi;
+import example.com.zhouyi_20.view.SlideRecyclerView;
 
 /**
  * Created by ChenSiyuan on 2019/1/17.
@@ -35,6 +45,9 @@ import example.com.zhouyi_20.tool.TianGanDiZhi;
 
 public class liuyao_fragment_2 extends Fragment {
     private View view;
+    private Integer liuyaoIntegerData[];
+    private String postStr;
+    private final String urlStr="http://120.76.128.110:8081/table/huGua";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -53,10 +66,35 @@ public class liuyao_fragment_2 extends Fragment {
         printRightBengui(bundle.getString("ben_string"));
         printRightBiangua(bundle.getString("bian_string"));
         printKongTable(bundle.getString("kong_table"));
+        printShougua(bundle.getString("shou_string"));
+        printShenGua(bundle.getString("shen_gua"));
         printDate();
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        Intent intent=getActivity().getIntent();
+        liuyaoIntegerData=(Integer[]) intent.getSerializableExtra("LiuYaoData");
+            Log.e("Fuckkkk",String.valueOf(liuyaoIntegerData));
+        Collections.reverse(Arrays.asList(liuyaoIntegerData));
+        postStr="["+liuyaoIntegerData[0];
+        for (int i=1;i<6;++i)
+            postStr+=","+liuyaoIntegerData[i];
+        postStr+="]";
+
+        HttpsConnect.sendRequest(urlStr, "POST", postStr, new HttpsListener() {
+            @Override
+            public void success(String response) {
+                catchResponse(response);
+            }
+
+            @Override
+            public void failed(Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+
+
         return view;
 
     }
@@ -146,11 +184,21 @@ public class liuyao_fragment_2 extends Fragment {
         TextView textView = (TextView)view.findViewById(R.id.liuyaoresult_right_biangua);
         textView.setText(biangua);
     }
+    //Shougua
+    private void printShougua(String shougua){
+        TextView textView = (TextView)view.findViewById(R.id.liuyaoresult_right_shougua);
+        textView.setText(shougua);
+    }
 
     //填上空表
     private void printKongTable(String kong_table){
         TextView textView = (TextView)view.findViewById(R.id.frg2_kong_table);
         textView.setText(kong_table);
+    }
+    //填上身卦
+    private void printShenGua(String shen_gua){
+        TextView textView = (TextView)view.findViewById(R.id.shen_gua);
+        textView.setText(shen_gua);
     }
 
     //日期等
@@ -281,5 +329,24 @@ public class liuyao_fragment_2 extends Fragment {
         }
 
     }
+    private void catchResponse(final String response) {
+        getActivity().runOnUiThread(new Runnable() {
+        @Override
+        public void run() {
+            try{
+                JSONObject RootJsonObject = new JSONObject(response);
+                JSONObject data = RootJsonObject.getJSONObject("data");
+                Log.e("TTTTT",data.toString());
+                String Hugua_string = data.getString("content");
+                Log.e("content_LLLL",Hugua_string);
+                TextView textView = view.findViewById(R.id.liuyaoresult_right_hugua);
+                textView.setText(Hugua_string);
+
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    });
+}
 
 }

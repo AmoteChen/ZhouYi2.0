@@ -2,6 +2,7 @@ package example.com.zhouyi_20.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,6 +77,18 @@ public class HistoryAdapter extends BaseRecyclerViewAdapter<Divination> {
                 int position = (Integer)v.getTag();
                 Divination divination = divinations.get(position);
                 Intent to_record = new Intent(v.getContext(), NewRecord.class);
+                Bundle bundle=new Bundle();
+                JSONArray jsonArray = divination.getGuaxiang();
+                Integer guaxiang []= new Integer[6];
+                for (int i = 0;i<6;i++){
+                    try {
+                        guaxiang[i]= (Integer) jsonArray.get(i);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                bundle.putSerializable("LiuYaoData",guaxiang);
+                to_record.putExtras(bundle);
                 to_record.putExtra("_id",divination.get_id());
                 to_record.putExtra("id", divination.getId());
                 to_record.putExtra("time",divination.getTime());
@@ -85,6 +98,7 @@ public class HistoryAdapter extends BaseRecyclerViewAdapter<Divination> {
                 to_record.putExtra("note",divination.getNote());
                 to_record.putExtra("yongshen",divination.getYongshen());
                 to_record.putExtra("from","history");
+
                 v.getContext().startActivity(to_record);
             }
         });

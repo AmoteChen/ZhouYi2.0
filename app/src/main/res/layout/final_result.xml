@@ -1628,10 +1628,10 @@
                     android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
                     />
                 <TextView
+                    android:id="@+id/liuqin_year"
                     android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1.3"
                     android:gravity="center_horizontal|top" android:textColor="#763869" android:textStyle="bold"
-                    android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
-                    android:text="父"/>
+                    android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
@@ -1654,10 +1654,10 @@
                     android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
                     />
                 <TextView
+                    android:id="@+id/liuqin_month"
                     android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1.3"
                     android:gravity="center_horizontal|top" android:textColor="#763869" android:textStyle="bold"
-                    android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
-                    android:text="父"/>
+                    android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
@@ -1680,10 +1680,10 @@
                     android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
                     />
                 <TextView
+                    android:id="@+id/liuqin_day"
                     android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1.3"
                     android:gravity="center_horizontal|top" android:textColor="#763869" android:textStyle="bold"
-                    android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
-                    android:text="父"/>
+                    android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
@@ -1706,10 +1706,10 @@
                     android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
                     />
                 <TextView
+                    android:id="@+id/liuqin_hour"
                     android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1.3"
                     android:gravity="center_horizontal|top" android:textColor="#763869" android:textStyle="bold"
-                    android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp"
-                    android:text="父"/>
+                    android:autoSizeMaxTextSize="22dp" android:autoSizeMinTextSize="12dp" android:textSize="18dp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
