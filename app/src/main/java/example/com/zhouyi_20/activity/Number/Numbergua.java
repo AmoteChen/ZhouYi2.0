@@ -84,6 +84,7 @@ public class Numbergua extends AppCompatActivity implements View.OnClickListener
         switch (view.getId()){
             case R.id.number_ok:
                 Getguaxiang();
+                //储存历史记录
                 HttpsConnect.sendRequest(address, "POST", getJsonData_NR(), new HttpsListener() {
                     @Override
                     public void success(String response) {
@@ -95,7 +96,7 @@ public class Numbergua extends AppCompatActivity implements View.OnClickListener
                         exception.printStackTrace();
                     }
                 });
-
+                //发送获取的起卦信息
                 Intent to_suangua_result = new Intent(Numbergua.this,Suangua_Result.class);
                 Bundle bundle=new Bundle();
                 bundle.putSerializable("LiuYaoData",Number_Result);
@@ -116,6 +117,7 @@ public class Numbergua extends AppCompatActivity implements View.OnClickListener
                 break;
         }
     }
+    //获取起卦信息
     private void getData(){
         Intent intent = getIntent();
         userid = User.getId();
@@ -126,7 +128,7 @@ public class Numbergua extends AppCompatActivity implements View.OnClickListener
         way = intent.getStringExtra("way");
         yongshen = intent.getStringExtra("yongshen");
     }
-
+    //包装历史记录中的起卦信息
     private JSONObject getJsonData_NR(){
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
@@ -164,7 +166,7 @@ public class Numbergua extends AppCompatActivity implements View.OnClickListener
             }
         });
     }
-
+    //获取起卦的数字
     private void Getguaxiang(){
         Number_Result[0]=Integer.parseInt(edit_gua6.getText().toString());
         Number_Result[1]=Integer.parseInt(edit_gua5.getText().toString());

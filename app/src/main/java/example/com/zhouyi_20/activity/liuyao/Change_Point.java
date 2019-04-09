@@ -11,13 +11,14 @@ import example.com.zhouyi_20.R;
 
 /**
  * Created by ChenSiyuan on 2019/1/16.
+ * The class used to paint the point when change the fragment
  */
 
 public class Change_Point extends View {
     private int r=9;
     private boolean isSelected = false;
     private Paint mPaint;
-
+//paint point
     private void initPaint(){
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.FILL);
@@ -37,6 +38,8 @@ public class Change_Point extends View {
         super(context,attrs,defStyleAttr);
         initPaint();
     }
+
+    //set point's color in different station
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);

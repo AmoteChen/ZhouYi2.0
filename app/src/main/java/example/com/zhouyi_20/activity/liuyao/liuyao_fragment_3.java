@@ -26,17 +26,23 @@ import example.com.zhouyi_20.tool.Birth;
 //整个逻辑写得非常的暴力，因为工期实在是太赶了，为后来者埋了坑，实在抱歉。
 //至于整个程序中变量名的问题，肯定会被吐槽，没有办法，祖传代码，经历了无数代完全不同地乱取。。祝顺利
 public class liuyao_fragment_3 extends Fragment {
+    //神煞那个选择下拉列表
     private Spinner spinner_shensha;
+    //神煞的名称（灰色字体部分）
     private TextView shensha_total,shensha_1,shensha_2,shensha_3,shensha_4,shensha_5,shensha_6,shensha_7,shensha_8;
     private TextView shensha_9,shensha_10,shensha_11,shensha_12,shensha_13,shensha_14,shensha_15,shensha_16;
+    //神煞对应的地支（黑色字体部分）
     private TextView dizhi_1,dizhi_2,dizhi_3,dizhi_4,dizhi_5,dizhi_6,dizhi_7,dizhi_8,dizhi_9,
             dizhi_10,dizhi_11,dizhi_12,dizhi_13,dizhi_14,dizhi_15,dizhi_16;
+    //名称与地支的对应关系（用HashMap处理）
     private HashMap TaoHua_map,YiMa_map,JieSha_map,WangShen_map,GuaSu_map,GuChen_map, HongLuan_map,TianXi_map,YangRen_map,GuiRen_map;
+    //日期的天干
     private String ganzhi_day;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.liuyao_fra_layout_3,container,false);
+        //初始化（没有包装起来是因为view这里做的一个局部变量，这个可以处理一下，当时太赶了没有弄）
         spinner_shensha = (Spinner)view.findViewById(R.id.spinner_shensha);
         spinner_shensha.setOnItemSelectedListener(new spinnerListener());
 
@@ -87,8 +93,9 @@ public class liuyao_fragment_3 extends Fragment {
         return view;
 
     }
-
+    //建立各种对应关系
     private void BuildMaps() throws ParseException {
+        //获取天干
         Calendar cal=Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         Date date= new Date();
@@ -238,7 +245,7 @@ public class liuyao_fragment_3 extends Fragment {
 
 
     }
-
+    //下拉列表的对应显示，具体要求见业务逻辑文档
     class spinnerListener implements AdapterView.OnItemSelectedListener{
         @Override
         public void onItemSelected(AdapterView<?> parent, View view,

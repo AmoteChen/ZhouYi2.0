@@ -1,6 +1,11 @@
 package example.com.zhouyi_20.tool;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
+import java.util.TimeZone;
 
 public class TianGanDiZhi {
     // 以下均为新历
@@ -19,10 +24,10 @@ public class TianGanDiZhi {
 
     private static String[] Zhi_month=new String[]{"寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌","亥","子", "丑"};
 
-    public TianGanDiZhi(Calendar cal){
-        year=cal.get(Calendar.YEAR);
-        month=cal.get(Calendar.MONTH)+1;
-        day=cal.get(Calendar.DATE);
+    public TianGanDiZhi (Calendar cals) throws ParseException {
+        year=cals.get(Calendar.YEAR);
+        month=cals.get(Calendar.MONTH)+1;
+        day=cals.get(Calendar.DATE);
 
         ganzhi_year=new String(Gan[(year-3)%10]+ Zhi_year[(year-3)%12]);
 
@@ -54,21 +59,33 @@ public class TianGanDiZhi {
         String wuxing_tmp[]=new String[]{"金","水","木","火","土"} ;
         wuxing=new String[5];
         int wuxing_start=0;
-        switch (month){
-            case 1:
-            case 2:
+
+        Calendar cal=Calendar.getInstance();
+        cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        Date date= new Date();
+        cal.setTime(date);
+        Birth birth = new Birth(cal);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
+        String dayTime = sdf.format(date);
+        Map map = birth.horoscope(dayTime);
+        String ganzhi_month=map.get("cM").toString();
+        String month_dizhi = ganzhi_month.substring(1,2);
+
+        switch (month_dizhi){
+            case "寅":
+            case "卯":
                 wuxing_start=2;
                 break;
-            case 4:
-            case 5:
+            case "巳":
+            case "午":
                 wuxing_start=3;
                 break;
-            case 7:
-            case 8:
+            case "申":
+            case "酉":
                 wuxing_start=0;
                 break;
-            case 10:
-            case 11:
+            case "亥":
+            case "子":
                 wuxing_start=1;
                 break;
             default:

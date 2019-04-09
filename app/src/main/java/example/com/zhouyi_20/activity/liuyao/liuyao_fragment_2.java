@@ -41,6 +41,8 @@ import example.com.zhouyi_20.view.SlideRecyclerView;
 
 /**
  * Created by ChenSiyuan on 2019/1/17.
+ * The name of the class is not accurate.
+ * This class is the second fragment in the bottom of the FINAL RESULT.
  */
 
 public class liuyao_fragment_2 extends Fragment {
@@ -52,13 +54,17 @@ public class liuyao_fragment_2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         view = inflater.inflate(R.layout.liuyao_fra_layout_2,container,false);
+        //空表的表头绘制（将其背景设置为黑色）
         String str = "空";
         SpannableStringBuilder style=new SpannableStringBuilder(str);
         style.setSpan(new BackgroundColorSpan(getResources().getColor(R.color.black)),0,str.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        // 填写空表表头内容
         TextView textView= (TextView)view.findViewById(R.id.liuyao_kong_title);
         textView.setText(style);
 
         try{
+            //从bundle中获取数据并调用各个方法填上各个表项
+            //此处的bundle是从Suangua_Result中发送回来的
         Bundle bundle = getArguments();
         printDayTable(bundle.getString("day_string"));
         printQinTable(bundle.getStringArrayList("qin_string"));
@@ -72,15 +78,16 @@ public class liuyao_fragment_2 extends Fragment {
         }catch (Exception e){
             e.printStackTrace();
         }
-
+        //单独拿取起卦中的卦象，发送至后端用于获取“互卦”的结果
         Intent intent=getActivity().getIntent();
         liuyaoIntegerData=(Integer[]) intent.getSerializableExtra("LiuYaoData");
-            Log.e("Fuckkkk",String.valueOf(liuyaoIntegerData));
         Collections.reverse(Arrays.asList(liuyaoIntegerData));
-        postStr="["+liuyaoIntegerData[0];
-        for (int i=1;i<6;++i)
+        //将卦象整理为字符串发送
+        postStr="["+liuyaoIntegerData[5];
+        for (int i=4;i>-1;i--)
             postStr+=","+liuyaoIntegerData[i];
         postStr+="]";
+        Log.e("AAAAAA",postStr);
 
         HttpsConnect.sendRequest(urlStr, "POST", postStr, new HttpsListener() {
             @Override

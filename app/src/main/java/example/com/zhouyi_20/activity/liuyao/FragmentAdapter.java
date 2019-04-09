@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by ChenSiyuan on 2018/12/4.
+ * basic adapter used to manage the fragments
  */
 
 public class FragmentAdapter extends FragmentPagerAdapter {

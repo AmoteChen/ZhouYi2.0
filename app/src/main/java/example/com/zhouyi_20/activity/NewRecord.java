@@ -103,6 +103,7 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
 
     private void spinner_init(){
         ArrayList<String> list = new ArrayList<String>();
+        list.add("用爻");
         list.add("父母");
         list.add("兄弟");
         list.add("官鬼");

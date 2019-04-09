@@ -402,11 +402,19 @@ public class Suangua_Result extends AppCompatActivity  {
                         zhuanggua_count++;
                         break;
                     case 1:
-                        printZhuanggua_2();
+                        try {
+                            printZhuanggua_2();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         zhuanggua_count++;
                         break;
                     case 2:
-                        printZhuanggua_3();
+                        try {
+                            printZhuanggua_3();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         zhuanggua_count++;
                         break;
                     case 3:
@@ -747,7 +755,7 @@ public class Suangua_Result extends AppCompatActivity  {
                 outputStream.close();
 
                 if (HttpURLConnection.HTTP_OK==connection.getResponseCode()){
-                    Toast.makeText(Suangua_Result.this,"Connect Succeed",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Suangua_Result.this,"起卦成功！",Toast.LENGTH_LONG).show();
 
                     InputStream inputStream=connection.getInputStream();
                     liuyaoData= IOUtils.toString(inputStream,"UTF-8");
@@ -759,9 +767,9 @@ public class Suangua_Result extends AppCompatActivity  {
                 }
 
                 else
-                    Toast.makeText(Suangua_Result.this,"Connect Failed",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Suangua_Result.this,"起卦失败，请检查网络",Toast.LENGTH_LONG).show();
             }catch (Exception e){
-                Toast.makeText(Suangua_Result.this,"Occur Exception",Toast.LENGTH_LONG).show();
+                Toast.makeText(Suangua_Result.this,"起卦失败，请检查网络",Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
             Looper.loop();
@@ -1192,7 +1200,7 @@ public class Suangua_Result extends AppCompatActivity  {
 
     }
     //装卦表形态2
-    private void printZhuanggua_2(){
+    private void printZhuanggua_2() throws ParseException {
         //拿五行
         Calendar cal=Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
@@ -1249,7 +1257,7 @@ public class Suangua_Result extends AppCompatActivity  {
 
     }
     //装卦表形态3
-    private void printZhuanggua_3(){
+    private void printZhuanggua_3() throws ParseException {
         //拿五行
         Calendar cal=Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
@@ -1725,7 +1733,7 @@ public class Suangua_Result extends AppCompatActivity  {
         }
         for (int i = 0;i<6;i++){
             if(full.contains(fushen_list.get(i).getText())){
-                if(liuqin_list.get(i).getText().toString().equals("子孙")){
+                if(liuqin_list.get(i).getText().toString().equals("子孙")||liuqin_list.get(i).getText().toString().equals("妻财")){
                     temp.setText(liuqin_list.get(i).getText().toString().substring(1,2));
                 }
                 else {

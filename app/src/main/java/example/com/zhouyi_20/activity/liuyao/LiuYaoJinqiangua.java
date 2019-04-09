@@ -140,7 +140,7 @@ public class LiuYaoJinqiangua extends AppCompatActivity implements View.OnClickL
         
     }
 
-    // 结束当前活动
+    // 结束当前活动，结束活动的时候把起卦界面的信息包装发送
     private void finishJinqiangua(){
         Intent to_liuyao_result=new Intent(this,Suangua_Result.class);
         Bundle bundle=new Bundle();

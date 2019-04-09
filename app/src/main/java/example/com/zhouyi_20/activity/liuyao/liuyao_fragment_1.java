@@ -13,6 +13,8 @@ import example.com.zhouyi_20.object.User;
 
 /**
  * Created by ChenSiyuan on 2019/1/17.
+ * The name of the class is not accurate.
+ * This class is the first fragment in the bottom of the FINAL RESULT.
  */
 
 public class liuyao_fragment_1 extends Fragment {
@@ -27,6 +29,7 @@ public class liuyao_fragment_1 extends Fragment {
                              Bundle savedInstanceState){
         view = inflater.inflate(R.layout.liuyao_fra_layout_1,container,false);
         getData();
+        //控件初始化及相应内容填写
         TextView textView = (TextView)view.findViewById(R.id.liuyao_result_frg1_date);
         textView.setText(date);
         textView = (TextView)view.findViewById(R.id.liuyao_result_frg1_name);
@@ -39,7 +42,7 @@ public class liuyao_fragment_1 extends Fragment {
         textView.setText(yongshen);
         return view;
     }
-
+    //从起卦页面获取信息
     private void getData(){
         Intent intent = getActivity().getIntent();
         date = intent.getStringExtra("date");
