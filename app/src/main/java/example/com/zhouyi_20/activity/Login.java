@@ -69,6 +69,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_bt_login:
+                Toast.makeText(Login.this,"登录按钮已点击",Toast.LENGTH_SHORT).show();
                 name = et_name.getText().toString();
                 password = et_password.getText().toString();
                 account = et_account.getText().toString();
@@ -77,6 +78,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void success(String response) {
                         catchResponse(response);
+                        Toast.makeText(Login.this,"已成功登录",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

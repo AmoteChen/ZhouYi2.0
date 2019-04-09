@@ -70,6 +70,8 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
     private final String getInput ="http://120.76.128.110:8081/table/origin";
     private final String address ="http://120.76.128.110:12510/app/newRecord";
 
+    //跟踪输入是否转换完成
+    private boolean input_changed = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,17 +95,7 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         exception.printStackTrace();
                     }
                 });
-                HttpsConnect.sendRequest(address, "POST", getJsonData_NR(), new HttpsListener() {
-                    @Override
-                    public void success(String response) {
-                        catchResponse_NR(response);
-                    }
 
-                    @Override
-                    public void failed(Exception exception) {
-                        exception.printStackTrace();
-                    }
-                });
                 break;
             case R.id.zd_back:
                 finish();
@@ -414,6 +406,8 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                     for (int i = 0;i<6;i++){
                         ziding_Result[i]=jsonArray.getInt(i);
                     }
+                    //转换完成
+                    input_changed=true;
                     bundle.putSerializable("LiuYaoData",ziding_Result);
                     to_suangua_result.putExtras(bundle);
                     to_suangua_result.putExtra("from","ziding");
@@ -423,6 +417,21 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                     to_suangua_result.putExtra("name",name);
                     to_suangua_result.putExtra("note",note);
                     to_suangua_result.putExtra("yongshen",yongshen);
+
+                    if(input_changed){
+                        HttpsConnect.sendRequest(address, "POST", getJsonData_NR(), new HttpsListener() {
+                            @Override
+                            public void success(String response) {
+                                catchResponse_NR(response);
+                            }
+
+                            @Override
+                            public void failed(Exception exception) {
+                                exception.printStackTrace();
+                            }
+                        });
+                    }
+
                     startActivity(to_suangua_result);
 
                 }catch (Exception e) {

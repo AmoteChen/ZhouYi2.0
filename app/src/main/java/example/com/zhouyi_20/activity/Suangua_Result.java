@@ -1642,6 +1642,9 @@ public class Suangua_Result extends AppCompatActivity  {
                     if(bg_dizhi_list.get(i).getText().toString().equals("辰")&&zg_kong.get(i).getText().toString().equals("丑")){
                         hk_list.get(i).setText("化进");
                     }
+                    if(bg_dizhi_list.get(i).getText().toString().equals(zg_kong.get(i).getText().toString())){
+                        hk_list.get(i).setText("");
+                    }
                     else {
                         hk_list.get(i).setText("化退");
                     }
