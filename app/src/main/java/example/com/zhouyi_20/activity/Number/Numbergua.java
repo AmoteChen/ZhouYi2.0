@@ -14,9 +14,8 @@ import org.json.JSONObject;
 
 import example.com.zhouyi_20.R;
 import example.com.zhouyi_20.activity.Suangua_Result;
-import example.com.zhouyi_20.activity.Ziding.Zidinggua;
-import example.com.zhouyi_20.object.HttpsConnect;
-import example.com.zhouyi_20.object.HttpsListener;
+import example.com.zhouyi_20.tool.HttpsConnect;
+import example.com.zhouyi_20.tool.HttpsListener;
 import example.com.zhouyi_20.object.User;
 
 /**

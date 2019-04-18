@@ -6,25 +6,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import example.com.zhouyi_20.R;
-import example.com.zhouyi_20.activity.Main;
 import example.com.zhouyi_20.activity.Suangua_Result;
-import example.com.zhouyi_20.activity.liuyao.LiuYaoJinqiangua;
-import example.com.zhouyi_20.object.HttpsConnect;
-import example.com.zhouyi_20.object.HttpsListener;
+import example.com.zhouyi_20.tool.HttpsConnect;
+import example.com.zhouyi_20.tool.HttpsListener;
 import example.com.zhouyi_20.object.User;
 
 /**

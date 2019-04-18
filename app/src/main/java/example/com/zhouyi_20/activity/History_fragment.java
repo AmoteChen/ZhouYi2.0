@@ -1,13 +1,10 @@
 package example.com.zhouyi_20.activity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,24 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.sun.corba.se.impl.oa.toa.TOA;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import example.com.zhouyi_20.R;
-import example.com.zhouyi_20.adapter.DivinationAdapter;
 import example.com.zhouyi_20.adapter.HistoryAdapter;
 import example.com.zhouyi_20.object.Divination;
-import example.com.zhouyi_20.object.HttpsConnect;
-import example.com.zhouyi_20.object.HttpsListener;
+import example.com.zhouyi_20.tool.HttpsConnect;
+import example.com.zhouyi_20.tool.HttpsListener;
 import example.com.zhouyi_20.object.User;
 import example.com.zhouyi_20.view.SlideRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static example.com.zhouyi_20.activity.Main.setFragment_set;
 
 public class History_fragment extends Fragment {
 

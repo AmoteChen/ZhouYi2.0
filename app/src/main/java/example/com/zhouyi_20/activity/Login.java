@@ -12,13 +12,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import example.com.zhouyi_20.R;
-import example.com.zhouyi_20.object.HttpsConnect;
-import example.com.zhouyi_20.object.HttpsListener;
+import example.com.zhouyi_20.tool.HttpsConnect;
+import example.com.zhouyi_20.tool.HttpsListener;
 import example.com.zhouyi_20.object.User;
 
 import org.json.JSONObject;
-
-import static example.com.zhouyi_20.activity.Main.setFragment_set;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 

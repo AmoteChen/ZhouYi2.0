@@ -1,28 +1,36 @@
 package example.com.zhouyi_20.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.AlteredCharSequence;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
-
-import org.json.JSONObject;
 
 import example.com.zhouyi_20.R;
 import example.com.zhouyi_20.activity.Number.Numbergua;
 import example.com.zhouyi_20.activity.Ziding.Zidinggua;
 import example.com.zhouyi_20.activity.liuyao.LiuYaoJinqiangua;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 public class NewRecord extends AppCompatActivity implements View.OnClickListener {
@@ -53,7 +61,7 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_record);
+        setContentView(R.layout.zhanbu_record);
 
         btn_ok=(Button)findViewById(R.id.liuyao_new_record_ok_btn);
         btn_ok.setOnClickListener(this);
@@ -79,13 +87,13 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
             spinner_init();
         }
         if(intent.getStringExtra("from").equals("history")){
-            String way = intent.getStringExtra("way").toString();
-            String time = intent.getStringExtra("time").toString();
-            String reason = intent.getStringExtra("reason").toString();
-            String name = intent.getStringExtra("name").toString();
-            String note = intent.getStringExtra("note").toString();
+            way = intent.getStringExtra("way").toString();
+            date = intent.getStringExtra("time").toString();
+            reason = intent.getStringExtra("reason").toString();
+            name = intent.getStringExtra("name").toString();
+            note = intent.getStringExtra("note").toString();
             spinner_init();
-            history_init(way,time,reason,name,note);
+            history_init(way,date,reason,name,note);
         }
 
     }
@@ -94,11 +102,12 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
 
         Calendar cal= Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        String year= String.valueOf(cal.get(Calendar.YEAR));
-        String month= String.valueOf(cal.get(Calendar.MONTH)+1);
-        String day= String.valueOf(cal.get(Calendar.DATE));
-        date=year+"年"+month+"月"+day+"日";
+        Date day= new Date();
+        cal.setTime(day);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        date = sdf.format(day);
         bugua_date_text.setText(date);
+        bugua_date_text.setOnClickListener(this);
     }
 
     private void spinner_init(){
@@ -190,6 +199,39 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
                     to_result.putExtra("yongshen",yongshen_selected);
                     startActivity(to_result);
                 }
+                break;
+            case R.id.liuyao_new_record_bugua_date:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                View dialogView = View.inflate(this,R.layout.dialog_date,null);
+                final DatePicker datePicker = (DatePicker)dialogView.findViewById(R.id.datePicker);
+                final TimePicker timePicker =(TimePicker)dialogView.findViewById(R.id.timePicker);
+                timePicker.setIs24HourView(true);
+
+                builder.setPositiveButton("设置", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Calendar cal= Calendar.getInstance();
+                        cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            date = datePicker.getYear()+"-"+(datePicker.getMonth()+1)+"-"+datePicker.getDayOfMonth()+" "+timePicker.getHour()+":"+timePicker.getMinute();
+                            Log.e("DDDDD",date);
+                        }
+                        bugua_date_text.setText(date);
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                final AlertDialog dialog = builder.create();
+                dialog.setTitle("设置日期");
+                dialog.setView(dialogView);
+                dialog.show();
+
                 break;
             default:
                 break;

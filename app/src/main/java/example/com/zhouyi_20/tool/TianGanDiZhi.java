@@ -24,7 +24,7 @@ public class TianGanDiZhi {
 
     private static String[] Zhi_month=new String[]{"寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌","亥","子", "丑"};
 
-    public TianGanDiZhi (Calendar cals) throws ParseException {
+    public TianGanDiZhi (Calendar cals,Date date) throws ParseException {
         year=cals.get(Calendar.YEAR);
         month=cals.get(Calendar.MONTH)+1;
         day=cals.get(Calendar.DATE);
@@ -60,11 +60,9 @@ public class TianGanDiZhi {
         wuxing=new String[5];
         int wuxing_start=0;
 
-        Calendar cal=Calendar.getInstance();
-        cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        Date date= new Date();
-        cal.setTime(date);
-        Birth birth = new Birth(cal);
+
+
+        Birth birth = new Birth(cals);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
         String dayTime = sdf.format(date);
         Map map = birth.horoscope(dayTime);

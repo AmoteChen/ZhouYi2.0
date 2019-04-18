@@ -17,8 +17,8 @@
                 android:divider="@drawable/liuyao_result_table_line_n" android:showDividers="middle">
                 <TextView
                     android:id="@+id/liuyaoresult_liushou_caption"
-                    android:textColor="#7e7e82" android:gravity="center" android:textStyle="normal"
-                    android:autoSizeMaxTextSize="25dp" android:autoSizeMinTextSize="8dp" android:textSize="12dp"
+                    android:textColor="#7e7e82" android:gravity="center" android:textStyle="bold"
+                    android:autoSizeMaxTextSize="25dp" android:autoSizeMinTextSize="8dp" android:textSize="15dp"
                     android:autoSizeTextType="uniform"
                     android:text="六神"
                     android:layout_width="match_parent" android:layout_height="match_parent"
@@ -124,8 +124,8 @@
                 android:layout_weight="0.3">
                 <TextView
                     android:id="@+id/liuyaoresult_liuqin_1_caption"
-                    android:textColor="#7e7e82" android:gravity="center" android:textStyle="normal"
-                    android:autoSizeMaxTextSize="20dp" android:autoSizeMinTextSize="8dp" android:textSize="12dp"
+                    android:textColor="#7e7e82" android:gravity="center" android:textStyle="bold"
+                    android:autoSizeMaxTextSize="25dp" android:autoSizeMinTextSize="8dp" android:textSize="15dp"
                     android:text="六亲"
                     android:autoSizeTextType="uniform"
                     android:layout_width="match_parent" android:layout_height="match_parent"

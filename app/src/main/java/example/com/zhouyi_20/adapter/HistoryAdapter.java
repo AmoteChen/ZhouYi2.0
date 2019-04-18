@@ -15,10 +15,9 @@ import java.util.List;
 
 import example.com.zhouyi_20.R;
 import example.com.zhouyi_20.activity.NewRecord;
-import example.com.zhouyi_20.activity.liuyao.LiuYaoJinqiangua;
 import example.com.zhouyi_20.object.Divination;
-import example.com.zhouyi_20.object.HttpsConnect;
-import example.com.zhouyi_20.object.HttpsListener;
+import example.com.zhouyi_20.tool.HttpsConnect;
+import example.com.zhouyi_20.tool.HttpsListener;
 
 /**
  * Created by ChenSiyuan on 2019/3/3.

@@ -479,10 +479,11 @@ public class Suangua_Result extends AppCompatActivity  {
             if(LiuHe(temp)){
                 printBG_Title();
             }
-            temp=jsonInstance.getContent_fushen();
-            if(LiuHe(temp)){
-                printFS_Title();
-            }
+            //伏神的表头逻辑被删除了
+//            temp=jsonInstance.getContent_fushen();
+//            if(LiuHe(temp)){
+//                printFS_Title();
+//            }
 
             temp = jsonInstance.getTimes_zhuanggua();
             ZG_title_times(temp);
@@ -490,8 +491,8 @@ public class Suangua_Result extends AppCompatActivity  {
             temp = jsonInstance.getTimes_biangua();
             BG_title_times(temp);
 
-            temp = jsonInstance.getTimes_fushen();
-            FS_title_times(temp);
+//            temp = jsonInstance.getTimes_fushen();
+//            FS_title_times(temp);
 
 
 
@@ -794,10 +795,10 @@ public class Suangua_Result extends AppCompatActivity  {
         TextView textView = (TextView)findViewById(R.id.result_change_title_2);
         textView.setText("六合");
     }
-    private void printFS_Title(){
-        TextView textView = (TextView)findViewById(R.id.result_change_title_3);
-        textView.setText("六合");
-    }
+//    private void printFS_Title(){
+//        TextView textView = (TextView)findViewById(R.id.result_change_title_3);
+//        textView.setText("六合");
+//    }
 
     private void ZG_title_times(String temp){
         if(temp.equals("归魂卦")){
@@ -833,23 +834,23 @@ public class Suangua_Result extends AppCompatActivity  {
             return;
         }
     }
-    private void FS_title_times(String temp){
-        if(temp.equals("归魂卦")){
-            TextView textView = (TextView)findViewById(R.id.result_change_title_3);
-            textView.setText("归魂");
-        }
-        if(temp.equals("游魂卦")){
-            TextView textView = (TextView)findViewById(R.id.result_change_title_3);
-            textView.setText("游魂");
-        }
-        if(temp.equals("本宫卦")){
-            TextView textView = (TextView)findViewById(R.id.result_change_title_3);
-            textView.setText("六冲");
-        }
-        else {
-            return;
-        }
-    }
+//    private void FS_title_times(String temp){
+//        if(temp.equals("归魂卦")){
+//            TextView textView = (TextView)findViewById(R.id.result_change_title_3);
+//            textView.setText("归魂");
+//        }
+//        if(temp.equals("游魂卦")){
+//            TextView textView = (TextView)findViewById(R.id.result_change_title_3);
+//            textView.setText("游魂");
+//        }
+//        if(temp.equals("本宫卦")){
+//            TextView textView = (TextView)findViewById(R.id.result_change_title_3);
+//            textView.setText("六冲");
+//        }
+//        else {
+//            return;
+//        }
+//    }
     // 从左至右第一个六亲
     private void printLiuQin1(String liuqin){
         //标题
@@ -1094,12 +1095,17 @@ public class Suangua_Result extends AppCompatActivity  {
 
         // 计算天干日
         Calendar cal=Calendar.getInstance();
-        Date date= new Date();
+
+        Intent intent = getIntent();
+        String time = intent.getStringExtra("date");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+        Date date = formatter.parse(time);
+
         cal.setTime(date);
         Birth birth = new Birth(cal);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
-        String dayTime = sdf.format(date);
-        Map map = birth.horoscope(dayTime);
+
+        Map map = birth.horoscope(time);
         String ganzhi_month=map.get("cD").toString();
         int index;
         if(ganzhi_month.substring(0,1).equals("甲")||ganzhi_month.substring(0,1).equals("乙")){
@@ -1132,7 +1138,11 @@ public class Suangua_Result extends AppCompatActivity  {
     private void printDate() throws ParseException {
         Calendar cal=Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        Date date= new Date();
+
+        Intent intent = getIntent();
+        String time = intent.getStringExtra("date");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date = formatter.parse(time);
 
         TextView textView;
 
@@ -1143,10 +1153,8 @@ public class Suangua_Result extends AppCompatActivity  {
 
         cal.setTime(date);
         Birth birth = new Birth(cal);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
-//        Map lunar = birth.toLunar();
-        String dayTime = sdf.format(date);
-        Map map = birth.horoscope(dayTime);
+
+        Map map = birth.horoscope(time);
         String ganzhi_year=map.get("cY").toString();
         String ganzhi_month=map.get("cM").toString();
         String ganzhi_day=map.get("cD").toString();
@@ -1202,9 +1210,15 @@ public class Suangua_Result extends AppCompatActivity  {
     //装卦表形态2
     private void printZhuanggua_2() throws ParseException {
         //拿五行
+        Intent intent = getIntent();
+        String time = intent.getStringExtra("date");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+        Date date = formatter.parse(time);
+
         Calendar cal=Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        TianGanDiZhi ganzhi = new TianGanDiZhi(cal);
+        TianGanDiZhi ganzhi = new TianGanDiZhi(cal,date);
         String zhi_month_wuxing[]=ganzhi.getWuXing();
         //拼装
         zhi_month_wuxing[0]=zhi_month_wuxing[0]+"旺";
@@ -1259,9 +1273,15 @@ public class Suangua_Result extends AppCompatActivity  {
     //装卦表形态3
     private void printZhuanggua_3() throws ParseException {
         //拿五行
+        Intent intent = getIntent();
+        String time = intent.getStringExtra("date");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+        Date date = formatter.parse(time);
+
         Calendar cal=Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        TianGanDiZhi ganzhi = new TianGanDiZhi(cal);
+        TianGanDiZhi ganzhi = new TianGanDiZhi(cal,date);
         String zhi_month_wuxing[]=ganzhi.getWuXing();
         //拿日表
         JsonService jsonInstance= JsonService.getInstance();

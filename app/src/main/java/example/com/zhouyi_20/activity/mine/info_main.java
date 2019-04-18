@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import example.com.zhouyi_20.R;
-import example.com.zhouyi_20.object.HttpsConnect;
-import example.com.zhouyi_20.object.HttpsListener;
+import example.com.zhouyi_20.tool.HttpsConnect;
+import example.com.zhouyi_20.tool.HttpsListener;
 import example.com.zhouyi_20.object.User;
 
 import org.json.JSONObject;

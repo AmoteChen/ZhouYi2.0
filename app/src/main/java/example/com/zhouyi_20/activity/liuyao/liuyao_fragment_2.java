@@ -3,9 +3,6 @@ package example.com.zhouyi_20.activity.liuyao;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.BackgroundColorSpan;
@@ -14,10 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
@@ -31,13 +25,10 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import example.com.zhouyi_20.R;
-import example.com.zhouyi_20.adapter.HistoryAdapter;
-import example.com.zhouyi_20.object.Divination;
-import example.com.zhouyi_20.object.HttpsConnect;
-import example.com.zhouyi_20.object.HttpsListener;
+import example.com.zhouyi_20.tool.HttpsConnect;
+import example.com.zhouyi_20.tool.HttpsListener;
 import example.com.zhouyi_20.tool.Birth;
 import example.com.zhouyi_20.tool.TianGanDiZhi;
-import example.com.zhouyi_20.view.SlideRecyclerView;
 
 /**
  * Created by ChenSiyuan on 2019/1/17.
@@ -212,7 +203,14 @@ public class liuyao_fragment_2 extends Fragment {
     private void printDate() throws ParseException {
         Calendar cal=Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        Date date= new Date();
+
+        Intent intent = getActivity().getIntent();
+        String time = intent.getStringExtra("date");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+        Date date = formatter.parse(time);
+
+        cal.setTime(date);
 
         TextView textView;
 
@@ -221,8 +219,9 @@ public class liuyao_fragment_2 extends Fragment {
         // 农历日月年干支用Birth计算
         //五行用TianGanDiZhi计算
 
-        TianGanDiZhi ganzhi=new TianGanDiZhi(cal);
-        cal.setTime(date);
+
+        TianGanDiZhi ganzhi=new TianGanDiZhi(cal,date);
+
         Birth birth = new Birth(cal);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH");
 //        Map lunar = birth.toLunar();

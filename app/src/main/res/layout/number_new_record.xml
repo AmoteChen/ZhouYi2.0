@@ -84,6 +84,14 @@
         android:layout_weight="1"
         android:hint="请输入数字6-9"
         android:digits="6789"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 </LinearLayout>
 
 </LinearLayout>

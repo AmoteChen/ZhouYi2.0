@@ -1,6 +1,5 @@
-package example.com.zhouyi_20.object;
+package example.com.zhouyi_20.tool;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -9,6 +8,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import example.com.zhouyi_20.object.User;
 
 public class HttpsConnect {
 //

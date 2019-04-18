@@ -1,7 +1,6 @@
 package example.com.zhouyi_20.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,8 +20,8 @@ import example.com.zhouyi_20.R;
 import example.com.zhouyi_20.activity.liuyao.FragmentAdapter;
 import example.com.zhouyi_20.activity.mine.Mine_fragment;
 import example.com.zhouyi_20.activity.mine.item_view;
-import example.com.zhouyi_20.object.HttpsConnect;
-import example.com.zhouyi_20.object.HttpsListener;
+import example.com.zhouyi_20.tool.HttpsConnect;
+import example.com.zhouyi_20.tool.HttpsListener;
 import example.com.zhouyi_20.object.User;
 import example.com.zhouyi_20.tool.CustomViewPager;
 

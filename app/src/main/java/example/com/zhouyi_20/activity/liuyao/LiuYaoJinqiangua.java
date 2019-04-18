@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -26,8 +25,8 @@ import org.json.JSONObject;
 
 import example.com.zhouyi_20.R;
 import example.com.zhouyi_20.activity.Suangua_Result;
-import example.com.zhouyi_20.object.HttpsConnect;
-import example.com.zhouyi_20.object.HttpsListener;
+import example.com.zhouyi_20.tool.HttpsConnect;
+import example.com.zhouyi_20.tool.HttpsListener;
 import example.com.zhouyi_20.object.User;
 import example.com.zhouyi_20.util.DensityUtil;
 
@@ -77,7 +76,7 @@ public class LiuYaoJinqiangua extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.liuyao_jinqiangua);
+        setContentView(R.layout.liuyao_new_record);
 
         btn_ok=(Button)findViewById(R.id.liuyao_jinqiangua_ok_btn);
         btn_ok.setOnClickListener(this);
