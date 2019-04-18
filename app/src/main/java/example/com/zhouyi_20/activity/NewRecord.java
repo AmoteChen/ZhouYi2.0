@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.AlteredCharSequence;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -25,8 +24,8 @@ import example.com.zhouyi_20.R;
 import example.com.zhouyi_20.activity.Number.Numbergua;
 import example.com.zhouyi_20.activity.Ziding.Zidinggua;
 import example.com.zhouyi_20.activity.liuyao.LiuYaoJinqiangua;
+import example.com.zhouyi_20.activity.total_result.Suangua_Result;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;

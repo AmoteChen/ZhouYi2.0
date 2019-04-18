@@ -1,4 +1,4 @@
-package example.com.zhouyi_20.activity;
+package example.com.zhouyi_20.activity.total_result;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -35,11 +35,6 @@ import java.util.TimeZone;
 
 
 import example.com.zhouyi_20.R;
-import example.com.zhouyi_20.activity.liuyao.Change_Point;
-import example.com.zhouyi_20.activity.liuyao.FragmentAdapter;
-import example.com.zhouyi_20.activity.liuyao.liuyao_fragment_1;
-import example.com.zhouyi_20.activity.liuyao.liuyao_fragment_2;
-import example.com.zhouyi_20.activity.liuyao.liuyao_fragment_3;
 import example.com.zhouyi_20.tool.Birth;
 import example.com.zhouyi_20.tool.JsonService;
 import example.com.zhouyi_20.tool.TianGanDiZhi;
@@ -51,9 +46,9 @@ public class Suangua_Result extends AppCompatActivity  {
     private LinearLayout temp_total;
 
     private FragmentAdapter fragmentAdapter;
-    private example.com.zhouyi_20.activity.liuyao.liuyao_fragment_1 liuyao_fragment_1;
-    private example.com.zhouyi_20.activity.liuyao.liuyao_fragment_2 liuyao_fragment_2;
-    private example.com.zhouyi_20.activity.liuyao.liuyao_fragment_3 liuyao_fragment_3;
+    private example.com.zhouyi_20.activity.total_result.liuyao_fragment_1 liuyao_fragment_1;
+    private example.com.zhouyi_20.activity.total_result.liuyao_fragment_2 liuyao_fragment_2;
+    private example.com.zhouyi_20.activity.total_result.liuyao_fragment_3 liuyao_fragment_3;
 
     private LinearLayout point_position;
 
@@ -145,6 +140,14 @@ public class Suangua_Result extends AppCompatActivity  {
     private TextView fs_kong_4;
     private TextView fs_kong_5;
     private TextView fs_kong_6;
+    //伏神的地支的文本框
+    ArrayList<TextView> fs_dizhi_list;
+    private TextView fs_dizhi_1;
+    private TextView fs_dizhi_2;
+    private TextView fs_dizhi_3;
+    private TextView fs_dizhi_4;
+    private TextView fs_dizhi_5;
+    private TextView fs_dizhi_6;
 
     //回克逻辑的文本框
     ArrayList<TextView> hk_list;
@@ -301,6 +304,21 @@ public class Suangua_Result extends AppCompatActivity  {
         fs_kong.add(fs_kong_5);
         fs_kong.add(fs_kong_6);
 
+        fs_dizhi_1 = (TextView)findViewById(R.id.liuyaoresult_fushen_1_1);
+        fs_dizhi_2 = (TextView)findViewById(R.id.liuyaoresult_fushen_2_1);
+        fs_dizhi_3 = (TextView)findViewById(R.id.liuyaoresult_fushen_3_1);
+        fs_dizhi_4 = (TextView)findViewById(R.id.liuyaoresult_fushen_4_1);
+        fs_dizhi_5 = (TextView)findViewById(R.id.liuyaoresult_fushen_5_1);
+        fs_dizhi_6 = (TextView)findViewById(R.id.liuyaoresult_fushen_6_1);
+
+        fs_dizhi_list=new ArrayList<>();
+        fs_dizhi_list.add(fs_dizhi_1);
+        fs_dizhi_list.add(fs_dizhi_2);
+        fs_dizhi_list.add(fs_dizhi_3);
+        fs_dizhi_list.add(fs_dizhi_4);
+        fs_dizhi_list.add(fs_dizhi_5);
+        fs_dizhi_list.add(fs_dizhi_6);
+
         hk_1 = (TextView)findViewById(R.id.huike_text_1);
         hk_2 = (TextView)findViewById(R.id.huike_text_2);
         hk_3 = (TextView)findViewById(R.id.huike_text_3);
@@ -337,6 +355,7 @@ public class Suangua_Result extends AppCompatActivity  {
     }
     //变卦控件可视性的初始化
     private void init_visible_biangua(){
+
             for(int i = 0;i<6;i++){
                 bg_List.get(i).setVisibility(View.INVISIBLE);
                 bg_qin.get(i).setVisibility(View.INVISIBLE);
@@ -499,9 +518,9 @@ public class Suangua_Result extends AppCompatActivity  {
             // 从左往右第1列六亲
             temp=jsonInstance.getLiuqin_1();
             printLiuQin1(temp);
-            // 从左往右第2列六亲
-            temp=jsonInstance.getLiuqin_2();
-            printLiuQin2(temp);
+//            // 从左往右第2列六亲
+//            temp=jsonInstance.getLiuqin_2();
+//            printLiuQin2(temp);
             // 从左往右第3列六亲
             temp=jsonInstance.getLiuqin_3();
             printLiuQin3(temp);
@@ -593,6 +612,9 @@ public class Suangua_Result extends AppCompatActivity  {
             //回克逻辑
             printHuiKe();
             printDateQin();
+
+            //装卦的六亲
+            printLiuQin2();
 
             fragment_init();
             liuyao_fragment_2.setArguments(bundle);
@@ -883,31 +905,40 @@ public class Suangua_Result extends AppCompatActivity  {
     }
 
     // 从左至右第二个六亲
-    private void printLiuQin2(String liuqin){
+    private void printLiuQin2(){
+        for (int i=0;i<6;i++){
+            TextView textView = bg_dizhi_list.get(i);
+            ArrayList<String>testList= new ArrayList();
 
-        String temp=liuqin.substring(2,4);
-        TextView textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_2_1);
-        textView.setText(temp);
+            if("丑辰未戌".contains(textView.getText().toString())){
+                testList.clear();
+                testList.add("丑辰未戌");
+            }
+            if("亥子".contains(textView.getText().toString())){
+                testList.clear();
+                testList.add("亥子");
+            }
+            if("寅卯".contains(textView.getText().toString())){
+                testList.clear();
+                testList.add("寅卯");
+            }
+            if("巳午".contains(textView.getText().toString())){
+                testList.clear();
+                testList.add("巳午");
+            }
+            if("申酉".contains(textView.getText().toString())) {
+                testList.clear();
+                testList.add("申酉");
+            }
 
-        temp=liuqin.substring(7,9);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_2_2);
-        textView.setText(temp);
+            for (int j=0;j<6;j++){
+                textView = fs_dizhi_list.get(j);
+                if(testList.get(0).contains(textView.getText())){
+                    bg_qin.get(i).setText(fs_qin.get(j).getText());
+                }
+            }
+        }
 
-        temp=liuqin.substring(12,14);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_2_3);
-        textView.setText(temp);
-
-        temp=liuqin.substring(17,19);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_2_4);
-        textView.setText(temp);
-
-        temp=liuqin.substring(22,24);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_2_5);
-        textView.setText(temp);
-
-        temp=liuqin.substring(27,29);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_2_6);
-        textView.setText(temp);
     }
 
     // 从左至右第三个六亲

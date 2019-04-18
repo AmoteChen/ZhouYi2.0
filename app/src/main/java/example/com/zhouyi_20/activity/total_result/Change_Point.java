@@ -1,4 +1,4 @@
-package example.com.zhouyi_20.activity.liuyao;
+package example.com.zhouyi_20.activity.total_result;
 
 import android.content.Context;
 import android.graphics.Canvas;

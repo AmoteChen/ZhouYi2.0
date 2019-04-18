@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import example.com.zhouyi_20.R;
-import example.com.zhouyi_20.activity.liuyao.FragmentAdapter;
+import example.com.zhouyi_20.activity.total_result.FragmentAdapter;
 import example.com.zhouyi_20.activity.mine.Mine_fragment;
 import example.com.zhouyi_20.activity.mine.item_view;
 import example.com.zhouyi_20.tool.HttpsConnect;
