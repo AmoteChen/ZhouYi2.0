@@ -57,8 +57,8 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
 
     private static boolean fragment_set = false;
 
-    private String check_address = "http://120.76.128.110:12510/web/CheckLogin";
-    private String address = "http://120.76.128.110:12510/web/UserLogin";
+    private String check_address = "http://120.76.128.110:12510/user/CheckLogin";
+    private String address = "http://120.76.128.110:12510/user/UserLogin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

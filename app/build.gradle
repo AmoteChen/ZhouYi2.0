@@ -35,6 +35,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     compile 'io.apisense:rhino-android:1.0'
-    provided files('C:/Program Files/Java/jdk1.8.0_162/jre/lib/rt.jar')
+    provided files('C:/Program Files/Java/jre1.8.0_211/lib/rt.jar')
     compile 'org.jetbrains:annotations-java5:15.0'
 }

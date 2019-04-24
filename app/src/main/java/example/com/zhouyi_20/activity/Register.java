@@ -37,7 +37,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
 
-    private final String address = "http://120.76.128.110:12510/web/UserSignUp";
+    private final String address = "http://120.76.128.110:12510/user/UserSignUp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

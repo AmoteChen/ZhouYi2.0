@@ -384,29 +384,31 @@ public class Suangua_Result extends AppCompatActivity  {
         }
     //点击事件的初始化
     private void click_init(){
-        biangua_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (biangua_count > 1) {
-                    biangua_count = 0;
+        if(!biangua_show.isEmpty()) {
+            biangua_layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (biangua_count > 1) {
+                        biangua_count = 0;
+                    }
+                    switch (biangua_count) {
+                        case 0:
+                            init_visible_biangua();
+                            biangua_count++;
+                            break;
+                        case 1:
+                            for (int i = 0; i < 6; i++) {
+                                bg_List.get(i).setVisibility(View.VISIBLE);
+                                bg_qin.get(i).setVisibility(View.VISIBLE);
+                            }
+                            biangua_count++;
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                switch (biangua_count) {
-                    case 0:
-                        init_visible_biangua();
-                        biangua_count++;
-                        break;
-                    case 1:
-                        for (int i = 0; i < 6; i++) {
-                            bg_List.get(i).setVisibility(View.VISIBLE);
-                            bg_qin.get(i).setVisibility(View.VISIBLE);
-                        }
-                        biangua_count++;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
+            });
+        }
         zhuanggua_layout.setOnClickListener(new View.OnClickListener() {
             //装卦表的点击跳转
             @Override

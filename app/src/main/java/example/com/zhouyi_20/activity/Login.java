@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
 
 
-    private final String address = "http://120.76.128.110:12510/web/UserLogin";
+    private final String address = "http://120.76.128.110:12510/user/UserLogin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_bt_login:
-                Toast.makeText(Login.this,"登录按钮已点击",Toast.LENGTH_SHORT).show();
                 name = et_name.getText().toString();
                 password = et_password.getText().toString();
                 account = et_account.getText().toString();
