@@ -2,6 +2,8 @@ package example.com.zhouyi_20.tool;
 
 import android.util.Log;
 
+import com.google.gson.JsonArray;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -29,6 +31,7 @@ public class JsonService {
             JSONObject dataObject_ZG=dataObject.getJSONObject("zhuangGuaTable");
             JSONObject dataObject_1=dataObject_ZG.getJSONObject("basicData");
             JSONArray dataObject_kong_zhuanggua=dataObject_ZG.getJSONArray("kongIndex");
+            JSONArray dataObject_kong_dizhi = dataObject_ZG.getJSONArray("kongDiZhi");
             // 六亲
             liuqin_1 = dataObject_1.getString("six_relatives");
             wuxing_1=dataObject_1.getString("five_elements");
@@ -48,6 +51,11 @@ public class JsonService {
             kong_zhuanggua=new ArrayList();
             for (int i = 0;i<dataObject_kong_zhuanggua.length();++i){
                 kong_zhuanggua.add(dataObject_kong_zhuanggua.get(i));
+            }
+            //空地支
+            kong_dizhi=new ArrayList();
+            for (int i = 0;i<dataObject_kong_dizhi.length();++i){
+                kong_dizhi.add(dataObject_kong_dizhi.get(i));
             }
 
             // 世应
@@ -217,6 +225,9 @@ public class JsonService {
     //装卦表的kong下标
     private List kong_zhuanggua=new ArrayList();
     public List getKong_zhuanggua(){return kong_zhuanggua;}
+    //装挂的kong地支
+    private List kong_dizhi = new ArrayList();
+    public List getKong_dizhi(){return kong_dizhi;}
 
 
     //变卦表的show下标

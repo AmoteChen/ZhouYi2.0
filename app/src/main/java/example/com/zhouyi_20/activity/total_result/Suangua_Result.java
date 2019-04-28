@@ -599,7 +599,10 @@ public class Suangua_Result extends AppCompatActivity  {
             for (int i=0;i<list_zg.size();i++){
                 int num = Integer.parseInt(list_zg.get(i).toString());
                 zg_kong.get(num).setBackgroundResource(R.drawable.right_triangle);
-                kong_table+=zg_kong.get(num).getText().toString();
+            }
+            List list_dizhi=jsonInstance.getKong_dizhi();
+            for (int i=0;i<list_dizhi.size();i++){
+                kong_table+=list_dizhi.get(i);
             }
             bundle.putString("kong_table",kong_table);
 

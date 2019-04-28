@@ -1,13 +1,16 @@
 package example.com.zhouyi_20.activity.Ziding;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -79,18 +82,22 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view){
         switch (view.getId()){
             case R.id.zd_ok:
-                HttpsConnect.sendRequest(getInput, "POST", getJsonData(), new HttpsListener() {
-                    @Override
-                    public void success(String response) {
-                        catchResponse(response);
-                    }
+                if(zd_total_1.getText().length()==18&&zd_total_2.getText().length()==18) {
+                    HttpsConnect.sendRequest(getInput, "POST", getJsonData(), new HttpsListener() {
+                        @Override
+                        public void success(String response) {
+                            catchResponse(response);
+                        }
 
-                    @Override
-                    public void failed(Exception exception) {
-                        exception.printStackTrace();
-                    }
-                });
-
+                        @Override
+                        public void failed(Exception exception) {
+                            exception.printStackTrace();
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(this, "输入错误！请仔细检查选择卦象",Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.zd_back:
                 finish();
@@ -155,6 +162,14 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         xg_temp.add(0);
                         xg_temp.add(0);
                         xg_temp.add(0);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.qian_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.qian_path));
+                        }
                         xg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -162,9 +177,17 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         xg_temp.clear();
                         sg_temp=new ArrayList<>(sg_temp.subList(0,3));
                         xg_select_2.clearCheck();
-                        xg_temp.add(0);
-                        xg_temp.add(0);
                         xg_temp.add(1);
+                        xg_temp.add(0);
+                        xg_temp.add(0);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.dui_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.dui_path));
+                        }
                         xg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -175,6 +198,14 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         xg_temp.add(0);
                         xg_temp.add(1);
                         xg_temp.add(0);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.li_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.li_path));
+                        }
                         xg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -182,9 +213,17 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         xg_temp.clear();
                         sg_temp=new ArrayList<>(sg_temp.subList(0,3));
                         xg_select_2.clearCheck();
+                        xg_temp.add(1);
+                        xg_temp.add(1);
                         xg_temp.add(0);
-                        xg_temp.add(1);
-                        xg_temp.add(1);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.zhen_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.zhen_path));
+                        }
                         xg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -202,9 +241,17 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         xg_temp.clear();
                         sg_temp=new ArrayList<>(sg_temp.subList(0,3));
                         xg_select_1.clearCheck();
+                        xg_temp.add(0);
+                        xg_temp.add(0);
                         xg_temp.add(1);
-                        xg_temp.add(0);
-                        xg_temp.add(0);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.xun_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.xun_path));
+                        }
                         xg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -215,6 +262,14 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         xg_temp.add(1);
                         xg_temp.add(0);
                         xg_temp.add(1);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.kan_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.kan_path));
+                        }
                         xg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -222,9 +277,17 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         xg_temp.clear();
                         sg_temp=new ArrayList<>(sg_temp.subList(0,3));
                         xg_select_1.clearCheck();
-                        xg_temp.add(1);
-                        xg_temp.add(1);
                         xg_temp.add(0);
+                        xg_temp.add(1);
+                        xg_temp.add(1);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.ken_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.ken_path));
+                        }
                         xg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -235,6 +298,14 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         xg_temp.add(1);
                         xg_temp.add(1);
                         xg_temp.add(1);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.kun_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_xg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.kun_path));
+                        }
                         xg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -253,15 +324,31 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         sg_temp.add(0);
                         sg_temp.add(0);
                         sg_temp.add(0);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.qian_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.qian_path));
+                        }
                         sg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
                     case R.id.sg_1_2:
                         sg_temp.clear();
                         sg_select_2.clearCheck();
-                        sg_temp.add(0);
-                        sg_temp.add(0);
                         sg_temp.add(1);
+                        sg_temp.add(0);
+                        sg_temp.add(0);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.dui_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.dui_path));
+                        }
                         sg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -271,15 +358,31 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         sg_temp.add(0);
                         sg_temp.add(1);
                         sg_temp.add(0);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.li_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.li_path));
+                        }
                         sg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
                     case R.id.sg_1_4:
                         sg_temp.clear();
                         sg_select_2.clearCheck();
+                        sg_temp.add(1);
+                        sg_temp.add(1);
                         sg_temp.add(0);
-                        sg_temp.add(1);
-                        sg_temp.add(1);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.zhen_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.zhen_path));
+                        }
                         sg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -296,9 +399,17 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                     case R.id.sg_2_1:
                         sg_temp.clear();
                         sg_select_1.clearCheck();
+                        sg_temp.add(0);
+                        sg_temp.add(0);
                         sg_temp.add(1);
-                        sg_temp.add(0);
-                        sg_temp.add(0);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.xun_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.xun_path));
+                        }
                         sg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -308,15 +419,31 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         sg_temp.add(1);
                         sg_temp.add(0);
                         sg_temp.add(1);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.kan_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.kan_path));
+                        }
                         sg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
                     case R.id.sg_2_3:
                         sg_temp.clear();
                         sg_select_1.clearCheck();
-                        sg_temp.add(1);
-                        sg_temp.add(1);
                         sg_temp.add(0);
+                        sg_temp.add(1);
+                        sg_temp.add(1);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.ken_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.ken_path));
+                        }
                         sg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -326,6 +453,14 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                         sg_temp.add(1);
                         sg_temp.add(1);
                         sg_temp.add(1);
+                        if(bg_selected==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_bengua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.kun_path));
+                        }
+                        if(bg_selected==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.ziding_biangua_image_sg);
+                            imageView.setBackground(getResources().getDrawable(R.drawable.kun_path));
+                        }
                         sg_selected = true;
                         setList(sg_selected,xg_selected,bg_selected);
                         break;
@@ -346,7 +481,17 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                 send_list1[i]=(int)temp.get(i);
             }
 
+            String string = "";
+            string="["+temp.get(0);
+            for (int i=1;i<6;++i)
+                string+=","+temp.get(i);
+            string+="]";
+
             zd_total_1.setText(temp.toString());
+
+            Ziding_Map ziding_map = new Ziding_Map();
+            TextView textView = (TextView)findViewById(R.id.ziding_bengua_text);
+            textView.setText(ziding_map.get(string));
         }
         if(sg&&xg&&bg_selected==2){
             sg_temp.addAll(xg_temp);
@@ -356,6 +501,16 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
                 send_list2[i]=(int)temp.get(i);
             }
             zd_total_2.setText(temp.toString());
+
+            String string = "";
+            string="["+temp.get(0);
+            for (int i=1;i<6;++i)
+                string+=","+temp.get(i);
+            string+="]";
+
+            Ziding_Map ziding_map = new Ziding_Map();
+            TextView textView = (TextView)findViewById(R.id.ziding_biangua_text);
+            textView.setText(ziding_map.get(string));
         }
 
     }

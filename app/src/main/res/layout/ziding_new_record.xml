@@ -29,9 +29,10 @@
     <LinearLayout
         android:layout_width="match_parent" android:layout_height="0dp"
         android:layout_weight="4.7" android:orientation="vertical">
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent" android:layout_height="0dp"
             android:layout_weight="1" android:layout_marginTop="40dp">
+
             <RadioGroup
                 android:id="@+id/top_total"
                 android:layout_width="match_parent" android:layout_height="match_parent"
@@ -44,7 +45,7 @@
                     android:layout_margin="4dp"
                     android:background="@drawable/zd_selector"
                     android:button="@null"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:text="000000"
                     android:textSize="14sp" />
                 <RadioButton
@@ -55,21 +56,80 @@
                     android:layout_margin="4dp"
                     android:background="@drawable/zd_selector"
                     android:button="@null"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:text="000000"
                     android:textSize="14sp" />
             </RadioGroup>
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ziding_bengua_image_sg"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/qian_path"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="30dp"/>
+                    <ImageView
+                        android:id="@+id/ziding_bengua_image_xg"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/qian_path"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="30dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ziding_biangua_image_sg"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/qian_path"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="30dp"/>
+                    <ImageView
+                        android:id="@+id/ziding_biangua_image_xg"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/qian_path"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="30dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
         <LinearLayout
             android:layout_width="match_parent" android:layout_height="0dp"
             android:layout_weight="0.6" android:orientation="horizontal"
             android:layout_marginBottom="2dp">
             <TextView
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="#0F0E0E"
+                android:id="@+id/ziding_bengua_text"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="4dp"/>
             <TextView
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="#0F0E0E"
+                android:id="@+id/ziding_biangua_text"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -87,13 +147,13 @@
                 android:id="@+id/shanggua_view"
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/zd_selector"
+                android:background="@drawable/ziding_sg"
                 android:layout_margin="4dp"/>
             <Button
                 android:id="@+id/xiagua_view"
                 android:layout_width="match_parent" android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/zd_selector"
+                android:background="@drawable/ziding_xg"
                 android:layout_margin="4dp"/>
         </LinearLayout>
         <LinearLayout
@@ -115,10 +175,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:background="@drawable/zd_selector"
+                        android:layout_gravity="center"
+                        android:background="@drawable/qian_selector"
                         android:button="@null"
-                        android:gravity="center"
-                        android:text="000"
                         android:textSize="14sp" />
                     <RadioButton
                         android:id="@+id/sg_1_2"
@@ -126,10 +185,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:background="@drawable/zd_selector"
+                        android:background="@drawable/dui_selector"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="001"
                         android:textSize="14sp" />
                     <RadioButton
                         android:id="@+id/sg_1_3"
@@ -137,10 +195,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:background="@drawable/zd_selector"
+                        android:background="@drawable/li_selector"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="010"
                         android:textSize="14sp" />
                     <RadioButton
                         android:id="@+id/sg_1_4"
@@ -148,10 +205,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:background="@drawable/zd_selector"
+                        android:background="@drawable/zhen_selector"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="011"
                         android:textSize="14sp" />
             </RadioGroup>
                 <RadioGroup
@@ -167,10 +223,9 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:layout_margin="4dp"
-                            android:background="@drawable/zd_selector"
+                            android:background="@drawable/xun_selector"
                             android:button="@null"
                             android:gravity="center"
-                            android:text="100"
                             android:textSize="14sp" />
                         <RadioButton
                             android:id="@+id/sg_2_2"
@@ -178,10 +233,9 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:layout_margin="4dp"
-                            android:background="@drawable/zd_selector"
+                            android:background="@drawable/kan_selector"
                             android:button="@null"
                             android:gravity="center"
-                            android:text="101"
                             android:textSize="14sp" />
                         <RadioButton
                             android:id="@+id/sg_2_3"
@@ -189,10 +243,9 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:layout_margin="4dp"
-                            android:background="@drawable/zd_selector"
+                            android:background="@drawable/ken_selector"
                             android:button="@null"
                             android:gravity="center"
-                            android:text="110"
                             android:textSize="14sp" />
                         <RadioButton
                             android:id="@+id/sg_2_4"
@@ -200,10 +253,9 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:layout_margin="4dp"
-                            android:background="@drawable/zd_selector"
+                            android:background="@drawable/kun_selector"
                             android:button="@null"
                             android:gravity="center"
-                            android:text="111"
                             android:textSize="14sp" />
                     </RadioGroup>
         </LinearLayout>
@@ -223,10 +275,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:background="@drawable/zd_selector"
+                        android:background="@drawable/qian_selector"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="000"
                         android:textSize="14sp" />
                     <RadioButton
                         android:id="@+id/xg_1_2"
@@ -234,10 +285,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:background="@drawable/zd_selector"
+                        android:background="@drawable/dui_selector"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="001"
                         android:textSize="14sp" />
                     <RadioButton
                         android:id="@+id/xg_1_3"
@@ -245,10 +295,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:background="@drawable/zd_selector"
+                        android:background="@drawable/li_selector"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="010"
                         android:textSize="14sp" />
                     <RadioButton
                         android:id="@+id/xg_1_4"
@@ -256,10 +305,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:background="@drawable/zd_selector"
+                        android:background="@drawable/zhen_selector"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="011"
                         android:textSize="14sp" />
             </RadioGroup>
 
@@ -276,10 +324,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:background="@drawable/zd_selector"
+                        android:background="@drawable/xun_selector"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="100"
                         android:textSize="14sp" />
                     <RadioButton
                         android:id="@+id/xg_2_2"
@@ -287,10 +334,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:background="@drawable/zd_selector"
+                        android:background="@drawable/kan_selector"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="101"
                         android:textSize="14sp" />
                     <RadioButton
                         android:id="@+id/xg_2_3"
@@ -298,10 +344,9 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:background="@drawable/zd_selector"
+                        android:background="@drawable/ken_selector"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="110"
                         android:textSize="14sp" />
                     <RadioButton
                         android:id="@+id/xg_2_4"
@@ -309,14 +354,12 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="4dp"
-                        android:background="@drawable/zd_selector"
+                        android:background="@drawable/kun_selector"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="111"
                         android:textSize="14sp" />
                 </RadioGroup>
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 
