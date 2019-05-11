@@ -24,6 +24,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private EditText et_password;
     private EditText et_account;
     private EditText et_code;
+    private Button bt_code;
     private Button bt_login;
     private Button bt_register;
 
@@ -47,7 +48,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         et_name = (EditText)findViewById(R.id.login_et_name);
         et_password = (EditText)findViewById(R.id.login_et_password);
         et_account = (EditText)findViewById(R.id.login_et_account);
+        et_account.setVisibility(View.GONE);
         et_code = (EditText)findViewById(R.id.login_et_code);
+        et_code.setVisibility(View.GONE);
+        bt_code = (Button) findViewById(R.id.login_bt_getcode);
+        bt_code.setVisibility(View.GONE);
         bt_login = (Button)findViewById(R.id.login_bt_login);
         bt_login.setOnClickListener(this);
         bt_register = (Button)findViewById(R.id.login_bt_register);

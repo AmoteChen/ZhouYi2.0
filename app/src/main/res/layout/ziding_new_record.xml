@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,8 +7,9 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
         android:orientation="horizontal">
 
         <Button
@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/zd_ok"
             android:text="取消" />
+
         <Button
             android:id="@+id/zd_ok"
             android:layout_width="wrap_content"
@@ -27,289 +28,372 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="4.7" android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <FrameLayout
-            android:layout_width="match_parent" android:layout_height="0dp"
-            android:layout_weight="1" android:layout_marginTop="40dp">
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="40dp">
 
             <RadioGroup
                 android:id="@+id/top_total"
-                android:layout_width="match_parent" android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
+
                 <RadioButton
                     android:id="@+id/zd_total_1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_margin="4dp"
+                    android:layout_weight="1"
                     android:background="@drawable/zd_selector"
                     android:button="@null"
                     android:gravity="center_horizontal"
-                    android:text="000000"
                     android:textSize="14sp" />
+
                 <RadioButton
                     android:id="@+id/zd_total_2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_margin="4dp"
+                    android:layout_weight="1"
                     android:background="@drawable/zd_selector"
                     android:button="@null"
                     android:gravity="center_horizontal"
-                    android:text="000000"
                     android:textSize="14sp" />
             </RadioGroup>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="80dp"
                 android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="0dp"
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="25dp"
                     android:layout_weight="1"
+                    android:text="本"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:orientation="vertical">
+
+
                     <ImageView
                         android:id="@+id/ziding_bengua_image_sg"
                         android:layout_width="match_parent"
-                        android:background="@drawable/qian_path"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:layout_marginHorizontal="30dp"/>
+                        android:layout_marginHorizontal="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/qian_path" />
+
                     <ImageView
                         android:id="@+id/ziding_bengua_image_xg"
                         android:layout_width="match_parent"
-                        android:background="@drawable/qian_path"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:layout_marginHorizontal="30dp"/>
+                        android:layout_marginHorizontal="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/qian_path" />
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="25dp"
                     android:layout_weight="1"
+                    android:text="卦"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="25dp"
+                    android:layout_weight="1"
+                    android:text="变"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/ziding_biangua_image_sg"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/qian_path"
                         android:layout_gravity="center"
-                        android:layout_marginHorizontal="30dp"/>
+                        android:layout_marginHorizontal="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/qian_path" />
+
                     <ImageView
                         android:id="@+id/ziding_biangua_image_xg"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/qian_path"
                         android:layout_gravity="center"
-                        android:layout_marginHorizontal="30dp"/>
+                        android:layout_marginHorizontal="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/qian_path" />
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="25dp"
+                    android:layout_weight="1"
+                    android:text="卦"
+                    android:textSize="18sp" />
+
             </LinearLayout>
         </FrameLayout>
+
         <LinearLayout
-            android:layout_width="match_parent" android:layout_height="0dp"
-            android:layout_weight="0.6" android:orientation="horizontal"
-            android:layout_marginBottom="2dp">
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_marginBottom="2dp"
+
+            android:orientation="horizontal">
+
             <TextView
-                android:gravity="center"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:textColor="#0F0E0E"
                 android:id="@+id/ziding_bengua_text"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:layout_margin="4dp"/>
-            <TextView
                 android:gravity="center"
-                android:textSize="25dp"
-                android:textStyle="bold"
                 android:textColor="#0F0E0E"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/ziding_biangua_text"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:layout_margin="4dp"/>
+                android:gravity="center"
+                android:textColor="#0F0E0E"
+                android:textSize="25dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="6" android:orientation="horizontal">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <LinearLayout
-            android:layout_width="0dp" android:layout_height="match_parent"
-            android:layout_weight="3" android:orientation="vertical">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
             <Button
                 android:id="@+id/shanggua_view"
-                android:layout_width="match_parent" android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/ziding_sg"
-                android:layout_margin="4dp"/>
-            <Button
-                android:id="@+id/xiagua_view"
-                android:layout_width="match_parent" android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/ziding_xg"
-                android:layout_margin="4dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp" android:layout_height="match_parent"
-            android:layout_weight="8" android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent" android:layout_height="0dp"
-                android:layout_weight="1" android:orientation="vertical">
-            <RadioGroup
-                android:id="@+id/sg_group_1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:gravity="center"
+                android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:background="@drawable/ziding_sg" />
+
+            <Button
+                android:id="@+id/xiagua_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/ziding_xg" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <RadioGroup
+                    android:id="@+id/sg_group_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/sg_1_1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_margin="4dp"
                         android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
                         android:background="@drawable/qian_selector"
                         android:button="@null"
                         android:textSize="14sp" />
+
                     <RadioButton
                         android:id="@+id/sg_1_2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         android:background="@drawable/dui_selector"
                         android:button="@null"
                         android:gravity="center"
                         android:textSize="14sp" />
+
                     <RadioButton
                         android:id="@+id/sg_1_3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         android:background="@drawable/li_selector"
                         android:button="@null"
                         android:gravity="center"
                         android:textSize="14sp" />
+
                     <RadioButton
                         android:id="@+id/sg_1_4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         android:background="@drawable/zhen_selector"
                         android:button="@null"
                         android:gravity="center"
                         android:textSize="14sp" />
-            </RadioGroup>
+                </RadioGroup>
+
                 <RadioGroup
-                        android:id="@+id/sg_group_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                    android:id="@+id/sg_group_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <RadioButton
-                            android:id="@+id/sg_2_1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_margin="4dp"
-                            android:background="@drawable/xun_selector"
-                            android:button="@null"
-                            android:gravity="center"
-                            android:textSize="14sp" />
-                        <RadioButton
-                            android:id="@+id/sg_2_2"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_margin="4dp"
-                            android:background="@drawable/kan_selector"
-                            android:button="@null"
-                            android:gravity="center"
-                            android:textSize="14sp" />
-                        <RadioButton
-                            android:id="@+id/sg_2_3"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_margin="4dp"
-                            android:background="@drawable/ken_selector"
-                            android:button="@null"
-                            android:gravity="center"
-                            android:textSize="14sp" />
-                        <RadioButton
-                            android:id="@+id/sg_2_4"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_margin="4dp"
-                            android:background="@drawable/kun_selector"
-                            android:button="@null"
-                            android:gravity="center"
-                            android:textSize="14sp" />
-                    </RadioGroup>
-        </LinearLayout>
+                        android:id="@+id/sg_2_1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/xun_selector"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/sg_2_2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/kan_selector"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/sg_2_3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ken_selector"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/sg_2_4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/kun_selector"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:textSize="14sp" />
+                </RadioGroup>
+            </LinearLayout>
+
             <LinearLayout
-                android:layout_width="match_parent" android:layout_height="0dp"
-                android:layout_weight="1" android:orientation="vertical">
-            <RadioGroup
-                android:id="@+id/xg_group_1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+
+                <RadioGroup
+                    android:id="@+id/xg_group_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/xg_1_1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         android:background="@drawable/qian_selector"
                         android:button="@null"
                         android:gravity="center"
                         android:textSize="14sp" />
+
                     <RadioButton
                         android:id="@+id/xg_1_2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         android:background="@drawable/dui_selector"
                         android:button="@null"
                         android:gravity="center"
                         android:textSize="14sp" />
+
                     <RadioButton
                         android:id="@+id/xg_1_3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         android:background="@drawable/li_selector"
                         android:button="@null"
                         android:gravity="center"
                         android:textSize="14sp" />
+
                     <RadioButton
                         android:id="@+id/xg_1_4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         android:background="@drawable/zhen_selector"
                         android:button="@null"
                         android:gravity="center"
                         android:textSize="14sp" />
-            </RadioGroup>
+                </RadioGroup>
 
                 <RadioGroup
                     android:id="@+id/xg_group_2"
@@ -318,42 +402,46 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/xg_2_1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         android:background="@drawable/xun_selector"
                         android:button="@null"
                         android:gravity="center"
                         android:textSize="14sp" />
+
                     <RadioButton
                         android:id="@+id/xg_2_2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         android:background="@drawable/kan_selector"
                         android:button="@null"
                         android:gravity="center"
                         android:textSize="14sp" />
+
                     <RadioButton
                         android:id="@+id/xg_2_3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         android:background="@drawable/ken_selector"
                         android:button="@null"
                         android:gravity="center"
                         android:textSize="14sp" />
+
                     <RadioButton
                         android:id="@+id/xg_2_4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_margin="4dp"
+                        android:layout_weight="1"
                         android:background="@drawable/kun_selector"
                         android:button="@null"
                         android:gravity="center"

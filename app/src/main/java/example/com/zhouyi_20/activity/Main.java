@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -38,9 +39,9 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
     private History_fragment history_fragment;
     private Mine_fragment mine_fragment;
 
-    private Button bt_zhouyi;
-    private Button bt_history;
-    private Button bt_mine;
+    private ImageView bt_zhouyi;
+    private ImageView bt_history;
+    private ImageView bt_mine;
 
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
@@ -71,12 +72,12 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
             Viewmanager();
             Log.e("TAGG","layout_seted");
 
-            bt_zhouyi = (Button)findViewById(R.id.main_bt_zhouyi);
+            bt_zhouyi =(ImageView)findViewById(R.id.main_bt_zhouyi);
             bt_zhouyi.setOnClickListener(this);
-            bt_history = (Button)findViewById(R.id.main_bt_history);
-            bt_history.setTextColor(Color.parseColor("#6393d5"));
+            bt_history = (ImageView)findViewById(R.id.main_bt_history);
+            bt_history.setImageResource(R.drawable.bottom_lishi_yes);
             bt_history.setOnClickListener(this);
-            bt_mine = (Button)findViewById(R.id.main_bt_mine);
+            bt_mine = (ImageView)findViewById(R.id.main_bt_mine);
             bt_mine.setOnClickListener(this);
 
             sp = getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -97,7 +98,7 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
 
 
             if (!token.equals("no token")) {
-                Toast.makeText(this, "checking", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "checking", Toast.LENGTH_SHORT).show();
                 HttpsConnect.sendRequest(check_address, "POST", getCheckJsonData(), new HttpsListener() {
                     @Override
                     public void success(String response) {
@@ -110,7 +111,7 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
                     }
                 });
             } else {
-                Toast.makeText(this, "no token", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "no token", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -119,9 +120,13 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onResume(){
         super.onResume();
-        bt_zhouyi.setTextColor(Color.parseColor("#000000"));
-        bt_history.setTextColor(Color.parseColor("#6393d5"));
-        bt_mine.setTextColor(Color.parseColor("#000000"));
+        //旧版本
+        //bt_zhouyi.setTextColor(Color.parseColor("#000000"));
+        //bt_history.setTextColor(Color.parseColor("#6393d5"));
+        //bt_mine.setTextColor(Color.parseColor("#000000"));
+        bt_zhouyi.setImageResource(R.drawable.bottom_zhanbu_no);
+        bt_history.setImageResource(R.drawable.bottom_lishi_yes);
+        bt_mine.setImageResource(R.drawable.bottom_wode_no);
     }
 
     @Override
@@ -154,7 +159,7 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
 
 
             if (!token.equals("no token")) {
-                Toast.makeText(this, "checking", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "checking", Toast.LENGTH_SHORT).show();
                 HttpsConnect.sendRequest(check_address, "POST", getCheckJsonData(), new HttpsListener() {
                     @Override
                     public void success(String response) {
@@ -167,12 +172,17 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
                     }
                 });
             } else {
-                Toast.makeText(this, "no token", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "no token", Toast.LENGTH_SHORT).show();
             }
 
         }
 
     }
+
+    /**
+     * @return
+     * 布局初始化
+     */
     private boolean fragment_init() {
         fragmentList.clear();
         history_fragment = new History_fragment();
@@ -187,6 +197,9 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         return true;
     }
 
+    /**
+     * ViewPager的处理
+     */
     private void Viewmanager(){
         viewPager = (CustomViewPager) findViewById(R.id.main_top_layout);
         //禁止滑动
@@ -205,21 +218,21 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.main_bt_zhouyi:
                 viewPager.setCurrentItem(0);
-                bt_zhouyi.setTextColor(Color.parseColor("#6393d5"));
-                bt_history.setTextColor(Color.parseColor("#000000"));
-                bt_mine.setTextColor(Color.parseColor("#000000"));
+                bt_zhouyi.setImageResource(R.drawable.bottom_zhanbu_yes);
+                bt_history.setImageResource(R.drawable.bottom_lishi_no);
+                bt_mine.setImageResource(R.drawable.bottom_wode_no);
                 break;
             case R.id.main_bt_history:
                 viewPager.setCurrentItem(1);
-                bt_zhouyi.setTextColor(Color.parseColor("#000000"));
-                bt_history.setTextColor(Color.parseColor("#6393d5"));
-                bt_mine.setTextColor(Color.parseColor("#000000"));
+                bt_zhouyi.setImageResource(R.drawable.bottom_zhanbu_no);
+                bt_history.setImageResource(R.drawable.bottom_lishi_yes);
+                bt_mine.setImageResource(R.drawable.bottom_wode_no);
                 break;
             case R.id.main_bt_mine:
                 viewPager.setCurrentItem(2);
-                bt_zhouyi.setTextColor(Color.parseColor("#000000"));
-                bt_history.setTextColor(Color.parseColor("#000000"));
-                bt_mine.setTextColor(Color.parseColor("#6393d5"));
+                bt_zhouyi.setImageResource(R.drawable.bottom_zhanbu_no);
+                bt_history.setImageResource(R.drawable.bottom_lishi_no);
+                bt_mine.setImageResource(R.drawable.bottom_wode_yes);
                 break;
             default:
                 break;
@@ -266,34 +279,34 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         });
     }
 
-        JSONObject getJsonData() {
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("name", name);
-                jsonObject.put("password", password);
-                jsonObject.put("phone", account);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return jsonObject;
+    JSONObject getJsonData() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("name", name);
+            jsonObject.put("password", password);
+            jsonObject.put("phone", account);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return jsonObject;
+    }
 
-        private void catchResponse(final String response) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        String result = jsonObject.getString("result");
-                        reason = jsonObject.getString("reason");
-                        realname = jsonObject.getString("realname");
-                        birthYM = jsonObject.getString("birthYM");
-                        name = jsonObject.getString("name");
-                        token = jsonObject.getString("token");
-                        id = jsonObject.getString("userId");
-                        if (result.compareTo("success") == 0) {
-                            Toast.makeText(Main.this, name, Toast.LENGTH_SHORT).show();
-                            item_view.setState(true);
+    private void catchResponse(final String response) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String result = jsonObject.getString("result");
+                    reason = jsonObject.getString("reason");
+                    realname = jsonObject.getString("realname");
+                    birthYM = jsonObject.getString("birthYM");
+                    name = jsonObject.getString("name");
+                    token = jsonObject.getString("token");
+                    id = jsonObject.getString("userId");
+                    if (result.compareTo("success") == 0) {
+                        Toast.makeText(Main.this, name+"登陆成功", Toast.LENGTH_SHORT).show();
+                        item_view.setState(true);
 
 //                        name = jsonObject.getString("name");
 //                        account = jsonObject.getString("phone");
@@ -301,42 +314,42 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
 //                        User.setName(name);
 //                        User.setAccount(account);
 //                        User.setPassword(password);
-                            User.setName(User.getName());
-                            User.setState(true);
-                            User.setToken(token);
-                            User.setId(id);
-                            User.setTrue_name(realname);
-                            User.setBirthday(birthYM);
+                        User.setName(User.getName());
+                        User.setState(true);
+                        User.setToken(token);
+                        User.setId(id);
+                        User.setTrue_name(realname);
+                        User.setBirthday(birthYM);
 
-                            sp = getSharedPreferences(User.getAccount(), Context.MODE_PRIVATE);
-                            editor = sp.edit();
-                            editor.putString("name", User.getName());
+                        sp = getSharedPreferences(User.getAccount(), Context.MODE_PRIVATE);
+                        editor = sp.edit();
+                        editor.putString("name", User.getName());
 //                        editor.putString("account", User.getAccount());
-                            editor.putString("password", User.getPassword());
-                            editor.putBoolean("state", User.getState());
-                            editor.putString("token", User.getToken());
-                            editor.putString("id", User.getId());
-                            editor.commit();
+                        editor.putString("password", User.getPassword());
+                        editor.putBoolean("state", User.getState());
+                        editor.putString("token", User.getToken());
+                        editor.putString("id", User.getId());
+                        editor.commit();
 
-                            sp = getSharedPreferences("user", Context.MODE_PRIVATE);
-                            editor = sp.edit();
-                            editor.putString("name", User.getName());
+                        sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+                        editor = sp.edit();
+                        editor.putString("name", User.getName());
 //                        editor.putString("account", User.getAccount());
-                            editor.putString("password", User.getPassword());
-                            editor.putBoolean("state", User.getState());
-                            editor.putString("token", User.getToken());
-                            editor.putString("id", User.getId());
-                            editor.commit();
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                        editor.putString("password", User.getPassword());
+                        editor.putBoolean("state", User.getState());
+                        editor.putString("token", User.getToken());
+                        editor.putString("id", User.getId());
+                        editor.commit();
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            });
-        }
+            }
+        });
+    }
 
-        public static void setFragment_set(boolean fragment_set1){
-            fragment_set=fragment_set1;
-        }
+    public static void setFragment_set(boolean fragment_set1){
+        fragment_set=fragment_set1;
+    }
 
 }

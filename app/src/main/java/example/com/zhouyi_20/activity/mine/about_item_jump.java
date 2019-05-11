@@ -15,6 +15,7 @@ import example.com.zhouyi_20.R;
 
 /**
  * Created by ChenSiyuan on 2018/10/21.
+ * * 关于界面选项的控件
  */
 
 public class about_item_jump extends LinearLayout {

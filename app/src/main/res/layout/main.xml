@@ -7,45 +7,49 @@
     android:orientation="vertical"
     tools:context=".activity.Zhouyi_fragment">
 
+    <include layout="@layout/main_item_jump" />
+
     <example.com.zhouyi_20.tool.CustomViewPager
         android:id="@+id/main_top_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10">
-    </example.com.zhouyi_20.tool.CustomViewPager>
+        android:layout_weight="10"></example.com.zhouyi_20.tool.CustomViewPager>
+
     <LinearLayout
         android:id="@+id/main_bottom_layout"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_below="@+id/main_top_layout"
+        android:layout_weight="1"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
+        <ImageView
             android:id="@+id/main_bt_zhouyi"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
             android:gravity="center"
-            android:text="占卜" />
-        <Button
+            android:src="@drawable/bottom_zhanbu_no" />
+
+        <ImageView
             android:id="@+id/main_bt_history"
-            android:background="@color/white"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/white"
             android:gravity="center"
-            android:text="历史"/>
-        <Button
+            android:src="@drawable/bottom_lishi_no" />
+
+        <ImageView
             android:id="@+id/main_bt_mine"
-            android:background="@color/white"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/white"
             android:gravity="center"
-            android:text="我的"/>
+            android:src="@drawable/bottom_wode_no" />
     </LinearLayout>
 
 </LinearLayout>

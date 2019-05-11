@@ -157,6 +157,7 @@ public class Mine_fragment extends Fragment implements View.OnClickListener {
         else {
             info.setVisibility(View.GONE);
             offline.setVisibility(View.GONE);
+            logout.setVisibility(View.GONE);
 
             Glide.with(this).load(R.drawable.defult_head)
                     .bitmapTransform(new BlurTransformation(getActivity(), 25), new CenterCrop(getActivity()))

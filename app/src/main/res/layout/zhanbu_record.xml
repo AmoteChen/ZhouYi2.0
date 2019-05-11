@@ -31,10 +31,10 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
-        android:id="@+id/liuyao_new_record_bengua_image"
-        android:src="@drawable/bengua"
+        android:id="@+id/liuyao_new_record_bengua_shang"
+        android:src="@drawable/qian_path"
         android:layout_width="90dp"
-        android:layout_height="70dp"
+        android:layout_height="35dp"
         app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintVertical_bias="0.2"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -42,16 +42,38 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <ImageView
-        android:id="@+id/liuyao_new_record_biangua_image"
-        android:src="@drawable/biangua"
+        android:id="@+id/liuyao_new_record_biangua_shang"
+        android:src="@drawable/kun_path"
         android:layout_width="90dp"
-        android:layout_height="70dp"
+        android:layout_height="35dp"
         app:layout_constraintHorizontal_bias="0.65"
         app:layout_constraintVertical_bias="0.2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+    <ImageView
+        android:id="@+id/liuyao_new_record_bengua_xia"
+        android:src="@drawable/qian_path"
+        android:layout_width="90dp"
+        android:layout_height="35dp"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintVertical_bias="0.26"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"  />
+    <ImageView
+        android:id="@+id/liuyao_new_record_biangua_xia"
+        android:src="@drawable/kun_path"
+        android:layout_width="90dp"
+        android:layout_height="35dp"
+        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintVertical_bias="0.26"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <!-- 本卦 -->
     <TextView
@@ -126,7 +148,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/liuyao_new_record_bengua_image"
+        app:layout_constraintTop_toBottomOf="@id/liuyao_new_record_bengua_shang"
         app:layout_constraintVertical_bias="0.497">
 
         <LinearLayout

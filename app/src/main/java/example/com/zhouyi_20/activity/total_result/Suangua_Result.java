@@ -384,19 +384,19 @@ public class Suangua_Result extends AppCompatActivity  {
         }
     //点击事件的初始化
     private void click_init(){
-        if(!biangua_show.isEmpty()) {
-            biangua_layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (biangua_count > 1) {
-                        biangua_count = 0;
-                    }
+        biangua_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (biangua_count > 1) {
+                    biangua_count = 0;
+                }
+                if(biangua_show.size()!=0) {
                     switch (biangua_count) {
-                        case 0:
+                        case 1:
                             init_visible_biangua();
                             biangua_count++;
                             break;
-                        case 1:
+                        case 0:
                             for (int i = 0; i < 6; i++) {
                                 bg_List.get(i).setVisibility(View.VISIBLE);
                                 bg_qin.get(i).setVisibility(View.VISIBLE);
@@ -407,22 +407,24 @@ public class Suangua_Result extends AppCompatActivity  {
                             break;
                     }
                 }
-            });
-        }
+            }
+
+        });
+
         zhuanggua_layout.setOnClickListener(new View.OnClickListener() {
             //装卦表的点击跳转
             @Override
             public void onClick(View v) {
                 if(zhuanggua_count>5){zhuanggua_count=0;}
                 switch (zhuanggua_count){
-                    case 0:
+                    case 5:
                         JsonService jsonInstance= JsonService.getInstance();
                         jsonInstance.createJsonObject(liuyaoData);
                         String temp=jsonInstance.getWuxing_1();
                         printWuXing_zhuanggua(temp);
                         zhuanggua_count++;
                         break;
-                    case 1:
+                    case 0:
                         try {
                             printZhuanggua_2();
                         } catch (ParseException e) {
@@ -430,7 +432,7 @@ public class Suangua_Result extends AppCompatActivity  {
                         }
                         zhuanggua_count++;
                         break;
-                    case 2:
+                    case 1:
                         try {
                             printZhuanggua_3();
                         } catch (ParseException e) {
@@ -438,15 +440,15 @@ public class Suangua_Result extends AppCompatActivity  {
                         }
                         zhuanggua_count++;
                         break;
-                    case 3:
+                    case 2:
                         printZhuanggua_4();
                         zhuanggua_count++;
                         break;
-                    case 4:
+                    case 3:
                         printZhuanggua_5();
                         zhuanggua_count++;
                         break;
-                    case 5:
+                    case 4:
                         printZhuanggua_6();
                         zhuanggua_count++;
                         break;
@@ -463,11 +465,11 @@ public class Suangua_Result extends AppCompatActivity  {
             public void onClick(View v) {
                 if(fushen_count>1){fushen_count=0;}
                 switch (fushen_count){
-                    case 0:
+                    case 1:
                         init_visible_fushen();
                         fushen_count++;
                         break;
-                    case 1:
+                    case 0:
                         for (int i =0;i<6;i++){
                             fs_List.get(i).setVisibility(View.VISIBLE);
                             fs_qin.get(i).setVisibility(View.VISIBLE);

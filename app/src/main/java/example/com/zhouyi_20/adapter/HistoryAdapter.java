@@ -30,25 +30,31 @@ public class HistoryAdapter extends BaseRecyclerViewAdapter<Divination> {
     private Context context;
     private OnDeleteClickListener mDeleteClickListener;
 
-    public HistoryAdapter(Context context, List<Divination> data){
-        super(context,data, R.layout.item_history);
+    public HistoryAdapter(Context context, List<Divination> data) {
+        super(context, data, R.layout.item_history);
         this.context = context;
         divinations = data;
     }
 
+    /**
+     * @param holder   The reference of the all view within the item.
+     * @param history
+     * @param position The position to bind data.
+     * 传一个intent到newrecord的逻辑写在这里，guaxiang作为liuyaodata传进去，在新活动取出
+     */
     @Override
-    protected void onBindData(RecyclerViewHolder holder, Divination history,int position){
+    protected void onBindData(RecyclerViewHolder holder, Divination history, int position) {
         final View delet_view = holder.getView(R.id.item_hi_delete);
         View total_view = holder.getView(R.id.item_hi_total);
 
         total_view.setTag(position);
         delet_view.setTag(position);
-
-        if(!delet_view.hasOnClickListeners()){
-            delet_view.setOnClickListener(new View.OnClickListener(){
+//删除
+        if (!delet_view.hasOnClickListeners()) {
+            delet_view.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v){
-                    if ( mDeleteClickListener != null) {
+                public void onClick(View v) {
+                    if (mDeleteClickListener != null) {
                         HttpsConnect.sendRequest(delete_address, "POST", getJsonData((Integer) v.getTag()), new HttpsListener() {
                             @Override
                             public void success(String response) {
@@ -65,6 +71,7 @@ public class HistoryAdapter extends BaseRecyclerViewAdapter<Divination> {
                 }
             });
         }
+        //这些是每一项里面显示的内容
         ((TextView) holder.getView(R.id.item_hi_shiyou)).setText(history.getReason());
         ((TextView) holder.getView(R.id.item_hi_date)).setText(history.getTime());
         ((TextView) holder.getView(R.id.item_hi_name)).setText(history.getName());
@@ -73,30 +80,30 @@ public class HistoryAdapter extends BaseRecyclerViewAdapter<Divination> {
         total_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = (Integer)v.getTag();
+                int position = (Integer) v.getTag();
                 Divination divination = divinations.get(position);
                 Intent to_record = new Intent(v.getContext(), NewRecord.class);
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
                 JSONArray jsonArray = divination.getGuaxiang();
-                Integer guaxiang []= new Integer[6];
-                for (int i = 0;i<6;i++){
+                Integer guaxiang[] = new Integer[6];//卦象数组
+                for (int i = 0; i < 6; i++) {
                     try {
-                        guaxiang[i]= (Integer) jsonArray.get(i);
+                        guaxiang[i] = (Integer) jsonArray.get(i);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                bundle.putSerializable("LiuYaoData",guaxiang);
+                bundle.putSerializable("LiuYaoData", guaxiang);
                 to_record.putExtras(bundle);
-                to_record.putExtra("_id",divination.get_id());
+                to_record.putExtra("_id", divination.get_id());
                 to_record.putExtra("id", divination.getId());
-                to_record.putExtra("time",divination.getTime());
+                to_record.putExtra("time", divination.getTime());
                 to_record.putExtra("reason", divination.getReason());
-                to_record.putExtra("way",divination.getway());
-                to_record.putExtra("name",divination.getName());
-                to_record.putExtra("note",divination.getNote());
-                to_record.putExtra("yongshen",divination.getYongshen());
-                to_record.putExtra("from","history");
+                to_record.putExtra("way", divination.getway());
+                to_record.putExtra("name", divination.getName());
+                to_record.putExtra("note", divination.getNote());
+                to_record.putExtra("yongshen", divination.getYongshen());
+                to_record.putExtra("from", "history");
 
                 v.getContext().startActivity(to_record);
             }
@@ -111,19 +118,19 @@ public class HistoryAdapter extends BaseRecyclerViewAdapter<Divination> {
         void onDeleteClick(View view, int position);
     }
 
-    private JSONObject getJsonData(int position){
+    private JSONObject getJsonData(int position) {
         JSONObject jsonObject = new JSONObject();
         Divination divination = divinations.get(position);
 
         try {
-            jsonObject.put("id",divination.get_id());
-        }catch (Exception e) {
+            jsonObject.put("id", divination.get_id());
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return jsonObject;
     }
 
-    private void catchResponse(final String response)  {
+    private void catchResponse(final String response) {
         JSONObject object = null;
         try {
             object = new JSONObject(response);
@@ -132,14 +139,14 @@ public class HistoryAdapter extends BaseRecyclerViewAdapter<Divination> {
         }
         String result = object.optString("result");
         String reason = object.optString("reason");
-        if(result.compareTo("success")==0){
-            Toast.makeText(context,"纪录删除成功！",Toast.LENGTH_SHORT).show();
+        if (result.compareTo("success") == 0) {
+            Toast.makeText(context, "纪录删除成功！", Toast.LENGTH_SHORT).show();
         }
 
     }
 
 
-    }
+}
 
 
 

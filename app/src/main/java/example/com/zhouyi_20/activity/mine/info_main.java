@@ -48,7 +48,7 @@ public class info_main extends AppCompatActivity {
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
 
-    private final String address ="http://120.76.128.110:12510/web/SetUserInfo";
+    private final String address ="http://120.76.128.110:12510/user/SetUserInfo";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
