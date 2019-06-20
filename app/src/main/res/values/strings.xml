@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ZHOUYI_2.0</string>
+    <string name="app_name">贞明易学</string>
     <string name="choose_shensha">选择神煞</string>
     <string-array name="shensha">
         <item>常用神煞</item>

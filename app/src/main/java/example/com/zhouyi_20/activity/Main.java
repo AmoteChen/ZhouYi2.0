@@ -6,8 +6,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Fade;
+import android.transition.Transition;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -67,6 +70,11 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         Log.e("TAGG","Main_onCreate");
         //先加载碎片内的信息再进行布局初始化，以防止布局已经设置后，信息不能刷新
         if(fragment_init()){
+
+            //设置页面打开动画
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+            init_fade();
+
             setContentView(R.layout.main);
 
             Viewmanager();
@@ -195,6 +203,16 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         fragmentAdapter = new FragmentAdapter(this.getSupportFragmentManager(),fragmentList);
 
         return true;
+    }
+
+    /**
+     * 页面打开动画
+     *
+     */
+    private void init_fade() {
+        Transition transition = new Fade().setDuration(200);
+        getWindow().setEnterTransition(transition);
+        getWindow().setExitTransition(transition);
     }
 
     /**

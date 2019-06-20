@@ -72,6 +72,7 @@ public class Pwd_Change extends AppCompatActivity implements View.OnClickListene
                         @Override
                         public void failed(Exception exception) {
                             //报错
+                            //这里可能会又问题，强行封装了一个线程来启用Toast
                             Looper.prepare();
                             Toast.makeText(Pwd_Change.this, "验证码获取失败，请稍后重试", Toast.LENGTH_SHORT).show();
                             Looper.loop();

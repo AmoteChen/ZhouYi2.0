@@ -22,6 +22,7 @@ import org.json.JSONObject;
 public class Login extends AppCompatActivity implements View.OnClickListener {
     /**
      * 更新：用手机号/密码登陆
+     * 密码错误提醒/网络连接失败提醒
      * 用户名、验证码等功能暂时取缔
      * 此处暂时注释，以备需求变更
      */
@@ -90,18 +91,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void success(String response) {
                         catchResponse(response);
-                        Toast.makeText(Login.this,"已成功登录",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void failed(Exception exception) {
-                        Looper.prepare();
-                        Toast.makeText(Login.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
                         exception.printStackTrace();
+                        Looper.prepare();
+                        Toast.makeText(Login.this, "网络连接中断，请检查网络设置", Toast.LENGTH_SHORT).show();
+                        Looper.loop();
+
                     }
                 });
-
 
                 break;
             case R.id.login_bt_register:
@@ -140,16 +140,21 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     /*********************** 从response中获取用户数据 **************************/
                     String result = jsonObject.getString("result");
                     String reason = jsonObject.getString("reason");
-                    String token = jsonObject.getString("token");
-                    String id = jsonObject.getString("userId");
-                    String realname = jsonObject.getString("realname");
-                    String birthYM = jsonObject.getString("birthYM");
-                    Toast.makeText(Login.this, response, Toast.LENGTH_SHORT).show();
+
+
+//                    Toast.makeText(Login.this, result, Toast.LENGTH_SHORT).show();
 
                     if (result.compareTo("success") == 0) {
                         /*********************** User的数据设置 **************************/
                         name = jsonObject.getString("name");
                         account = jsonObject.getString("phone");
+
+                        //成功登陆后再载入此类信息
+                        String token = jsonObject.getString("token");
+                        String id = jsonObject.getString("userId");
+                        String realname = jsonObject.getString("realname");
+                        String birthYM = jsonObject.getString("birthYM");
+
                         //password在后端是非明文存储，此处不从后端拿取，直接沿用用户输入
                         User.setName(name);
                         User.setAccount(account);
@@ -183,6 +188,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
                         User.setState(true);
                         restartApplication();
+                    }
+                    if (result.compareTo("failure") == 0) {
+                        //登陆失败处理
+                        Toast.makeText(Login.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
 

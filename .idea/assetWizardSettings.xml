@@ -51,7 +51,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="scalingPercent" value="82" />
+                                                <entry key="scalingPercent" value="67" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -62,8 +62,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="4c80b5" />
-                                      <entry key="foregroundImage" value="E:\gongcheng\AndoridLearn\ZhouYi2.0\app\src\main\res\drawable\icon_part.png" />
+                                      <entry key="backgroundColor" value="ea5146" />
+                                      <entry key="foregroundImage" value="E:\gongcheng\AndoridLearn\周易资料\微信图片_20190620152756.jpg" />
                                     </map>
                                   </option>
                                 </PersistentState>
