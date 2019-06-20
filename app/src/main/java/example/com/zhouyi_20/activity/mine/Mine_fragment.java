@@ -60,6 +60,7 @@ public class Mine_fragment extends Fragment implements View.OnClickListener {
     private item_view info;
     private item_view about;
     private item_view offline;
+    private item_view setting;
     private Button logout;
 
     private static Bitmap user_header;
@@ -96,6 +97,8 @@ public class Mine_fragment extends Fragment implements View.OnClickListener {
         offline.setOnClickListener(this);
         logout = (Button)view.findViewById(R.id.logout);
         logout.setOnClickListener(this);
+        setting = (item_view) view.findViewById(R.id.setting_item_view);
+        setting.setOnClickListener(this);
 
         mPermissionsChecker = new PermissionsChecker(getActivity());
 
@@ -186,6 +189,10 @@ public class Mine_fragment extends Fragment implements View.OnClickListener {
             case R.id.about_item_view:
                 Intent toAbout=new Intent(getActivity(),mine_about.class);
                 startActivity(toAbout);
+                break;
+            case R.id.setting_item_view:
+                Intent toSetting = new Intent(getActivity(), mine_setting.class);
+                startActivity(toSetting);
                 break;
             case R.id.logout:
                 if(User.getState()){

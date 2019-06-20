@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.database.Cursor;
 import android.content.*;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -44,6 +45,7 @@ import example.com.zhouyi_20.tool.HttpsListener;
 
 /**
  * Created by ChenSiyuan on 2018/10/21.
+ * 2019/4/24
  */
 
 public class mine_about extends AppCompatActivity implements View.OnClickListener {
@@ -54,6 +56,8 @@ public class mine_about extends AppCompatActivity implements View.OnClickListene
     private AlertDialog updateDlg1;
     private AlertDialog.Builder dontUpdateDlg;
     private AlertDialog.Builder permission;
+    
+    private TextView banbenhao;
 
     private DownloadManager updateDownload;
     private long downloadId;
@@ -65,9 +69,10 @@ public class mine_about extends AppCompatActivity implements View.OnClickListene
     public static final int INSTALL_APK_REQUESTCODE = 1;
     public static final int UPDATE_UI = 2;
 
-    public static final String versionCode = "1.1.4.1000";
+    public static final String versionCode = "1.1.8";//181行改了下载包的命名，以解决覆盖的问题,247行改了打开安装包的文件名，有问题再改
+    public static final String nextVersionCode="1.1.9";
     public static final String checkAddress = "http://120.76.128.110:12510/manage/CheckVersion";
-    public static final String downloadAddress = "https://qd.myapp.com/myapp/qqteam/Androidlite/qqlite_3.7.1.704_android_r110206_GuanWang_537057973_release_10000484.apk";
+    public static final String downloadAddress = "http://120.76.128.110:12510/AndroidDeployment/android.apk";
     public static final String ttttt = "http://http://120.76.128.110:12510/AndroidDeployment/android.apk";
 
     /**
@@ -101,6 +106,8 @@ public class mine_about extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_layout);
         updateBtn = findViewById(R.id.about_refresh);
+        banbenhao = findViewById(R.id.banbenhao);
+        banbenhao.setText(versionCode);
         updateBtn.setOnClickListener(this);
         //初始化并注册内容观察器和完成接收器
         observer = new MyContentObserver(null);
@@ -172,7 +179,7 @@ public class mine_about extends AppCompatActivity implements View.OnClickListene
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(address));
 
         //目录: Android -> data -> com.app -> files -> Download ->
-        request.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, "android.apk");
+        request.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, nextVersionCode+".apk");
 
         request.setTitle("正在下载");
         request.setDescription("下载中……");
@@ -237,7 +244,7 @@ public class mine_about extends AppCompatActivity implements View.OnClickListene
      */
     private void openApkFile() {
         String apkPath = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-        File apk = new File(apkPath, "android.apk");
+        File apk = new File(apkPath, nextVersionCode+".apk");
         Intent intent = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             intent.setDataAndType(Uri.fromFile(apk), "application/vnd.android.package-archive");
@@ -357,7 +364,7 @@ public class mine_about extends AppCompatActivity implements View.OnClickListene
                         updateDlg.setPositiveButton("下载", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                downloadUpdate("http://120.76.128.110:12510/AndroidDeployment/android.apk");
+                                downloadUpdate(downloadAddress);
                             }
                         });
                         updateDlg.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -368,7 +375,7 @@ public class mine_about extends AppCompatActivity implements View.OnClickListene
                         });
                         updateDlg1 = updateDlg.show();
                     }
-                    else
+                    else 
                     {
                         updateDlg = new AlertDialog.Builder(mine_about.this);
                         updateDlg.setTitle("当前版本已是最新版本");
@@ -376,7 +383,7 @@ public class mine_about extends AppCompatActivity implements View.OnClickListene
                         updateDlg.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                
                             }
                         });
                         updateDlg.setNegativeButton("取消", new DialogInterface.OnClickListener() {

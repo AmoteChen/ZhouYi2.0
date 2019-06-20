@@ -16,6 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -39,7 +42,7 @@ import example.com.zhouyi_20.tool.Birth;
 import example.com.zhouyi_20.tool.JsonService;
 import example.com.zhouyi_20.tool.TianGanDiZhi;
 
-public class Suangua_Result extends AppCompatActivity  {
+public class Suangua_Result extends AppCompatActivity {
 
     private ViewPager viewPager;
     private List<Fragment> fragmentList = new ArrayList<Fragment>();
@@ -52,8 +55,9 @@ public class Suangua_Result extends AppCompatActivity  {
 
     private LinearLayout point_position;
 
-    private final String urlStr="http://120.76.128.110:8081/table/item";
+    private final String urlStr = "http://120.76.128.110:8081/table/item";
     private String postStr;
+    private String postDate;//19/5/17新增，传数据要把日期一起传
     private String liuyaoData;
     private LiuYaoMSGHandler handler;
     private LinearLayout zhuanggua_layout;
@@ -89,9 +93,9 @@ public class Suangua_Result extends AppCompatActivity  {
     private TextView fs_qin_5;
     private TextView fs_qin_6;
     //点一点变一变里面应该展现的项
-    private List biangua_show ;
-    private List biangua_kong ;
-    private List fushen_show ;
+    private List biangua_show;
+    private List biangua_kong;
+    private List fushen_show;
 
     ArrayList<LinearLayout> bg_List;
     ArrayList<TextView> bg_qin;
@@ -162,7 +166,8 @@ public class Suangua_Result extends AppCompatActivity  {
     // 懒得重新解析因此直接存储
     private Integer liuyaoIntegerData[];
 
-    private final int MSG_GET_DATA_FROM_SERVER_SUCCEED=0;
+    private final int MSG_GET_DATA_FROM_SERVER_SUCCEED = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -170,13 +175,12 @@ public class Suangua_Result extends AppCompatActivity  {
         setContentView(R.layout.final_result);
 
 
+        biangua_show = new ArrayList();
+        fushen_show = new ArrayList();
 
-        biangua_show=new ArrayList();
-        fushen_show=new ArrayList();
+        handler = new LiuYaoMSGHandler();
 
-        handler=new LiuYaoMSGHandler();
-
-        point_position = (LinearLayout)findViewById(R.id.point_position);
+        point_position = (LinearLayout) findViewById(R.id.point_position);
 
         getDataFromLiuYao();
         getDataFromServer();
@@ -185,24 +189,22 @@ public class Suangua_Result extends AppCompatActivity  {
         click_init();
 
 
-
-
     }
 
     //控件的初始化
-    private void initialize(){
-        zhuanggua_layout=(LinearLayout)findViewById(R.id.liuyaoresult_zhuanggua_total);
-        biangua_layout=(LinearLayout)findViewById(R.id.liuyaoresult_biangua_total);
-        fushen_layout=(LinearLayout)findViewById(R.id.liuyaoresult_fushen_total);
+    private void initialize() {
+        zhuanggua_layout = (LinearLayout) findViewById(R.id.liuyaoresult_zhuanggua_total);
+        biangua_layout = (LinearLayout) findViewById(R.id.liuyaoresult_biangua_total);
+        fushen_layout = (LinearLayout) findViewById(R.id.liuyaoresult_fushen_total);
 
-        bg_layout_1=(LinearLayout)findViewById(R.id.liuyaoresult_biangua_1);
-        bg_layout_2=(LinearLayout)findViewById(R.id.liuyaoresult_biangua_2);
-        bg_layout_3=(LinearLayout)findViewById(R.id.liuyaoresult_biangua_3);
-        bg_layout_4=(LinearLayout)findViewById(R.id.liuyaoresult_biangua_4);
-        bg_layout_5=(LinearLayout)findViewById(R.id.liuyaoresult_biangua_5);
-        bg_layout_6=(LinearLayout)findViewById(R.id.liuyaoresult_biangua_6);
+        bg_layout_1 = (LinearLayout) findViewById(R.id.liuyaoresult_biangua_1);
+        bg_layout_2 = (LinearLayout) findViewById(R.id.liuyaoresult_biangua_2);
+        bg_layout_3 = (LinearLayout) findViewById(R.id.liuyaoresult_biangua_3);
+        bg_layout_4 = (LinearLayout) findViewById(R.id.liuyaoresult_biangua_4);
+        bg_layout_5 = (LinearLayout) findViewById(R.id.liuyaoresult_biangua_5);
+        bg_layout_6 = (LinearLayout) findViewById(R.id.liuyaoresult_biangua_6);
 
-        bg_List=new ArrayList<>();
+        bg_List = new ArrayList<>();
         bg_List.add(bg_layout_1);
         bg_List.add(bg_layout_2);
         bg_List.add(bg_layout_3);
@@ -210,14 +212,14 @@ public class Suangua_Result extends AppCompatActivity  {
         bg_List.add(bg_layout_5);
         bg_List.add(bg_layout_6);
 
-        bg_qin_1=(TextView)findViewById(R.id.liuyaoresult_liuqin_2_1);
-        bg_qin_2=(TextView)findViewById(R.id.liuyaoresult_liuqin_2_2);
-        bg_qin_3=(TextView)findViewById(R.id.liuyaoresult_liuqin_2_3);
-        bg_qin_4=(TextView)findViewById(R.id.liuyaoresult_liuqin_2_4);
-        bg_qin_5=(TextView)findViewById(R.id.liuyaoresult_liuqin_2_5);
-        bg_qin_6=(TextView)findViewById(R.id.liuyaoresult_liuqin_2_6);
+        bg_qin_1 = (TextView) findViewById(R.id.liuyaoresult_liuqin_2_1);
+        bg_qin_2 = (TextView) findViewById(R.id.liuyaoresult_liuqin_2_2);
+        bg_qin_3 = (TextView) findViewById(R.id.liuyaoresult_liuqin_2_3);
+        bg_qin_4 = (TextView) findViewById(R.id.liuyaoresult_liuqin_2_4);
+        bg_qin_5 = (TextView) findViewById(R.id.liuyaoresult_liuqin_2_5);
+        bg_qin_6 = (TextView) findViewById(R.id.liuyaoresult_liuqin_2_6);
 
-        bg_qin=new ArrayList<>();
+        bg_qin = new ArrayList<>();
         bg_qin.add(bg_qin_1);
         bg_qin.add(bg_qin_2);
         bg_qin.add(bg_qin_3);
@@ -226,15 +228,14 @@ public class Suangua_Result extends AppCompatActivity  {
         bg_qin.add(bg_qin_6);
 
 
+        fs_layout_1 = (LinearLayout) findViewById(R.id.liuyaoresult_fushen_1);
+        fs_layout_2 = (LinearLayout) findViewById(R.id.liuyaoresult_fushen_2);
+        fs_layout_3 = (LinearLayout) findViewById(R.id.liuyaoresult_fushen_3);
+        fs_layout_4 = (LinearLayout) findViewById(R.id.liuyaoresult_fushen_4);
+        fs_layout_5 = (LinearLayout) findViewById(R.id.liuyaoresult_fushen_5);
+        fs_layout_6 = (LinearLayout) findViewById(R.id.liuyaoresult_fushen_6);
 
-        fs_layout_1=(LinearLayout)findViewById(R.id.liuyaoresult_fushen_1);
-        fs_layout_2=(LinearLayout)findViewById(R.id.liuyaoresult_fushen_2);
-        fs_layout_3=(LinearLayout)findViewById(R.id.liuyaoresult_fushen_3);
-        fs_layout_4=(LinearLayout)findViewById(R.id.liuyaoresult_fushen_4);
-        fs_layout_5=(LinearLayout)findViewById(R.id.liuyaoresult_fushen_5);
-        fs_layout_6=(LinearLayout)findViewById(R.id.liuyaoresult_fushen_6);
-
-        fs_List=new ArrayList<>();
+        fs_List = new ArrayList<>();
         fs_List.add(fs_layout_1);
         fs_List.add(fs_layout_2);
         fs_List.add(fs_layout_3);
@@ -242,14 +243,14 @@ public class Suangua_Result extends AppCompatActivity  {
         fs_List.add(fs_layout_5);
         fs_List.add(fs_layout_6);
 
-        fs_qin_1=(TextView)findViewById(R.id.liuyaoresult_liuqin_3_1);
-        fs_qin_2=(TextView)findViewById(R.id.liuyaoresult_liuqin_3_2);
-        fs_qin_3=(TextView)findViewById(R.id.liuyaoresult_liuqin_3_3);
-        fs_qin_4=(TextView)findViewById(R.id.liuyaoresult_liuqin_3_4);
-        fs_qin_5=(TextView)findViewById(R.id.liuyaoresult_liuqin_3_5);
-        fs_qin_6=(TextView)findViewById(R.id.liuyaoresult_liuqin_3_6);
+        fs_qin_1 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_1);
+        fs_qin_2 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_2);
+        fs_qin_3 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_3);
+        fs_qin_4 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_4);
+        fs_qin_5 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_5);
+        fs_qin_6 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_6);
 
-        fs_qin=new ArrayList<>();
+        fs_qin = new ArrayList<>();
         fs_qin.add(fs_qin_1);
         fs_qin.add(fs_qin_2);
         fs_qin.add(fs_qin_3);
@@ -257,12 +258,12 @@ public class Suangua_Result extends AppCompatActivity  {
         fs_qin.add(fs_qin_5);
         fs_qin.add(fs_qin_6);
 
-        zg_kong_1 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_1);
-        zg_kong_2 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_2);
-        zg_kong_3 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_3);
-        zg_kong_4 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_4);
-        zg_kong_5 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_5);
-        zg_kong_6 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_6);
+        zg_kong_1 = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_1_1);
+        zg_kong_2 = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_1_2);
+        zg_kong_3 = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_1_3);
+        zg_kong_4 = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_1_4);
+        zg_kong_5 = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_1_5);
+        zg_kong_6 = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_1_6);
 
         zg_kong = new ArrayList<>();
         zg_kong.add(zg_kong_1);
@@ -272,14 +273,14 @@ public class Suangua_Result extends AppCompatActivity  {
         zg_kong.add(zg_kong_5);
         zg_kong.add(zg_kong_6);
 
-        zg_bian_1 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_1);
-        zg_bian_2 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_2);
-        zg_bian_3 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_3);
-        zg_bian_4 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_4);
-        zg_bian_5 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_5);
-        zg_bian_6 = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_6);
+        zg_bian_1 = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_1);
+        zg_bian_2 = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_2);
+        zg_bian_3 = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_3);
+        zg_bian_4 = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_4);
+        zg_bian_5 = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_5);
+        zg_bian_6 = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_6);
 
-        zg_bian_list=new ArrayList<>();
+        zg_bian_list = new ArrayList<>();
         zg_bian_list.add(zg_bian_1);
         zg_bian_list.add(zg_bian_2);
         zg_bian_list.add(zg_bian_3);
@@ -289,12 +290,12 @@ public class Suangua_Result extends AppCompatActivity  {
 
 
         //伏神部分的空表因为后端返回index逻辑好像没有做完，暂时不能够实现
-        fs_kong_1 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_1);
-        fs_kong_2 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_2);
-        fs_kong_3 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_3);
-        fs_kong_4 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_4);
-        fs_kong_5 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_5);
-        fs_kong_6 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_6);
+        fs_kong_1 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_1);
+        fs_kong_2 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_2);
+        fs_kong_3 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_3);
+        fs_kong_4 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_4);
+        fs_kong_5 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_5);
+        fs_kong_6 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_6);
 
         fs_kong = new ArrayList<>();
         fs_kong.add(fs_kong_1);
@@ -304,14 +305,14 @@ public class Suangua_Result extends AppCompatActivity  {
         fs_kong.add(fs_kong_5);
         fs_kong.add(fs_kong_6);
 
-        fs_dizhi_1 = (TextView)findViewById(R.id.liuyaoresult_fushen_1_1);
-        fs_dizhi_2 = (TextView)findViewById(R.id.liuyaoresult_fushen_2_1);
-        fs_dizhi_3 = (TextView)findViewById(R.id.liuyaoresult_fushen_3_1);
-        fs_dizhi_4 = (TextView)findViewById(R.id.liuyaoresult_fushen_4_1);
-        fs_dizhi_5 = (TextView)findViewById(R.id.liuyaoresult_fushen_5_1);
-        fs_dizhi_6 = (TextView)findViewById(R.id.liuyaoresult_fushen_6_1);
+        fs_dizhi_1 = (TextView) findViewById(R.id.liuyaoresult_fushen_1_1);
+        fs_dizhi_2 = (TextView) findViewById(R.id.liuyaoresult_fushen_2_1);
+        fs_dizhi_3 = (TextView) findViewById(R.id.liuyaoresult_fushen_3_1);
+        fs_dizhi_4 = (TextView) findViewById(R.id.liuyaoresult_fushen_4_1);
+        fs_dizhi_5 = (TextView) findViewById(R.id.liuyaoresult_fushen_5_1);
+        fs_dizhi_6 = (TextView) findViewById(R.id.liuyaoresult_fushen_6_1);
 
-        fs_dizhi_list=new ArrayList<>();
+        fs_dizhi_list = new ArrayList<>();
         fs_dizhi_list.add(fs_dizhi_1);
         fs_dizhi_list.add(fs_dizhi_2);
         fs_dizhi_list.add(fs_dizhi_3);
@@ -319,12 +320,12 @@ public class Suangua_Result extends AppCompatActivity  {
         fs_dizhi_list.add(fs_dizhi_5);
         fs_dizhi_list.add(fs_dizhi_6);
 
-        hk_1 = (TextView)findViewById(R.id.huike_text_1);
-        hk_2 = (TextView)findViewById(R.id.huike_text_2);
-        hk_3 = (TextView)findViewById(R.id.huike_text_3);
-        hk_4 = (TextView)findViewById(R.id.huike_text_4);
-        hk_5 = (TextView)findViewById(R.id.huike_text_5);
-        hk_6 = (TextView)findViewById(R.id.huike_text_6);
+        hk_1 = (TextView) findViewById(R.id.huike_text_1);
+        hk_2 = (TextView) findViewById(R.id.huike_text_2);
+        hk_3 = (TextView) findViewById(R.id.huike_text_3);
+        hk_4 = (TextView) findViewById(R.id.huike_text_4);
+        hk_5 = (TextView) findViewById(R.id.huike_text_5);
+        hk_6 = (TextView) findViewById(R.id.huike_text_6);
 
         hk_list = new ArrayList<>();
         hk_list.add(hk_1);
@@ -334,12 +335,12 @@ public class Suangua_Result extends AppCompatActivity  {
         hk_list.add(hk_5);
         hk_list.add(hk_6);
 
-        bg_dizhi_1 = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_1);
-        bg_dizhi_2 = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_2);
-        bg_dizhi_3 = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_3);
-        bg_dizhi_4 = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_4);
-        bg_dizhi_5 = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_5);
-        bg_dizhi_6 = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_6);
+        bg_dizhi_1 = (TextView) findViewById(R.id.liuyaoresult_bg_dizhi_1);
+        bg_dizhi_2 = (TextView) findViewById(R.id.liuyaoresult_bg_dizhi_2);
+        bg_dizhi_3 = (TextView) findViewById(R.id.liuyaoresult_bg_dizhi_3);
+        bg_dizhi_4 = (TextView) findViewById(R.id.liuyaoresult_bg_dizhi_4);
+        bg_dizhi_5 = (TextView) findViewById(R.id.liuyaoresult_bg_dizhi_5);
+        bg_dizhi_6 = (TextView) findViewById(R.id.liuyaoresult_bg_dizhi_6);
 
         bg_dizhi_list = new ArrayList<>();
         bg_dizhi_list.add(bg_dizhi_1);
@@ -350,47 +351,48 @@ public class Suangua_Result extends AppCompatActivity  {
         bg_dizhi_list.add(bg_dizhi_6);
 
 
-
-
     }
+
     //变卦控件可视性的初始化
-    private void init_visible_biangua(){
+    private void init_visible_biangua() {
 
-            for(int i = 0;i<6;i++){
-                bg_List.get(i).setVisibility(View.INVISIBLE);
-                bg_qin.get(i).setVisibility(View.INVISIBLE);
-            }
-
-            for (int i = 0; i < biangua_show.size(); i++) {
-                int num = Integer.parseInt(biangua_show.get(i).toString());
-                bg_List.get(num).setVisibility(View.VISIBLE);
-                bg_qin.get(num).setVisibility(View.VISIBLE);
-            }
-    }
-    //伏神控件可视性的初始化
-    private void init_visible_fushen(){
-
-        Log.e("FFFF",fushen_show.toString());
-            for(int i = 0;i<6;i++){
-                fs_List.get(i).setVisibility(View.INVISIBLE);
-                fs_qin.get(i).setVisibility(View.INVISIBLE);
-            }
-
-            for (int i = 0; i < fushen_show.size(); i++) {
-                int num = Integer.parseInt(fushen_show.get(i).toString());
-                fs_List.get(num).setVisibility(View.VISIBLE);
-                fs_qin.get(num).setVisibility(View.VISIBLE);
-            }
+        for (int i = 0; i < 6; i++) {
+            bg_List.get(i).setVisibility(View.INVISIBLE);
+            bg_qin.get(i).setVisibility(View.INVISIBLE);
         }
+
+        for (int i = 0; i < biangua_show.size(); i++) {
+            int num = Integer.parseInt(biangua_show.get(i).toString());
+            bg_List.get(num).setVisibility(View.VISIBLE);
+            bg_qin.get(num).setVisibility(View.VISIBLE);
+        }
+    }
+
+    //伏神控件可视性的初始化
+    private void init_visible_fushen() {
+
+        Log.e("FFFF", fushen_show.toString());
+        for (int i = 0; i < 6; i++) {
+            fs_List.get(i).setVisibility(View.INVISIBLE);
+            fs_qin.get(i).setVisibility(View.INVISIBLE);
+        }
+
+        for (int i = 0; i < fushen_show.size(); i++) {
+            int num = Integer.parseInt(fushen_show.get(i).toString());
+            fs_List.get(num).setVisibility(View.VISIBLE);
+            fs_qin.get(num).setVisibility(View.VISIBLE);
+        }
+    }
+
     //点击事件的初始化
-    private void click_init(){
+    private void click_init() {
         biangua_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (biangua_count > 1) {
                     biangua_count = 0;
                 }
-                if(biangua_show.size()!=0) {
+                if (biangua_show.size() != 0) {
                     switch (biangua_count) {
                         case 1:
                             init_visible_biangua();
@@ -410,23 +412,41 @@ public class Suangua_Result extends AppCompatActivity  {
             }
 
         });
-
+//这里就是装挂6列变换的逻辑了
         zhuanggua_layout.setOnClickListener(new View.OnClickListener() {
             //装卦表的点击跳转
             @Override
             public void onClick(View v) {
-                if(zhuanggua_count>5){zhuanggua_count=0;}
-                switch (zhuanggua_count){
-                    case 5:
-                        JsonService jsonInstance= JsonService.getInstance();
-                        jsonInstance.createJsonObject(liuyaoData);
-                        String temp=jsonInstance.getWuxing_1();
+                if (zhuanggua_count > 5) {
+                    zhuanggua_count = 0;
+                }
+                JsonService jsonInstance = JsonService.getInstance();
+                jsonInstance.createJsonObject(liuyaoData);
+                String temp;
+                JSONArray temp1;//column类型是jsonArray，这里转成String用
+                int temp2[] = {0, 0, 0, 0, 0, 0};
+                int temp3[] = {0, 0, 0, 0, 0, 0};
+                switch (zhuanggua_count) {
+                    case 5://回到第一列
+                        temp = jsonInstance.getZhuangGua1();
                         printWuXing_zhuanggua(temp);
+                        temp = jsonInstance.getBianGua1();
+                        printWuxing_biangua(temp);
+                        temp = jsonInstance.getFuShen1();
+                        printWuxing_fushen(temp);
                         zhuanggua_count++;
                         break;
                     case 0:
                         try {
-                            printZhuanggua_2();
+                            temp1 = jsonInstance.getZhuangGua2();
+                            temp = temp1.toString();
+                            printZhuanggua_2(temp);
+                            temp1 = jsonInstance.getBianGua2();
+                            temp = temp1.toString();
+                            printBiangua_2(temp);
+                            temp1 = jsonInstance.getFuShen2();
+                            temp = temp1.toString();
+                            printFushen_2(temp);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -434,22 +454,105 @@ public class Suangua_Result extends AppCompatActivity  {
                         break;
                     case 1:
                         try {
-                            printZhuanggua_3();
+                            temp1 = jsonInstance.getZhuangGua3();
+                            temp = temp1.toString();
+                            printZhuanggua_3(temp);
+                            temp1 = jsonInstance.getBianGua3();
+                            temp = temp1.toString();
+                            printBiangua_3(temp);
+                            temp1 = jsonInstance.getFuShen3();
+                            temp = temp1.toString();
+                            printFushen_3(temp);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
                         zhuanggua_count++;
                         break;
                     case 2:
-                        printZhuanggua_4();
+                        try {
+                            temp1 = jsonInstance.getZhuangGua4();
+                            Integer a = 1;//用于比较
+                            for (int i = 0; i < 6; i++) {
+                                if (temp1.get(i) == a) {
+                                    temp2[i] = 1;
+                                }
+                            }
+                            printZhuanggua_4(temp2);
+                            temp1 = jsonInstance.getBianGua4();
+                            for (int i = 0; i < 6; i++) {
+                                if (temp1.get(i) == a) {
+                                    temp2[i] = 1;
+                                }
+                            }
+                            printBiangua_4(temp2);
+                            temp1 = jsonInstance.getFuShen4();
+                            for (int i = 0; i < 6; i++) {
+                                if (temp1.get(i) == a) {
+                                    temp3[i] = 1;
+                                }
+                            }
+                            printFushen_4(temp3);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         zhuanggua_count++;
                         break;
                     case 3:
-                        printZhuanggua_5();
+                        try {                            
+                            temp1 = jsonInstance.getZhuangGua5();
+                            Integer a = 1;//用于比较
+                            for (int i = 0; i < 6; i++) {
+                                if (temp1.get(i) == a) {
+                                    temp2[i] = 1;
+                                }
+                            }
+                            printZhuanggua_5(temp2);
+                            temp1 = jsonInstance.getBianGua5();
+                            for (int i = 0; i < 6; i++) {
+                                if (temp1.get(i) == a) {
+                                    temp2[i] = 1;
+                                }
+                            }
+                            printBiangua_5(temp2);
+                            temp1 = jsonInstance.getFuShen5();
+                            for (int i = 0; i < 6; i++) {
+                                if (temp1.get(i) == a) {
+                                    temp3[i] = 1;
+                                }
+                            }
+                            printFushen_5(temp3);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         zhuanggua_count++;
                         break;
                     case 4:
-                        printZhuanggua_6();
+                        try {
+                            temp1 = jsonInstance.getZhuangGua6();
+                            Integer a = 1;//用于比较
+                            for (int i = 0; i < 6; i++) {
+                                if (temp1.get(i) == a) {
+                                    temp2[i] = 1;
+                                }
+                            }
+                            printZhuanggua_6(temp2);
+                            temp1 = jsonInstance.getBianGua6();
+                            for (int i = 0; i < 6; i++) {
+                                if (temp1.get(i) == a) {
+                                    temp2[i] = 1;
+                                }
+                            }
+                            printBiangua_6(temp2);
+                            temp1 = jsonInstance.getFuShen6();
+                            for (int i = 0; i < 6; i++) {
+                                if (temp1.get(i) == a) {
+                                    temp3[i] = 1;
+                                }
+                            }
+                            printFushen_6(temp3);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         zhuanggua_count++;
                         break;
                     default:
@@ -463,14 +566,16 @@ public class Suangua_Result extends AppCompatActivity  {
             //伏神表点击的显示与不显示
             @Override
             public void onClick(View v) {
-                if(fushen_count>1){fushen_count=0;}
-                switch (fushen_count){
+                if (fushen_count > 1) {
+                    fushen_count = 0;
+                }
+                switch (fushen_count) {
                     case 1:
                         init_visible_fushen();
                         fushen_count++;
                         break;
                     case 0:
-                        for (int i =0;i<6;i++){
+                        for (int i = 0; i < 6; i++) {
                             fs_List.get(i).setVisibility(View.VISIBLE);
                             fs_qin.get(i).setVisibility(View.VISIBLE);
                         }
@@ -485,21 +590,21 @@ public class Suangua_Result extends AppCompatActivity  {
         });
     }
 
-    private void paintData(){
-        Log.d("LiuYaoResult",liuyaoData);
+    private void paintData() {
+        Log.d("LiuYaoResult", liuyaoData);
 
-        JsonService jsonInstance= JsonService.getInstance();
+        JsonService jsonInstance = JsonService.getInstance();
         jsonInstance.createJsonObject(liuyaoData);
 
         String temp;
-        try{
+        try {
             //表头
-            temp=jsonInstance.getContent_zhuanggua();
-            if(LiuHe(temp)){
+            temp = jsonInstance.getContent_zhuanggua();
+            if (LiuHe(temp)) {
                 printZG_Title();
             }
-            temp=jsonInstance.getContent_biangua();
-            if(LiuHe(temp)){
+            temp = jsonInstance.getContent_biangua();
+            if (LiuHe(temp)) {
                 printBG_Title();
             }
             //伏神的表头逻辑被删除了
@@ -518,55 +623,53 @@ public class Suangua_Result extends AppCompatActivity  {
 //            FS_title_times(temp);
 
 
-
             // 从左往右第1列六亲
-            temp=jsonInstance.getLiuqin_1();
+            temp = jsonInstance.getLiuqin_1();
             printLiuQin1(temp);
 //            // 从左往右第2列六亲
 //            temp=jsonInstance.getLiuqin_2();
 //            printLiuQin2(temp);
             // 从左往右第3列六亲
-            temp=jsonInstance.getLiuqin_3();
+            temp = jsonInstance.getLiuqin_3();
             printLiuQin3(temp);
             // 六爻卦象的图片
             printLiuYaoImage();
             // 世应
-            temp=jsonInstance.getShiying();
+            temp = jsonInstance.getShiying();
             printShiying(temp);
             // 六兽
             printLiuShou();
             // 日期的格子
             printDate();
             //五行(装卦表里的部分)
-            temp=jsonInstance.getWuxing_1();
+            temp = jsonInstance.getZhuangGua1();
             printWuXing_zhuanggua(temp);
             //Heaven表
-            temp=jsonInstance.getHeavenly_stems();
+            temp = jsonInstance.getHeavenly_stems();
             printHeaven(temp);
-            temp=jsonInstance.getHeavenly_stems_biangua();
+            temp = jsonInstance.getHeavenly_stems_biangua();
             printHeaven_biangua(temp);
-            temp=jsonInstance.getHeavenly_stems_fushen();
+            temp = jsonInstance.getHeavenly_stems_fushen();
             printHeaven_fushen(temp);
             //Earthly表
-            temp=jsonInstance.getEarthly_branches();
+            temp = jsonInstance.getEarthly_branches();
             printEarthly(temp);
-            temp=jsonInstance.getEarthly_biangua();
+            temp = jsonInstance.getEarthly_biangua();
             printEarthly_biangua(temp);
-            temp=jsonInstance.getEarthly_fushen();
+            temp = jsonInstance.getEarthly_fushen();
             printEarthly_fushen(temp);
 
 
-
             //五行（伏神表里的部分）
-            temp=jsonInstance.getWuxing_2();
+            temp = jsonInstance.getFuShen1();
             printWuxing_fushen(temp);
 
             //五行（变卦表里的部分）
-            temp=jsonInstance.getWuxing_3();
+            temp = jsonInstance.getBianGua1();
             printWuxing_biangua(temp);
 
 //            //日表
-            String day_String=jsonInstance.getDaytable();
+            String day_String = jsonInstance.getDaytable();
             //变表
             List bian_list = jsonInstance.getBiantable();
             //亲表（下端部分）
@@ -575,47 +678,53 @@ public class Suangua_Result extends AppCompatActivity  {
 
             //content
             //bengui
-            String ben_String=jsonInstance.getContent_zhuanggua();
+            String ben_String = jsonInstance.getContent_zhuanggua();
 
             //biangua
-            String bian_String=jsonInstance.getContent_biangua();
+            String bian_String = jsonInstance.getContent_biangua();
             //fushen
-            String fushen_String=jsonInstance.getContent_fushen();
+            String fushen_String = jsonInstance.getContent_fushen();
             //shen_gua
             String shen_gua = jsonInstance.getShen_gua();
 
             Bundle bundle = new Bundle();
             bundle.putString("day_string", day_String);
             bundle.putStringArrayList("qin_string", (ArrayList<String>) qin_list);
-            bundle.putStringArrayList("bian_table",(ArrayList<String>) bian_list);
-            bundle.putString("ben_string",ben_String);
-            bundle.putString("bian_string",bian_String);
-            bundle.putString("shou_string",fushen_String);
-            bundle.putString("shen_gua",shen_gua);
+            bundle.putStringArrayList("bian_table", (ArrayList<String>) bian_list);
+            bundle.putString("ben_string", ben_String);
+            bundle.putString("bian_string", bian_String);
+            bundle.putString("shou_string", fushen_String);
+            bundle.putString("shen_gua", shen_gua);
 //
 
 
             //kong部分
             String kong_table = "";
-            List list_zg=jsonInstance.getKong_zhuanggua();
-            for (int i=0;i<list_zg.size();i++){
+            List list_zg = jsonInstance.getKong_zhuanggua();
+            for (int i = 0; i < list_zg.size(); i++) {
                 int num = Integer.parseInt(list_zg.get(i).toString());
                 zg_kong.get(num).setBackgroundResource(R.drawable.right_triangle);
             }
-            List list_dizhi=jsonInstance.getKong_dizhi();
-            for (int i=0;i<list_dizhi.size();i++){
-                kong_table+=list_dizhi.get(i);
+            List list_dizhi = jsonInstance.getKong_dizhi();
+            for (int i = 0; i < list_dizhi.size(); i++) {
+                kong_table += list_dizhi.get(i);
             }
-            bundle.putString("kong_table",kong_table);
+            bundle.putString("kong_table", kong_table);
 
 
-            List list_bg=jsonInstance.getKong_biangua();
-            for (int i=0;i<list_bg.size();i++){
+            List list_bg = jsonInstance.getKong_biangua();
+            for (int i = 0; i < list_bg.size(); i++) {
                 int num = Integer.parseInt(list_bg.get(i).toString());
                 bg_qin.get(num).setBackgroundResource(R.drawable.small_triangle);
             }
-            Log.e("bi_kong",list_bg.toString());
-
+            Log.e("bi_kong", list_bg.toString());
+            
+            List list_fs = jsonInstance.getKong_fushen();
+            for (int i = 0; i < list_fs.size(); i++) {
+                int num = Integer.parseInt(list_fs.get(i).toString());
+                fs_qin.get(num).setBackgroundResource(R.drawable.small_triangle);
+            }
+            
             //回克逻辑
             printHuiKe();
             printDateQin();
@@ -635,33 +744,33 @@ public class Suangua_Result extends AppCompatActivity  {
 
             //show 部分
 
-            List list_bg_show=jsonInstance.getShow_biangua();
-            if(!list_bg_show.isEmpty()) {
-                for (int i = 0; i<list_bg_show.size();i++){
+            List list_bg_show = jsonInstance.getShow_biangua();
+            if (!list_bg_show.isEmpty()) {
+                for (int i = 0; i < list_bg_show.size(); i++) {
                     biangua_show.add(list_bg_show.get(i).toString());
                 }
             }
 
 
-            List list_fs= jsonInstance.getShow_fushen();
-            if(!list_fs.isEmpty()) {
-                for (int i = 0; i<list_fs.size();i++){
-                    fushen_show.add(list_fs.get(i).toString());
+            List list_fs_show = jsonInstance.getShow_fushen();
+            if (!list_fs_show.isEmpty()) {
+                for (int i = 0; i < list_fs_show.size(); i++) {
+                    fushen_show.add(list_fs_show.get(i).toString());
                 }
             }
-            Log.e("FF",fushen_show.toString());
-
+            Log.e("FF", fushen_show.toString());
 
 
 //            //神表
 //            printShenTable();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    private void fragment_init(){
+
+    private void fragment_init() {
         fragmentList.clear();
-        viewPager=(ViewPager)findViewById(R.id.liuyao_bottom);
+        viewPager = (ViewPager) findViewById(R.id.liuyao_bottom);
         liuyao_fragment_1 = new liuyao_fragment_1();
         liuyao_fragment_2 = new liuyao_fragment_2();
         liuyao_fragment_3 = new liuyao_fragment_3();
@@ -685,8 +794,9 @@ public class Suangua_Result extends AppCompatActivity  {
             point_position.addView(point, params);
         }
     }
-    private void fragment_manage(){
-        fragmentAdapter = new FragmentAdapter(this.getSupportFragmentManager(),fragmentList);
+
+    private void fragment_manage() {
+        fragmentAdapter = new FragmentAdapter(this.getSupportFragmentManager(), fragmentList);
         viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(fragmentAdapter);
         viewPager.setCurrentItem(1);
@@ -726,23 +836,25 @@ public class Suangua_Result extends AppCompatActivity  {
     }
 
 
-
     // 从liuYaoJinqiangua获取数据并解析
-    private void getDataFromLiuYao(){
-        Intent intent=getIntent();
-        liuyaoIntegerData=(Integer[]) intent.getSerializableExtra("LiuYaoData");
+    private void getDataFromLiuYao() {
+        Intent intent = getIntent();
+        liuyaoIntegerData = (Integer[]) intent.getSerializableExtra("LiuYaoData");
         Collections.reverse(Arrays.asList(liuyaoIntegerData));
-        postStr="["+liuyaoIntegerData[0];
-        for (int i=1;i<6;++i)
-            postStr+=","+liuyaoIntegerData[i];
-        postStr+="]";
-        Log.e("postStr",postStr);
+        postStr = "[" + liuyaoIntegerData[0];
+        for (int i = 1; i < 6; ++i)
+            postStr += "," + liuyaoIntegerData[i];
+        postStr += "]";
+        Log.e("postStr", postStr);
+        postDate = intent.getStringExtra("date");//从intent取出date
+        postDate += ":00";//只有分，后端要求秒，所以手动加个秒
     }
 
 
     // 从服务器端获取数据
-    private void getDataFromServer(){
-        Thread getDataThread=new Thread(new WebGetDataService());
+    private void getDataFromServer() {
+        //下面两句是老方法
+        Thread getDataThread = new Thread(new WebGetDataService());
         getDataThread.start();
     }
 
@@ -751,7 +863,7 @@ public class Suangua_Result extends AppCompatActivity  {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case MSG_GET_DATA_FROM_SERVER_SUCCEED:
                     paintData();
                     init_visible_biangua();
@@ -764,106 +876,133 @@ public class Suangua_Result extends AppCompatActivity  {
     }
 
     // Android不允许在UI线程执行的操作
-    private class WebGetDataService implements Runnable{
+    private class WebGetDataService implements Runnable {
         @Override
         public void run() {
             Looper.prepare();
-            try{
-                URL url=new URL(urlStr);
-                HttpURLConnection connection=(HttpURLConnection) url.openConnection();
+            try {
+                URL url = new URL(urlStr);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
                 connection.setRequestMethod("POST");
-                connection.setRequestProperty("Content-type","application/json");
+                connection.setRequestProperty("Content-type", "application/json");
                 connection.setConnectTimeout(5000);
                 connection.setReadTimeout(5000);
                 connection.setUseCaches(false);
                 connection.setDoInput(true);
                 connection.setDoOutput(true);
 
-                OutputStream outputStream=connection.getOutputStream();
-                outputStream.write(postStr.getBytes());
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(getJsonData().toString().getBytes());//改成这样，经过测试，成功了
+
                 outputStream.close();
 
-                if (HttpURLConnection.HTTP_OK==connection.getResponseCode()){
-                    Toast.makeText(Suangua_Result.this,"起卦成功！",Toast.LENGTH_LONG).show();
+                if (HttpURLConnection.HTTP_OK == connection.getResponseCode()) {
+                    Toast.makeText(Suangua_Result.this, "起卦成功！", Toast.LENGTH_LONG).show();
 
-                    InputStream inputStream=connection.getInputStream();
-                    liuyaoData= IOUtils.toString(inputStream,"UTF-8");
+                    InputStream inputStream = connection.getInputStream();
+                    liuyaoData = IOUtils.toString(inputStream, "UTF-8");
 
                     //成功获取数据，向主线程传递信息
-                    Message msg=new Message();
-                    msg.what=MSG_GET_DATA_FROM_SERVER_SUCCEED;
+                    Message msg = new Message();
+                    msg.what = MSG_GET_DATA_FROM_SERVER_SUCCEED;
                     handler.sendMessage(msg);
-                }
-
-                else
-                    Toast.makeText(Suangua_Result.this,"起卦失败，请检查网络",Toast.LENGTH_LONG).show();
-            }catch (Exception e){
-                Toast.makeText(Suangua_Result.this,"起卦失败，请检查网络",Toast.LENGTH_LONG).show();
+                } else
+                    Toast.makeText(Suangua_Result.this, "起卦失败，请检查网络", Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                Toast.makeText(Suangua_Result.this, "起卦失败，请检查网络", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
             Looper.loop();
         }
     }
 
+    /**
+     * @return 试着用一般的方式POST
+     */
+    private JSONObject getJsonData() {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < 6; i++) {
+            jsonArray.put(liuyaoIntegerData[i]);
+        }
+        try {
+            jsonObject.put("list", jsonArray);
+            jsonObject.put("time", postDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
 
     /**************************** 以下函数用于填充数据到UI **************************/
 
     //表头逻辑
-    private boolean LiuHe(String temp){
-        if(temp.equals("天地否")||temp.equals("水泽节")||temp.equals("山火贲")||temp.equals("雷地豫")||temp.equals("火山旅")||temp.equals("地雷复")||temp.equals("地天泰")||temp.equals("泽水困")){
+    private boolean LiuHe(String temp) {
+        if (temp.equals("天地否") || temp.equals("水泽节") || temp.equals("山火贲") || temp.equals("雷地豫") || temp.equals("火山旅") || temp.equals("地雷复") || temp.equals("地天泰") || temp.equals("泽水困")) {
             return true;
+        } else {
+            return false;
         }
-        else {return false;}
     }
-    private void printZG_Title(){
-        TextView textView = (TextView)findViewById(R.id.result_change_title_1);
+
+    private void printZG_Title() {
+        TextView textView = (TextView) findViewById(R.id.result_change_title_1);
         textView.setText("六合");
+        textView.setTextSize(20);
     }
-    private void printBG_Title(){
-        TextView textView = (TextView)findViewById(R.id.result_change_title_2);
+
+    private void printBG_Title() {
+        TextView textView = (TextView) findViewById(R.id.result_change_title_2);
         textView.setText("六合");
+        textView.setTextSize(20);
     }
 //    private void printFS_Title(){
 //        TextView textView = (TextView)findViewById(R.id.result_change_title_3);
 //        textView.setText("六合");
 //    }
 
-    private void ZG_title_times(String temp){
-        if(temp.equals("归魂卦")){
-            TextView textView = (TextView)findViewById(R.id.result_change_title_1);
+    private void ZG_title_times(String temp) {
+        if (temp.equals("归魂卦")) {
+            TextView textView = (TextView) findViewById(R.id.result_change_title_1);
             textView.setText("归魂");
+            textView.setTextSize(20);
         }
-        if(temp.equals("游魂卦")){
-            TextView textView = (TextView)findViewById(R.id.result_change_title_1);
+        if (temp.equals("游魂卦")) {
+            TextView textView = (TextView) findViewById(R.id.result_change_title_1);
             textView.setText("游魂");
+            textView.setTextSize(20);
         }
-        if(temp.equals("本宫卦")){
-            TextView textView = (TextView)findViewById(R.id.result_change_title_1);
+        if (temp.equals("本宫卦")) {
+            TextView textView = (TextView) findViewById(R.id.result_change_title_1);
             textView.setText("六冲");
-        }
-        else {
+            textView.setTextSize(20);
+        } else {
             return;
         }
     }
-    private void BG_title_times(String temp){
-        if(temp.equals("归魂卦")){
-            TextView textView = (TextView)findViewById(R.id.result_change_title_2);
+
+    private void BG_title_times(String temp) {
+        if (temp.equals("归魂卦")) {
+            TextView textView = (TextView) findViewById(R.id.result_change_title_2);
             textView.setText("归魂");
+            textView.setTextSize(20);
         }
-        if(temp.equals("游魂卦")){
-            TextView textView = (TextView)findViewById(R.id.result_change_title_2);
+        if (temp.equals("游魂卦")) {
+            TextView textView = (TextView) findViewById(R.id.result_change_title_2);
             textView.setText("游魂");
+            textView.setTextSize(20);
         }
-        if(temp.equals("本宫卦")){
-            TextView textView = (TextView)findViewById(R.id.result_change_title_2);
+        if (temp.equals("本宫卦")) {
+            TextView textView = (TextView) findViewById(R.id.result_change_title_2);
             textView.setText("六冲");
-        }
-        else {
+            textView.setTextSize(20);
+        } else {
             return;
         }
     }
-//    private void FS_title_times(String temp){
+
+    private void FS_title_times(String temp) {
 //        if(temp.equals("归魂卦")){
 //            TextView textView = (TextView)findViewById(R.id.result_change_title_3);
 //            textView.setText("归魂");
@@ -879,68 +1018,69 @@ public class Suangua_Result extends AppCompatActivity  {
 //        else {
 //            return;
 //        }
-//    }
+    }
+
     // 从左至右第一个六亲
-    private void printLiuQin1(String liuqin){
+    private void printLiuQin1(String liuqin) {
         //标题
-        TextView textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_1_caption);
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_1_caption);
         textView.setText("六亲");
 
-        String temp=liuqin.substring(2,4);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_1_1);
+        String temp = liuqin.substring(2, 4);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_1_1);
         textView.setText(temp);
 
-        temp=liuqin.substring(7,9);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_1_2);
+        temp = liuqin.substring(7, 9);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_1_2);
         textView.setText(temp);
 
-        temp=liuqin.substring(12,14);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_1_3);
+        temp = liuqin.substring(12, 14);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_1_3);
         textView.setText(temp);
 
-        temp=liuqin.substring(17,19);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_1_4);
+        temp = liuqin.substring(17, 19);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_1_4);
         textView.setText(temp);
 
-        temp=liuqin.substring(22,24);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_1_5);
+        temp = liuqin.substring(22, 24);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_1_5);
         textView.setText(temp);
 
-        temp=liuqin.substring(27,29);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_1_6);
+        temp = liuqin.substring(27, 29);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_1_6);
         textView.setText(temp);
     }
 
     // 从左至右第二个六亲
-    private void printLiuQin2(){
-        for (int i=0;i<6;i++){
+    private void printLiuQin2() {
+        for (int i = 0; i < 6; i++) {
             TextView textView = bg_dizhi_list.get(i);
-            ArrayList<String>testList= new ArrayList();
+            ArrayList<String> testList = new ArrayList();
 
-            if("丑辰未戌".contains(textView.getText().toString())){
+            if ("丑辰未戌".contains(textView.getText().toString())) {
                 testList.clear();
                 testList.add("丑辰未戌");
             }
-            if("亥子".contains(textView.getText().toString())){
+            if ("亥子".contains(textView.getText().toString())) {
                 testList.clear();
                 testList.add("亥子");
             }
-            if("寅卯".contains(textView.getText().toString())){
+            if ("寅卯".contains(textView.getText().toString())) {
                 testList.clear();
                 testList.add("寅卯");
             }
-            if("巳午".contains(textView.getText().toString())){
+            if ("巳午".contains(textView.getText().toString())) {
                 testList.clear();
                 testList.add("巳午");
             }
-            if("申酉".contains(textView.getText().toString())) {
+            if ("申酉".contains(textView.getText().toString())) {
                 testList.clear();
                 testList.add("申酉");
             }
 
-            for (int j=0;j<6;j++){
+            for (int j = 0; j < 6; j++) {
                 textView = fs_dizhi_list.get(j);
-                if(testList.get(0).contains(textView.getText())){
+                if (testList.get(0).contains(textView.getText())) {
                     bg_qin.get(i).setText(fs_qin.get(j).getText());
                 }
             }
@@ -949,121 +1089,121 @@ public class Suangua_Result extends AppCompatActivity  {
     }
 
     // 从左至右第三个六亲
-    private void printLiuQin3(String liuqin){
+    private void printLiuQin3(String liuqin) {
 
 
-        String temp=liuqin.substring(2,4);
-        TextView textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_3_1);
+        String temp = liuqin.substring(2, 4);
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_1);
         textView.setText(temp);
 
-        temp=liuqin.substring(7,9);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_3_2);
+        temp = liuqin.substring(7, 9);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_2);
         textView.setText(temp);
 
-        temp=liuqin.substring(12,14);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_3_3);
+        temp = liuqin.substring(12, 14);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_3);
         textView.setText(temp);
 
-        temp=liuqin.substring(17,19);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_3_4);
+        temp = liuqin.substring(17, 19);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_4);
         textView.setText(temp);
 
-        temp=liuqin.substring(22,24);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_3_5);
+        temp = liuqin.substring(22, 24);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_5);
         textView.setText(temp);
 
-        temp=liuqin.substring(27,29);
-        textView=(TextView)findViewById(R.id.liuyaoresult_liuqin_3_6);
+        temp = liuqin.substring(27, 29);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_6);
         textView.setText(temp);
     }
 
     // 世应
-    private void printShiying(String shiying){
+    private void printShiying(String shiying) {
         TextView textView;
         // 以下高能，完全丢弃了作为一个程序员的节操
 
-        String temp=new String();
+        String temp = new String();
 
-        int i= -1;
-        while (true){
+        int i = -1;
+        while (true) {
             ++i;
-            if (shiying.charAt(i)=='['||shiying.charAt(i)=='"' ||shiying.charAt(i)==',')
+            if (shiying.charAt(i) == '[' || shiying.charAt(i) == '"' || shiying.charAt(i) == ',')
                 continue;
             else if (Character.isDigit(shiying.charAt(i)))
                 break;
-            else{
-                temp=Character.toString(shiying.charAt(i));
-                textView=(TextView)findViewById(R.id.liuyaoresult_shiying_1);
+            else {
+                temp = Character.toString(shiying.charAt(i));
+                textView = (TextView) findViewById(R.id.liuyaoresult_shiying_1);
                 textView.setText(temp);
                 break;
             }
         }
 
-        while (true){
+        while (true) {
             ++i;
-            if (shiying.charAt(i)=='['||shiying.charAt(i)=='"' ||shiying.charAt(i)==',')
+            if (shiying.charAt(i) == '[' || shiying.charAt(i) == '"' || shiying.charAt(i) == ',')
                 continue;
             else if (Character.isDigit(shiying.charAt(i)))
                 break;
-            else{
-                temp=Character.toString(shiying.charAt(i));
-                textView=(TextView)findViewById(R.id.liuyaoresult_shiying_2);
+            else {
+                temp = Character.toString(shiying.charAt(i));
+                textView = (TextView) findViewById(R.id.liuyaoresult_shiying_2);
                 textView.setText(temp);
                 break;
             }
         }
 
-        while (true){
+        while (true) {
             ++i;
-            if (shiying.charAt(i)=='['||shiying.charAt(i)=='"' ||shiying.charAt(i)==',')
+            if (shiying.charAt(i) == '[' || shiying.charAt(i) == '"' || shiying.charAt(i) == ',')
                 continue;
             else if (Character.isDigit(shiying.charAt(i)))
                 break;
-            else{
-                temp=Character.toString(shiying.charAt(i));
-                textView=(TextView)findViewById(R.id.liuyaoresult_shiying_3);
+            else {
+                temp = Character.toString(shiying.charAt(i));
+                textView = (TextView) findViewById(R.id.liuyaoresult_shiying_3);
                 textView.setText(temp);
                 break;
             }
         }
 
-        while (true){
+        while (true) {
             ++i;
-            if (shiying.charAt(i)=='['||shiying.charAt(i)=='"' ||shiying.charAt(i)==',')
+            if (shiying.charAt(i) == '[' || shiying.charAt(i) == '"' || shiying.charAt(i) == ',')
                 continue;
             else if (Character.isDigit(shiying.charAt(i)))
                 break;
-            else{
-                temp=Character.toString(shiying.charAt(i));
-                textView=(TextView)findViewById(R.id.liuyaoresult_shiying_4);
+            else {
+                temp = Character.toString(shiying.charAt(i));
+                textView = (TextView) findViewById(R.id.liuyaoresult_shiying_4);
                 textView.setText(temp);
                 break;
             }
         }
 
-        while (true){
+        while (true) {
             ++i;
-            if (shiying.charAt(i)=='['||shiying.charAt(i)=='"' ||shiying.charAt(i)==',')
+            if (shiying.charAt(i) == '[' || shiying.charAt(i) == '"' || shiying.charAt(i) == ',')
                 continue;
             else if (Character.isDigit(shiying.charAt(i)))
                 break;
-            else{
-                temp=Character.toString(shiying.charAt(i));
-                textView=(TextView)findViewById(R.id.liuyaoresult_shiying_5);
+            else {
+                temp = Character.toString(shiying.charAt(i));
+                textView = (TextView) findViewById(R.id.liuyaoresult_shiying_5);
                 textView.setText(temp);
                 break;
             }
         }
 
-        while (true){
+        while (true) {
             ++i;
-            if (shiying.charAt(i)=='['||shiying.charAt(i)=='"' ||shiying.charAt(i)==',')
+            if (shiying.charAt(i) == '[' || shiying.charAt(i) == '"' || shiying.charAt(i) == ',')
                 continue;
             else if (Character.isDigit(shiying.charAt(i)))
                 break;
-            else{
-                temp=Character.toString(shiying.charAt(i));
-                textView=(TextView)findViewById(R.id.liuyaoresult_shiying_6);
+            else {
+                temp = Character.toString(shiying.charAt(i));
+                textView = (TextView) findViewById(R.id.liuyaoresult_shiying_6);
                 textView.setText(temp);
                 break;
             }
@@ -1071,22 +1211,23 @@ public class Suangua_Result extends AppCompatActivity  {
     }
 
     // 六爻卦象的图片
-    private void printLiuYaoImage(){
-        ImageView temp=(ImageView)findViewById(R.id.liuyaoresult_gua_image_1);
+    private void printLiuYaoImage() {
+        ImageView temp = (ImageView) findViewById(R.id.liuyaoresult_gua_image_1);
         temp.setImageResource(returnLiuYaoImageID(liuyaoIntegerData[0]));
-        temp=(ImageView)findViewById(R.id.liuyaoresult_gua_image_2);
+        temp = (ImageView) findViewById(R.id.liuyaoresult_gua_image_2);
         temp.setImageResource(returnLiuYaoImageID(liuyaoIntegerData[1]));
-        temp=(ImageView)findViewById(R.id.liuyaoresult_gua_image_3);
+        temp = (ImageView) findViewById(R.id.liuyaoresult_gua_image_3);
         temp.setImageResource(returnLiuYaoImageID(liuyaoIntegerData[2]));
-        temp=(ImageView)findViewById(R.id.liuyaoresult_gua_image_4);
+        temp = (ImageView) findViewById(R.id.liuyaoresult_gua_image_4);
         temp.setImageResource(returnLiuYaoImageID(liuyaoIntegerData[3]));
-        temp=(ImageView)findViewById(R.id.liuyaoresult_gua_image_5);
+        temp = (ImageView) findViewById(R.id.liuyaoresult_gua_image_5);
         temp.setImageResource(returnLiuYaoImageID(liuyaoIntegerData[4]));
-        temp=(ImageView)findViewById(R.id.liuyaoresult_gua_image_6);
+        temp = (ImageView) findViewById(R.id.liuyaoresult_gua_image_6);
         temp.setImageResource(returnLiuYaoImageID(liuyaoIntegerData[5]));
     }
-    private int returnLiuYaoImageID(int index){
-        switch (index){
+
+    private int returnLiuYaoImageID(int index) {
+        switch (index) {
             case 6:
                 return R.drawable.g6;
             case 7:
@@ -1102,37 +1243,38 @@ public class Suangua_Result extends AppCompatActivity  {
 
     // 六兽部分
     private void printLiuShou() throws ParseException {
-        String[] liuShou=calculateLiuShou();
+        String[] liuShou = calculateLiuShou();
 
         //标题
-        TextView textView=(TextView)findViewById(R.id.liuyaoresult_liushou_caption);
-        textView.setText("六兽");
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_liushen_caption);
+        //textView.setText("六兽");此处注释掉，保留六神
 
-        textView=(TextView)findViewById(R.id.liuyaoresult_liushou_1);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liushou_1);
         textView.setText(liuShou[0]);
 
-        textView=(TextView)findViewById(R.id.liuyaoresult_liushou_2);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liushou_2);
         textView.setText(liuShou[1]);
 
-        textView=(TextView)findViewById(R.id.liuyaoresult_liushou_3);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liushou_3);
         textView.setText(liuShou[2]);
 
-        textView=(TextView)findViewById(R.id.liuyaoresult_liushou_4);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liushou_4);
         textView.setText(liuShou[3]);
 
-        textView=(TextView)findViewById(R.id.liuyaoresult_liushou_5);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liushou_5);
         textView.setText(liuShou[4]);
 
-        textView=(TextView)findViewById(R.id.liuyaoresult_liushou_6);
+        textView = (TextView) findViewById(R.id.liuyaoresult_liushou_6);
         textView.setText(liuShou[5]);
     }
+
     // 计算六兽数据
     private String[] calculateLiuShou() throws ParseException {
-        String[] sixGods={"青龙","朱雀","勾陈","腾蛇","白虎","玄武"};
-        String[] result=new String[6];
+        String[] sixGods = {"青龙", "朱雀", "勾陈", "腾蛇", "白虎", "玄武"};
+        String[] result = new String[6];
 
         // 计算天干日
-        Calendar cal=Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
 
         Intent intent = getIntent();
         String time = intent.getStringExtra("date");
@@ -1144,37 +1286,32 @@ public class Suangua_Result extends AppCompatActivity  {
         Birth birth = new Birth(cal);
 
         Map map = birth.horoscope(time);
-        String ganzhi_month=map.get("cD").toString();
+        String ganzhi_month = map.get("cD").toString();
         int index;
-        if(ganzhi_month.substring(0,1).equals("甲")||ganzhi_month.substring(0,1).equals("乙")){
-            index=0;
-        }
-        else if(ganzhi_month.substring(0,1).equals("丙")||ganzhi_month.substring(0,1).equals("丁")) {
+        if (ganzhi_month.substring(0, 1).equals("甲") || ganzhi_month.substring(0, 1).equals("乙")) {
+            index = 0;
+        } else if (ganzhi_month.substring(0, 1).equals("丙") || ganzhi_month.substring(0, 1).equals("丁")) {
             index = 1;
-        }
-        else if(ganzhi_month.substring(0,1).equals("戌")) {
+        } else if (ganzhi_month.substring(0, 1).equals("戊")) {
             index = 2;
-        }
-        else if(ganzhi_month.substring(0,1).equals("己")) {
+        } else if (ganzhi_month.substring(0, 1).equals("己")) {
             index = 3;
-        }
-        else if(ganzhi_month.substring(0,1).equals("庚")||ganzhi_month.substring(0,1).equals("辛")) {
+        } else if (ganzhi_month.substring(0, 1).equals("庚") || ganzhi_month.substring(0, 1).equals("辛")) {
             index = 4;
+        } else {
+            index = 5;
         }
-        else {
-            index=5;
-        }
-        for (int i=0;i<6;++i){
-            result[i]=sixGods[index++];
-            if (index>=6)
-                index=0;
+        for (int i = 5; i >= 0; --i) {
+            result[i] = sixGods[index++];
+            if (index >= 6)
+                index = 0;
         }
         return result;
     }
 
-//     填上表格中所有与日期有关的格子
+    //     填上表格中所有与日期有关的格子
     private void printDate() throws ParseException {
-        Calendar cal=Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
 
         Intent intent = getIntent();
@@ -1185,7 +1322,6 @@ public class Suangua_Result extends AppCompatActivity  {
         TextView textView;
 
 
-
         // 农历日月年干支用Birth计算
         //五行用TianGanDiZhi计算
 
@@ -1193,525 +1329,956 @@ public class Suangua_Result extends AppCompatActivity  {
         Birth birth = new Birth(cal);
 
         Map map = birth.horoscope(time);
-        String ganzhi_year=map.get("cY").toString();
-        String ganzhi_month=map.get("cM").toString();
-        String ganzhi_day=map.get("cD").toString();
-        String ganzhi_hour=map.get("cH").toString();
+        String ganzhi_year = map.get("cY").toString();
+        String ganzhi_month = map.get("cM").toString();
+        String ganzhi_day = map.get("cD").toString();
+        String ganzhi_hour = map.get("cH").toString();
 
-        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_day_1);
-        textView.setText(ganzhi_day.substring(0,1));
-        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_day_2);
-        textView.setText(ganzhi_day.substring(1,2));
-        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_month_1);
-        textView.setText(ganzhi_month.substring(0,1));
-        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_month_2);
-        textView.setText(ganzhi_month.substring(1,2));
-        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_year_1);
-        textView.setText(ganzhi_year.substring(0,1));
-        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_year_2);
-        textView.setText(ganzhi_year.substring(1,2));
-        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_hour_1);
-        textView.setText(ganzhi_hour.substring(0,1));
-        textView=(TextView)findViewById(R.id.liuyaoresult_ganzhi_hour_2);
-        textView.setText(ganzhi_hour.substring(1,2));
+        textView = (TextView) findViewById(R.id.liuyaoresult_ganzhi_day_1);
+        textView.setText(ganzhi_day.substring(0, 1));
+        textView = (TextView) findViewById(R.id.liuyaoresult_ganzhi_day_2);
+        textView.setText(ganzhi_day.substring(1, 2));
+        textView = (TextView) findViewById(R.id.liuyaoresult_ganzhi_month_1);
+        textView.setText(ganzhi_month.substring(0, 1));
+        textView = (TextView) findViewById(R.id.liuyaoresult_ganzhi_month_2);
+        textView.setText(ganzhi_month.substring(1, 2));
+        textView = (TextView) findViewById(R.id.liuyaoresult_ganzhi_year_1);
+        textView.setText(ganzhi_year.substring(0, 1));
+        textView = (TextView) findViewById(R.id.liuyaoresult_ganzhi_year_2);
+        textView.setText(ganzhi_year.substring(1, 2));
+        textView = (TextView) findViewById(R.id.liuyaoresult_ganzhi_hour_1);
+        textView.setText(ganzhi_hour.substring(0, 1));
+        textView = (TextView) findViewById(R.id.liuyaoresult_ganzhi_hour_2);
+        textView.setText(ganzhi_hour.substring(1, 2));
 
 
     }
 
     //五行（装卦表的形态1）
-    private void printWuXing_zhuanggua(String wuxing_1){
-        String temp = wuxing_1.substring(2,3);
-        TextView textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_1);
+    private void printWuXing_zhuanggua(String wuxing_1) {
+        String temp = wuxing_1.substring(2, 3);
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_1);
         textView.setText(temp);
 
-        temp = wuxing_1.substring(6,7);
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_2);
+        temp = wuxing_1.substring(6, 7);
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_2);
         textView.setText(temp);
 
-        temp = wuxing_1.substring(10,11);
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_3);
+        temp = wuxing_1.substring(10, 11);
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_3);
         textView.setText(temp);
 
-        temp = wuxing_1.substring(14,15);
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_4);
+        temp = wuxing_1.substring(14, 15);
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_4);
         textView.setText(temp);
 
-        temp = wuxing_1.substring(18,19);
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_5);
+        temp = wuxing_1.substring(18, 19);
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_5);
         textView.setText(temp);
 
-        temp = wuxing_1.substring(22,23);
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_6);
+        temp = wuxing_1.substring(22, 23);
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_6);
         textView.setText(temp);
 
     }
-    //装卦表形态2
-    private void printZhuanggua_2() throws ParseException {
-        //拿五行
-        Intent intent = getIntent();
-        String time = intent.getStringExtra("date");
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-        Date date = formatter.parse(time);
-
-        Calendar cal=Calendar.getInstance();
-        cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        TianGanDiZhi ganzhi = new TianGanDiZhi(cal,date);
-        String zhi_month_wuxing[]=ganzhi.getWuXing();
-        //拼装
-        zhi_month_wuxing[0]=zhi_month_wuxing[0]+"旺";
-        zhi_month_wuxing[1]=zhi_month_wuxing[1]+"相";
-        zhi_month_wuxing[2]=zhi_month_wuxing[2]+"死";
-        zhi_month_wuxing[3]=zhi_month_wuxing[3]+"囚";
-        zhi_month_wuxing[4]=zhi_month_wuxing[4]+"休";
-        TextView textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_1);
-        for(int i = 0;i<=4;i++){
-            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0,1))){
-                textView.setText(zhi_month_wuxing[i].toString().substring(1,2));
-                break;
-            }
-        }
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_2);
-        for(int i = 0;i<=4;i++){
-            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0,1))){
-                textView.setText(zhi_month_wuxing[i].toString().substring(1,2));
-                break;
-            }
-        }
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_3);
-        for(int i = 0;i<=4;i++){
-            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0,1))){
-                textView.setText(zhi_month_wuxing[i].toString().substring(1,2));
-                break;
-            }
-        }
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_4);
-        for(int i = 0;i<=4;i++){
-            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0,1))){
-                textView.setText(zhi_month_wuxing[i].toString().substring(1,2));
-                break;
-            }
-        }
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_5);
-        for(int i = 0;i<=4;i++){
-            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0,1))){
-                textView.setText(zhi_month_wuxing[i].toString().substring(1,2));
-                break;
-            }
-        }
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_6);
-        for(int i = 0;i<=4;i++){
-            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0,1))){
-                textView.setText(zhi_month_wuxing[i].toString().substring(1,2));
-                break;
-            }
-        }
-
-    }
-    //装卦表形态3
-    private void printZhuanggua_3() throws ParseException {
-        //拿五行
-        Intent intent = getIntent();
-        String time = intent.getStringExtra("date");
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
-        Date date = formatter.parse(time);
-
-        Calendar cal=Calendar.getInstance();
-        cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        TianGanDiZhi ganzhi = new TianGanDiZhi(cal,date);
-        String zhi_month_wuxing[]=ganzhi.getWuXing();
-        //拿日表
-        JsonService jsonInstance= JsonService.getInstance();
-        jsonInstance.createJsonObject(liuyaoData);
-        String temp=jsonInstance.getDaytable();
-        //拼装
-        zhi_month_wuxing[0]=zhi_month_wuxing[0]+temp.substring(0,1);
-        zhi_month_wuxing[1]=zhi_month_wuxing[1]+temp.substring(1,2);
-        zhi_month_wuxing[2]=zhi_month_wuxing[2]+temp.substring(2,3);
-        zhi_month_wuxing[3]=zhi_month_wuxing[3]+temp.substring(3,4);
-        zhi_month_wuxing[4]=zhi_month_wuxing[4]+temp.substring(4);
-        //填入
-
-        temp=jsonInstance.getWuxing_1();
-        TextView textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_1);
-        for(int i = 0;i<=4;i++){
-            if (temp.substring(2,3).equals(zhi_month_wuxing[i].toString().substring(0,1))){
-                textView.setText(zhi_month_wuxing[i].toString().substring(1,2));
-                break;
-            }
-        }
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_2);
-        for(int i = 0;i<=4;i++){
-            if (temp.substring(6,7).equals(zhi_month_wuxing[i].toString().substring(0,1))){
-                textView.setText(zhi_month_wuxing[i].toString().substring(1,2));
-                break;
-            }
-        }
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_3);
-        for(int i = 0;i<=4;i++){
-            if (temp.substring(10,11).equals(zhi_month_wuxing[i].toString().substring(0,1))){
-                textView.setText(zhi_month_wuxing[i].toString().substring(1,2));
-                break;
-            }
-        }
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_4);
-        for(int i = 0;i<=4;i++){
-            if (temp.substring(14,15).equals(zhi_month_wuxing[i].toString().substring(0,1))){
-                textView.setText(zhi_month_wuxing[i].toString().substring(1,2));
-                break;
-            }
-        }
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_5);
-        for(int i = 0;i<=4;i++){
-            if (temp.substring(18,19).equals(zhi_month_wuxing[i].toString().substring(0,1))){
-                textView.setText(zhi_month_wuxing[i].toString().substring(1,2));
-                break;
-            }
-        }
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_3_6);
-        for(int i = 0;i<=4;i++){
-            if (temp.substring(22,23).equals(zhi_month_wuxing[i].toString().substring(0,1))){
-                textView.setText(zhi_month_wuxing[i].toString().substring(1,2));
-                break;
-            }
-        }
-
-
-    }
-    //装卦表形态4
-    private void printZhuanggua_4(){
-        HashMap xing_map = new HashMap();
-        xing_map.put("子","卯");
-        xing_map.put("丑","未");
-        xing_map.put("寅","申");
-        xing_map.put("卯","子");
-        xing_map.put("辰","辰");
-        xing_map.put("巳","寅");
-        xing_map.put("午","午");
-        xing_map.put("未","戌");
-        xing_map.put("申","巳");
-        xing_map.put("酉","酉");
-        xing_map.put("戌","丑");
-        xing_map.put("亥","亥");
-        for (int i=0;i<6;i++){
-            zg_bian_list.get(i).setText("");
-        }
-        for (int i=0;i<6;i++){
-            for(int j=i+1;j<6;j++){
-                if(zg_kong.get(j).getText().toString().equals(xing_map.get(zg_kong.get(i).getText().toString()))){
-                    zg_bian_list.get(j).setText("刑");
-                    zg_bian_list.get(i).setText("刑");
-                }
-            }
-        }
-    }
-    //装卦表形态5
-    private void printZhuanggua_5(){
-        HashMap chong_map = new HashMap();
-        chong_map.put("子","午");
-        chong_map.put("丑","未");
-        chong_map.put("寅","申");
-        chong_map.put("卯","酉");
-        chong_map.put("辰","戌");
-        chong_map.put("巳","亥");
-        chong_map.put("午","子");
-        chong_map.put("未","丑");
-        chong_map.put("申","寅");
-        chong_map.put("酉","卯");
-        chong_map.put("戌","辰");
-        chong_map.put("亥","巳");
-        for (int i=0;i<6;i++){
-            zg_bian_list.get(i).setText("");
-        }
-        for (int i=0;i<6;i++){
-            for(int j=i+1;j<6;j++){
-                if(zg_kong.get(j).getText().toString().equals(chong_map.get(zg_kong.get(i).getText().toString()))){
-                    zg_bian_list.get(j).setText("冲");
-                    zg_bian_list.get(i).setText("冲");
-                }
-            }
-        }
-    }
-    //装卦表形态6
-    private void printZhuanggua_6(){
-        HashMap hai_map = new HashMap();
-        hai_map.put("子","未");
-        hai_map.put("丑","午");
-        hai_map.put("寅","巳");
-        hai_map.put("卯","辰");
-        hai_map.put("辰","卯");
-        hai_map.put("巳","寅");
-        hai_map.put("午","丑");
-        hai_map.put("未","子");
-        hai_map.put("申","亥");
-        hai_map.put("酉","戌");
-        hai_map.put("戌","酉");
-        hai_map.put("亥","申");
-        for (int i=0;i<6;i++){
-            zg_bian_list.get(i).setText("");
-        }
-        for (int i=0;i<6;i++){
-            for(int j=i+1;j<6;j++){
-                if(zg_kong.get(j).getText().toString().equals(hai_map.get(zg_kong.get(i).getText().toString()))){
-                    zg_bian_list.get(j).setText("害");
-                    zg_bian_list.get(i).setText("害");
-                }
-            }
-        }
-    }
-    //填上装卦绿色那部分（不知道是什么了）
-    private void printHeaven(String heavenly_stems){
-        TextView textView= (TextView)findViewById(R.id.liuyaoresult_zhuanggua_2_1);
-        String temp = heavenly_stems.substring(2,3);
-        textView.setText(temp);
-
-        temp=heavenly_stems.substring(6,7);
-        textView= (TextView)findViewById(R.id.liuyaoresult_zhuanggua_2_4);
-        textView.setText(temp);
-    }
-    //填上变卦里面类似的部分
-    private void printHeaven_biangua(String heavenly_biangua){
-        TextView textView = (TextView)findViewById(R.id.biangua_branches_1);
-        String temp = heavenly_biangua.substring(2,3);
-        textView.setText(temp);
-
-        temp=heavenly_biangua.substring(6,7);
-        textView = (TextView)findViewById(R.id.biangua_branches_2);
-        textView.setText(temp);
-    }
-    //填上伏神里面的类似部分
-    private void printHeaven_fushen(String hevenly_fushen){
-        TextView textView= (TextView)findViewById(R.id.liuyaoresult_fushen_1_2);
-        String temp = hevenly_fushen.substring(2,3);
-        textView.setText(temp);
-
-        temp=hevenly_fushen.substring(6,7);
-        textView= (TextView)findViewById(R.id.liuyaoresult_fushen_4_2);
-        textView.setText(temp);
-    }
-    //填上装卦蓝色那部分（再次不知道是什么了）
-    private void printEarthly(String earthly_branches){
-        String temp = earthly_branches.substring(2,3);
-        TextView textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_1);
-        textView.setText(temp);
-
-        temp = earthly_branches.substring(6,7);
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_2);
-        textView.setText(temp);
-
-        temp = earthly_branches.substring(10,11);
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_3);
-        textView.setText(temp);
-
-        temp = earthly_branches.substring(14,15);
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_4);
-        textView.setText(temp);
-
-        temp = earthly_branches.substring(18,19);
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_5);
-        textView.setText(temp);
-
-        temp = earthly_branches.substring(22,23);
-        textView = (TextView)findViewById(R.id.liuyaoresult_zhuanggua_1_6);
-        textView.setText(temp);
-    }
-    //填上变卦表类似的部分
-    private void printEarthly_biangua(String earthly_biangua){
-        String temp = earthly_biangua.substring(2,3);
-        TextView textView = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_1);
-        textView.setText(temp);
-
-        temp = earthly_biangua.substring(6,7);
-        textView = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_2);
-        textView.setText(temp);
-
-        temp = earthly_biangua.substring(10,11);
-        textView = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_3);
-        textView.setText(temp);
-
-        temp = earthly_biangua.substring(14,15);
-        textView = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_4);
-        textView.setText(temp);
-
-        temp = earthly_biangua.substring(18,19);
-        textView = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_5);
-        textView.setText(temp);
-
-        temp = earthly_biangua.substring(22,23);
-        textView = (TextView)findViewById(R.id.liuyaoresult_bg_dizhi_6);
-        textView.setText(temp);
-    }
-    // 填上伏神里面的类似部分
-    private void printEarthly_fushen(String earthly_fushen){
-        String temp = earthly_fushen.substring(2,3);
-        TextView textView = (TextView)findViewById(R.id.liuyaoresult_fushen_1_1);
-        textView.setText(temp);
-
-        temp = earthly_fushen.substring(6,7);
-        textView = (TextView)findViewById(R.id.liuyaoresult_fushen_2_1);
-        textView.setText(temp);
-
-        temp = earthly_fushen.substring(10,11);
-        textView = (TextView)findViewById(R.id.liuyaoresult_fushen_3_1);
-        textView.setText(temp);
-
-        temp = earthly_fushen.substring(14,15);
-        textView = (TextView)findViewById(R.id.liuyaoresult_fushen_4_1);
-        textView.setText(temp);
-
-        temp = earthly_fushen.substring(18,19);
-        textView = (TextView)findViewById(R.id.liuyaoresult_fushen_5_1);
-        textView.setText(temp);
-
-        temp = earthly_fushen.substring(22,23);
-        textView = (TextView)findViewById(R.id.liuyaoresult_fushen_6_1);
-        textView.setText(temp);
-    }
     //填上变卦表里面的五行
-    private void printWuxing_biangua(String wuxing_3){
-        String temp=wuxing_3.substring(2,3);
-        TextView textView = (TextView)findViewById(R.id.liuyaoresult_bg_wuxing_1);
+    private void printWuxing_biangua(String wuxing_3) {
+        String temp = wuxing_3.substring(2, 3);
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_1);
         textView.setText(temp);
 
-        temp = wuxing_3.substring(6,7);
-        textView = (TextView)findViewById(R.id.liuyaoresult_bg_wuxing_2);
+        temp = wuxing_3.substring(6, 7);
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_2);
         textView.setText(temp);
 
-        temp = wuxing_3.substring(10,11);
-        textView = (TextView)findViewById(R.id.liuyaoresult_bg_wuxing_3);
+        temp = wuxing_3.substring(10, 11);
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_3);
         textView.setText(temp);
 
-        temp = wuxing_3.substring(14,15);
-        textView = (TextView)findViewById(R.id.liuyaoresult_bg_wuxing_4);
+        temp = wuxing_3.substring(14, 15);
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_4);
         textView.setText(temp);
 
-        temp = wuxing_3.substring(18,19);
-        textView = (TextView)findViewById(R.id.liuyaoresult_bg_wuxing_5);
+        temp = wuxing_3.substring(18, 19);
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_5);
         textView.setText(temp);
 
-        temp = wuxing_3.substring(22,23);
-        textView = (TextView)findViewById(R.id.liuyaoresult_bg_wuxing_6);
+        temp = wuxing_3.substring(22, 23);
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_6);
         textView.setText(temp);
     }
+
     //填上伏神表里面的五行
-    private void printWuxing_fushen(String wuxing_2){
-        String temp = wuxing_2.substring(2,3);
-        TextView textView = (TextView)findViewById(R.id.liuyaoresult_fushen_1_3);
+    private void printWuxing_fushen(String wuxing_2) {
+        String temp = wuxing_2.substring(2, 3);
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_fushen_1_3);
         textView.setText(temp);
 
-        temp = wuxing_2.substring(6,7);
-        textView = (TextView)findViewById(R.id.liuyaoresult_fushen_2_3);
+        temp = wuxing_2.substring(6, 7);
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_2_3);
         textView.setText(temp);
 
-        temp = wuxing_2.substring(10,11);
-        textView = (TextView)findViewById(R.id.liuyaoresult_fushen_3_3);
+        temp = wuxing_2.substring(10, 11);
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_3_3);
         textView.setText(temp);
 
-        temp = wuxing_2.substring(14,15);
-        textView = (TextView)findViewById(R.id.liuyaoresult_fushen_4_3);
+        temp = wuxing_2.substring(14, 15);
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_4_3);
         textView.setText(temp);
 
-        temp = wuxing_2.substring(18,19);
-        textView = (TextView)findViewById(R.id.liuyaoresult_fushen_5_3);
+        temp = wuxing_2.substring(18, 19);
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_5_3);
         textView.setText(temp);
 
-        temp = wuxing_2.substring(22,23);
-        textView = (TextView)findViewById(R.id.liuyaoresult_fushen_6_3);
+        temp = wuxing_2.substring(22, 23);
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_6_3);
         textView.setText(temp);
 
     }
+
+    //装卦表形态2
+    private void printZhuanggua_2(String temp) throws ParseException {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_1);
+        textView.setText(temp.substring(2, 3));
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_2);
+        textView.setText(temp.substring(6, 7));
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_3);
+        textView.setText(temp.substring(10, 11));
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_4);
+        textView.setText(temp.substring(14, 15));
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_5);
+        textView.setText(temp.substring(18, 19));
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_6);
+        textView.setText(temp.substring(22, 23));
+
+    }
+
+    private void printBiangua_2(String temp) throws ParseException {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_1);
+        textView.setText(temp.substring(2, 3));
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_2);
+        textView.setText(temp.substring(6, 7));
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_3);
+        textView.setText(temp.substring(10, 11));
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_4);
+        textView.setText(temp.substring(14, 15));
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_5);
+        textView.setText(temp.substring(18, 19));
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_6);
+        textView.setText(temp.substring(22, 23));
+        //拿五行
+//        Intent intent = getIntent();
+//        String time = intent.getStringExtra("date");
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//
+//        Date date = formatter.parse(time);
+//
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+//        TianGanDiZhi ganzhi = new TianGanDiZhi(cal, date);
+//        String zhi_month_wuxing[] = ganzhi.getWuXing();
+//        //拼装
+//        zhi_month_wuxing[0] = zhi_month_wuxing[0] + "旺";
+//        zhi_month_wuxing[1] = zhi_month_wuxing[1] + "相";
+//        zhi_month_wuxing[2] = zhi_month_wuxing[2] + "死";
+//        zhi_month_wuxing[3] = zhi_month_wuxing[3] + "囚";
+//        zhi_month_wuxing[4] = zhi_month_wuxing[4] + "休";
+//        TextView textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_1);
+//        for (int i = 0; i <= 4; i++) {
+//            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_2);
+//        for (int i = 0; i <= 4; i++) {
+//            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_4);
+//        for (int i = 0; i <= 4; i++) {
+//            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_5);
+//        for (int i = 0; i <= 4; i++) {
+//            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_6);
+//        for (int i = 0; i <= 4; i++) {
+//            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+    }
+
+    private void printFushen_2(String temp) throws ParseException {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_fushen_1_3);
+        textView.setText(temp.substring(2, 3));
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_2_3);
+        textView.setText(temp.substring(6, 7));
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_3_3);
+        textView.setText(temp.substring(10, 11));
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_4_3);
+        textView.setText(temp.substring(14, 15));
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_5_3);
+        textView.setText(temp.substring(18, 19));
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_6_3);
+        textView.setText(temp.substring(22, 23));
+//        Intent intent = getIntent();
+//        String time = intent.getStringExtra("date");
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//
+//        Date date = formatter.parse(time);
+//
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+//        TianGanDiZhi ganzhi = new TianGanDiZhi(cal, date);
+//        String zhi_month_wuxing[] = ganzhi.getWuXing();
+//        //拼装
+//        zhi_month_wuxing[0] = zhi_month_wuxing[0] + "旺";
+//        zhi_month_wuxing[1] = zhi_month_wuxing[1] + "相";
+//        zhi_month_wuxing[2] = zhi_month_wuxing[2] + "死";
+//        zhi_month_wuxing[3] = zhi_month_wuxing[3] + "囚";
+//        zhi_month_wuxing[4] = zhi_month_wuxing[4] + "休";
+//        TextView textView = (TextView) findViewById(R.id.liuyaoresult_fushen_1_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_2_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_3_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_4_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_5_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_6_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (textView.getText().toString().equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+    }
+
+    //装卦表形态3
+    private void printZhuanggua_3(String temp) throws ParseException {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_1);
+        textView.setText(temp.substring(2, 3));
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_2);
+        textView.setText(temp.substring(6, 7));
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_3);
+        textView.setText(temp.substring(10, 11));
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_4);
+        textView.setText(temp.substring(14, 15));
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_5);
+        textView.setText(temp.substring(18, 19));
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_6);
+        textView.setText(temp.substring(22, 23));
+    }
+
+    private void printBiangua_3(String temp) throws ParseException {
+//        //拿五行
+//        Intent intent = getIntent();
+//        String time = intent.getStringExtra("date");
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//
+//        Date date = formatter.parse(time);
+//
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+//        TianGanDiZhi ganzhi = new TianGanDiZhi(cal, date);
+//        String zhi_month_wuxing[] = ganzhi.getWuXing();
+//        //拿日表
+//        JsonService jsonInstance = JsonService.getInstance();
+//        jsonInstance.createJsonObject(liuyaoData);
+//        String temp = jsonInstance.getDaytable();
+//        //拼装
+//        zhi_month_wuxing[0] = zhi_month_wuxing[0] + temp.substring(0, 1);
+//        zhi_month_wuxing[1] = zhi_month_wuxing[1] + temp.substring(1, 2);
+//        zhi_month_wuxing[2] = zhi_month_wuxing[2] + temp.substring(2, 3);
+//        zhi_month_wuxing[3] = zhi_month_wuxing[3] + temp.substring(3, 4);
+//        zhi_month_wuxing[4] = zhi_month_wuxing[4] + temp.substring(4);
+//        //填入
+//
+//        temp = jsonInstance.getZhuangGua1();
+//        TextView textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_1);
+//        for (int i = 0; i <= 4; i++) {
+//            if (temp.substring(2, 3).equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_2);
+//        for (int i = 0; i <= 4; i++) {
+//            if (temp.substring(6, 7).equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (temp.substring(10, 11).equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_4);
+//        for (int i = 0; i <= 4; i++) {
+//            if (temp.substring(14, 15).equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_5);
+//        for (int i = 0; i <= 4; i++) {
+//            if (temp.substring(18, 19).equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_6);
+//        for (int i = 0; i <= 4; i++) {
+//            if (temp.substring(22, 23).equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_1);
+        textView.setText(temp.substring(2, 3));
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_2);
+        textView.setText(temp.substring(6, 7));
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_3);
+        textView.setText(temp.substring(10, 11));
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_4);
+        textView.setText(temp.substring(14, 15));
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_5);
+        textView.setText(temp.substring(18, 19));
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_6);
+        textView.setText(temp.substring(22, 23));
+
+    }
+
+    private void printFushen_3(String temp) throws ParseException {
+//        //拿五行
+//        Intent intent = getIntent();
+//        String time = intent.getStringExtra("date");
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//
+//        Date date = formatter.parse(time);
+//
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+//        TianGanDiZhi ganzhi = new TianGanDiZhi(cal, date);
+//        String zhi_month_wuxing[] = ganzhi.getWuXing();
+//        //拿日表
+//        JsonService jsonInstance = JsonService.getInstance();
+//        jsonInstance.createJsonObject(liuyaoData);
+//        String temp = jsonInstance.getDaytable();
+//        //拼装
+//        zhi_month_wuxing[0] = zhi_month_wuxing[0] + temp.substring(0, 1);
+//        zhi_month_wuxing[1] = zhi_month_wuxing[1] + temp.substring(1, 2);
+//        zhi_month_wuxing[2] = zhi_month_wuxing[2] + temp.substring(2, 3);
+//        zhi_month_wuxing[3] = zhi_month_wuxing[3] + temp.substring(3, 4);
+//        zhi_month_wuxing[4] = zhi_month_wuxing[4] + temp.substring(4);
+//        //填入
+//
+//        temp = jsonInstance.getZhuangGua1();
+//        TextView textView = (TextView) findViewById(R.id.liuyaoresult_fushen_1_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (temp.substring(2, 3).equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_2_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (temp.substring(6, 7).equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_3_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (temp.substring(10, 11).equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_4_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (temp.substring(14, 15).equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_5_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (temp.substring(18, 19).equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+//        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_6_3);
+//        for (int i = 0; i <= 4; i++) {
+//            if (temp.substring(22, 23).equals(zhi_month_wuxing[i].toString().substring(0, 1))) {
+//                textView.setText(zhi_month_wuxing[i].toString().substring(1, 2));
+//                break;
+//            }
+//        }
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_fushen_1_3);
+        textView.setText(temp.substring(2, 3));
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_2_3);
+        textView.setText(temp.substring(6, 7));
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_3_3);
+        textView.setText(temp.substring(10, 11));
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_4_3);
+        textView.setText(temp.substring(14, 15));
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_5_3);
+        textView.setText(temp.substring(18, 19));
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_6_3);
+        textView.setText(temp.substring(22, 23));
+
+    }
+
+    //装卦表形态4
+    private void printZhuanggua_4(int[] temp) {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_1);
+        textView.setText("");
+        if (temp[0] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_2);
+        textView.setText("");
+        if (temp[1] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_3);
+        textView.setText("");
+        if (temp[2] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_4);
+        textView.setText("");
+        if (temp[3] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_5);
+        textView.setText("");
+        if (temp[4] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_6);
+        textView.setText("");
+        if (temp[5] == 1) {
+            textView.setText("刑");
+        }
+    }
+
+    private void printBiangua_4(int[] temp) {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_1);
+        textView.setText("");
+        if (temp[0] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_2);
+        textView.setText("");
+        if (temp[1] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_3);
+        textView.setText("");
+        if (temp[2] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_4);
+        textView.setText("");
+        if (temp[3] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_5);
+        textView.setText("");
+        if (temp[4] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_6);
+        textView.setText("");
+        if (temp[5] == 1) {
+            textView.setText("刑");
+        }
+    }
+
+    private void printFushen_4(int[] temp) {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_fushen_1_3);
+        textView.setText("");
+        if (temp[0] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_2_3);
+        textView.setText("");
+        if (temp[1] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_3_3);
+        textView.setText("");
+        if (temp[2] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_4_3);
+        textView.setText("");
+        if (temp[3] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_5_3);
+        textView.setText("");
+        if (temp[4] == 1) {
+            textView.setText("刑");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_6_3);
+        textView.setText("");
+        if (temp[5] == 1) {
+            textView.setText("刑");
+        }
+    }
+
+    //装卦表形态5
+    private void printZhuanggua_5(int[] temp) {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_1);
+        textView.setText("");
+        if (temp[0] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_2);
+        textView.setText("");
+        if (temp[1] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_3);
+        textView.setText("");
+        if (temp[2] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_4);
+        textView.setText("");
+        if (temp[3] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_5);
+        textView.setText("");
+        if (temp[4] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_6);
+        textView.setText("");
+        if (temp[5] == 1) {
+            textView.setText("冲");
+        }
+    }
+
+    private void printBiangua_5(int[] temp) {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_1);
+        textView.setText("");
+        if (temp[0] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_2);
+        textView.setText("");
+        if (temp[1] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_3);
+        textView.setText("");
+        if (temp[2] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_4);
+        textView.setText("");
+        if (temp[3] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_5);
+        textView.setText("");
+        if (temp[4] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_6);
+        textView.setText("");
+        if (temp[5] == 1) {
+            textView.setText("冲");
+        }
+    }
+
+    private void printFushen_5(int[] temp) {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_fushen_1_3);
+        textView.setText("");
+        if (temp[0] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_2_3);
+        textView.setText("");
+        if (temp[1] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_3_3);
+        textView.setText("");
+        if (temp[2] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_4_3);
+        textView.setText("");
+        if (temp[3] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_5_3);
+        textView.setText("");
+        if (temp[4] == 1) {
+            textView.setText("冲");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_6_3);
+        textView.setText("");
+        if (temp[5] == 1) {
+            textView.setText("冲");
+        }
+    }
+
+    //装卦表形态6
+    private void printZhuanggua_6(int[] temp) {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_1);
+        textView.setText("");
+        if (temp[0] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_2);
+        textView.setText("");
+        if (temp[1] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_3);
+        textView.setText("");
+        if (temp[2] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_4);
+        textView.setText("");
+        if (temp[3] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_5);
+        textView.setText("");
+        if (temp[4] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_3_6);
+        textView.setText("");
+        if (temp[5] == 1) {
+            textView.setText("害");
+        }
+    }
+    private void printBiangua_6(int[] temp) {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_1);
+        textView.setText("");
+        if (temp[0] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_2);
+        textView.setText("");
+        if (temp[1] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_3);
+        textView.setText("");
+        if (temp[2] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_4);
+        textView.setText("");
+        if (temp[3] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_5);
+        textView.setText("");
+        if (temp[4] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_wuxing_6);
+        textView.setText("");
+        if (temp[5] == 1) {
+            textView.setText("害");
+        }
+    }
+
+    private void printFushen_6(int[] temp) {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_fushen_1_3);
+        textView.setText("");
+        if (temp[0] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_2_3);
+        textView.setText("");
+        if (temp[1] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_3_3);
+        textView.setText("");
+        if (temp[2] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_4_3);
+        textView.setText("");
+        if (temp[3] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_5_3);
+        textView.setText("");
+        if (temp[4] == 1) {
+            textView.setText("害");
+        }
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_6_3);
+        textView.setText("");
+        if (temp[5] == 1) {
+            textView.setText("害");
+        }
+    }
+
+    //填上装卦左边那部分（不知道是什么了）
+    private void printHeaven(String heavenly_stems) {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_2_1);
+        String temp = heavenly_stems.substring(2, 3);
+        textView.setText(temp);
+
+        temp = heavenly_stems.substring(6, 7);
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_2_4);
+        textView.setText(temp);
+    }
+
+    //填上变卦里面类似的部分
+    private void printHeaven_biangua(String heavenly_biangua) {
+        TextView textView = (TextView) findViewById(R.id.biangua_branches_1);
+        String temp = heavenly_biangua.substring(2, 3);
+        textView.setText(temp);
+
+        temp = heavenly_biangua.substring(6, 7);
+        textView = (TextView) findViewById(R.id.biangua_branches_2);
+        textView.setText(temp);
+    }
+
+    //填上伏神里面的类似部分
+    private void printHeaven_fushen(String hevenly_fushen) {
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_fushen_1_2);
+        String temp = hevenly_fushen.substring(2, 3);
+        textView.setText(temp);
+
+        temp = hevenly_fushen.substring(6, 7);
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_4_2);
+        textView.setText(temp);
+    }
+
+    //填上装卦黄色那部分（再次不知道是什么了）
+    private void printEarthly(String earthly_branches) {
+        String temp = earthly_branches.substring(2, 3);
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_1_1);
+        textView.setText(temp);
+
+        temp = earthly_branches.substring(6, 7);
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_1_2);
+        textView.setText(temp);
+
+        temp = earthly_branches.substring(10, 11);
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_1_3);
+        textView.setText(temp);
+
+        temp = earthly_branches.substring(14, 15);
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_1_4);
+        textView.setText(temp);
+
+        temp = earthly_branches.substring(18, 19);
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_1_5);
+        textView.setText(temp);
+
+        temp = earthly_branches.substring(22, 23);
+        textView = (TextView) findViewById(R.id.liuyaoresult_zhuanggua_1_6);
+        textView.setText(temp);
+    }
+
+    //填上变卦表类似的部分
+    private void printEarthly_biangua(String earthly_biangua) {
+        String temp = earthly_biangua.substring(2, 3);
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_bg_dizhi_1);
+        textView.setText(temp);
+
+        temp = earthly_biangua.substring(6, 7);
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_dizhi_2);
+        textView.setText(temp);
+
+        temp = earthly_biangua.substring(10, 11);
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_dizhi_3);
+        textView.setText(temp);
+
+        temp = earthly_biangua.substring(14, 15);
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_dizhi_4);
+        textView.setText(temp);
+
+        temp = earthly_biangua.substring(18, 19);
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_dizhi_5);
+        textView.setText(temp);
+
+        temp = earthly_biangua.substring(22, 23);
+        textView = (TextView) findViewById(R.id.liuyaoresult_bg_dizhi_6);
+        textView.setText(temp);
+    }
+
+    // 填上伏神里面的类似部分
+    private void printEarthly_fushen(String earthly_fushen) {
+        String temp = earthly_fushen.substring(2, 3);
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_fushen_1_1);
+        textView.setText(temp);
+
+        temp = earthly_fushen.substring(6, 7);
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_2_1);
+        textView.setText(temp);
+
+        temp = earthly_fushen.substring(10, 11);
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_3_1);
+        textView.setText(temp);
+
+        temp = earthly_fushen.substring(14, 15);
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_4_1);
+        textView.setText(temp);
+
+        temp = earthly_fushen.substring(18, 19);
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_5_1);
+        textView.setText(temp);
+
+        temp = earthly_fushen.substring(22, 23);
+        textView = (TextView) findViewById(R.id.liuyaoresult_fushen_6_1);
+        textView.setText(temp);
+    }
+
 
     //回克逻辑
-    private void printHuiKe(){
+    private void printHuiKe() {
         HashMap HuiHe_map = new HashMap();
-        HuiHe_map.put("子","丑");
-        HuiHe_map.put("丑","子");
-        HuiHe_map.put("寅","亥");
-        HuiHe_map.put("卯","戌");
-        HuiHe_map.put("辰","酉");
-        HuiHe_map.put("巳","申");
-        HuiHe_map.put("午","未");
-        HuiHe_map.put("未","午");
-        HuiHe_map.put("申","巳");
-        HuiHe_map.put("酉","辰");
-        HuiHe_map.put("戌","卯");
-        HuiHe_map.put("亥","寅");
+        HuiHe_map.put("子", "丑");
+        HuiHe_map.put("丑", "子");
+        HuiHe_map.put("寅", "亥");
+        HuiHe_map.put("卯", "戌");
+        HuiHe_map.put("辰", "酉");
+        HuiHe_map.put("巳", "申");
+        HuiHe_map.put("午", "未");
+        HuiHe_map.put("未", "午");
+        HuiHe_map.put("申", "巳");
+        HuiHe_map.put("酉", "辰");
+        HuiHe_map.put("戌", "卯");
+        HuiHe_map.put("亥", "寅");
 
         HashMap Ke_map = new HashMap();
-        Ke_map.put("子","巳午");
-        Ke_map.put("丑","子亥");
-        Ke_map.put("寅","丑辰未戌");
-        Ke_map.put("卯","丑辰未戌");
-        Ke_map.put("辰","子亥");
-        Ke_map.put("巳","申酉");
-        Ke_map.put("午","申酉");
-        Ke_map.put("未","子亥");
-        Ke_map.put("申","寅卯");
-        Ke_map.put("酉","寅卯");
-        Ke_map.put("戌","子亥");
-        Ke_map.put("亥","巳午");
+        Ke_map.put("子", "巳午");
+        Ke_map.put("丑", "子亥");
+        Ke_map.put("寅", "丑辰未戌");
+        Ke_map.put("卯", "丑辰未戌");
+        Ke_map.put("辰", "子亥");
+        Ke_map.put("巳", "申酉");
+        Ke_map.put("午", "申酉");
+        Ke_map.put("未", "子亥");
+        Ke_map.put("申", "寅卯");
+        Ke_map.put("酉", "寅卯");
+        Ke_map.put("戌", "子亥");
+        Ke_map.put("亥", "巳午");
 
         HashMap Sheng_map = new HashMap();
-        Sheng_map.put("子","寅卯");
-        Sheng_map.put("丑","申酉");
-        Sheng_map.put("寅","巳午");
-        Sheng_map.put("卯","巳午");
-        Sheng_map.put("辰","申酉");
-        Sheng_map.put("巳","丑辰");
-        Sheng_map.put("午","丑辰");
-        Sheng_map.put("未","申酉");
-        Sheng_map.put("申","子亥");
-        Sheng_map.put("酉","子亥");
-        Sheng_map.put("戌","申酉");
-        Sheng_map.put("亥","寅卯");
+        Sheng_map.put("子", "寅卯");
+        Sheng_map.put("丑", "申酉");
+        Sheng_map.put("寅", "巳午");
+        Sheng_map.put("卯", "巳午");
+        Sheng_map.put("辰", "申酉");
+        Sheng_map.put("巳", "丑辰");
+        Sheng_map.put("午", "丑辰");
+        Sheng_map.put("未", "申酉");
+        Sheng_map.put("申", "子亥");
+        Sheng_map.put("酉", "子亥");
+        Sheng_map.put("戌", "申酉");
+        Sheng_map.put("亥", "寅卯");
 
         HashMap Hua_map = new HashMap();
-        Hua_map.put(1,"丑辰未戌");
-        Hua_map.put(2,"亥子");
-        Hua_map.put(3,"寅卯");
-        Hua_map.put(4,"巳午");
-        Hua_map.put(5,"申酉");
+        Hua_map.put(1, "丑辰未戌");
+        Hua_map.put(2, "亥子");
+        Hua_map.put(3, "寅卯");
+        Hua_map.put(4, "巳午");
+        Hua_map.put(5, "申酉");
 
-        for(int i=0;i<6;i++){
+        for (int i = 0; i < 6; i++) {
             hk_list.get(i).setText("");
-            Log.e("zhuanggua",bg_dizhi_list.get(i).getText().toString());
-            if(HuiHe_map.get(bg_dizhi_list.get(i).getText().toString()).equals(zg_kong.get(i).getText().toString())){
-                Log.e("biangua111",zg_kong.get(i).getText().toString());
+            Log.e("zhuanggua", bg_dizhi_list.get(i).getText().toString());
+            if (HuiHe_map.get(bg_dizhi_list.get(i).getText().toString()).equals(zg_kong.get(i).getText().toString())) {
+                Log.e("biangua111", zg_kong.get(i).getText().toString());
                 hk_list.get(i).setText("回合");
-            }
-
-            else if((Ke_map.get(bg_dizhi_list.get(i).getText()).toString()).contains(zg_kong.get(i).getText().toString())){
-                if( hk_list.get(i).equals("回合")) {
+            } else if ((Ke_map.get(bg_dizhi_list.get(i).getText()).toString()).contains(zg_kong.get(i).getText().toString())) {
+                if (hk_list.get(i).equals("回合")) {
                     hk_list.get(i).setText("合克");
                     continue;
-                }
-                else {
+                } else {
                     hk_list.get(i).setText("回克");
                     continue;
                 }
-            }
-
-            else if((Sheng_map.get(bg_dizhi_list.get(i).getText()).toString()).contains(zg_kong.get(i).getText().toString())){
+            } else if ((Sheng_map.get(bg_dizhi_list.get(i).getText()).toString()).contains(zg_kong.get(i).getText().toString())) {
                 hk_list.get(i).setText("回生");
                 continue;
             }
 
-            for (int j=1;j<6;j++){
-                if(Hua_map.get(j).toString().contains(bg_dizhi_list.get(i).getText().toString())&&Hua_map.get(j).toString().contains(zg_kong.get(i).getText().toString())){
-                    if("戌亥卯午酉".contains(bg_dizhi_list.get(i).getText().toString())){
+            for (int j = 1; j < 6; j++) {
+                if (Hua_map.get(j).toString().contains(bg_dizhi_list.get(i).getText().toString()) && Hua_map.get(j).toString().contains(zg_kong.get(i).getText().toString())) {
+                    if ("戌亥卯午酉".contains(bg_dizhi_list.get(i).getText().toString())) {
                         hk_list.get(i).setText("化进");
                     }
-                    if(bg_dizhi_list.get(i).getText().toString().equals("未")&&"辰丑".contains(zg_kong.get(i).getText().toString())){
+                    if (bg_dizhi_list.get(i).getText().toString().equals("未") && "辰丑".contains(zg_kong.get(i).getText().toString())) {
                         hk_list.get(i).setText("化进");
                     }
-                    if(bg_dizhi_list.get(i).getText().toString().equals("辰")&&zg_kong.get(i).getText().toString().equals("丑")){
+                    if (bg_dizhi_list.get(i).getText().toString().equals("辰") && zg_kong.get(i).getText().toString().equals("丑")) {
                         hk_list.get(i).setText("化进");
                     }
-                    if(bg_dizhi_list.get(i).getText().toString().equals(zg_kong.get(i).getText().toString())){
+                    if (bg_dizhi_list.get(i).getText().toString().equals(zg_kong.get(i).getText().toString())) {
                         hk_list.get(i).setText("");
-                    }
-                    else {
+                    } else {
                         hk_list.get(i).setText("化退");
                     }
 
@@ -1723,18 +2290,18 @@ public class Suangua_Result extends AppCompatActivity  {
     }
 
     //年月日里的亲表（极其暴力的实现）
-    private void printDateQin(){
+    private void printDateQin() {
         ArrayList<TextView> fushen_list = new ArrayList<>();
         ArrayList<TextView> liuqin_list = new ArrayList<>();
 
-        TextView fushen_1,fushen_2,fushen_3,fushen_4,fushen_5,fushen_6;
-        TextView liuqin_1,liuqin_2,liuqin_3,liuqin_4,liuqin_5,liuqin_6;
-        fushen_1 = (TextView)findViewById(R.id.liuyaoresult_fushen_1_1);
-        fushen_2 = (TextView)findViewById(R.id.liuyaoresult_fushen_2_1);
-        fushen_3 = (TextView)findViewById(R.id.liuyaoresult_fushen_3_1);
-        fushen_4 = (TextView)findViewById(R.id.liuyaoresult_fushen_4_1);
-        fushen_5 = (TextView)findViewById(R.id.liuyaoresult_fushen_5_1);
-        fushen_6 = (TextView)findViewById(R.id.liuyaoresult_fushen_6_1);
+        TextView fushen_1, fushen_2, fushen_3, fushen_4, fushen_5, fushen_6;
+        TextView liuqin_1, liuqin_2, liuqin_3, liuqin_4, liuqin_5, liuqin_6;
+        fushen_1 = (TextView) findViewById(R.id.liuyaoresult_fushen_1_1);
+        fushen_2 = (TextView) findViewById(R.id.liuyaoresult_fushen_2_1);
+        fushen_3 = (TextView) findViewById(R.id.liuyaoresult_fushen_3_1);
+        fushen_4 = (TextView) findViewById(R.id.liuyaoresult_fushen_4_1);
+        fushen_5 = (TextView) findViewById(R.id.liuyaoresult_fushen_5_1);
+        fushen_6 = (TextView) findViewById(R.id.liuyaoresult_fushen_6_1);
 
         fushen_list.add(fushen_1);
         fushen_list.add(fushen_2);
@@ -1743,12 +2310,12 @@ public class Suangua_Result extends AppCompatActivity  {
         fushen_list.add(fushen_5);
         fushen_list.add(fushen_6);
 
-        liuqin_1 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_1);
-        liuqin_2 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_2);
-        liuqin_3 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_3);
-        liuqin_4 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_4);
-        liuqin_5 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_5);
-        liuqin_6 = (TextView)findViewById(R.id.liuyaoresult_liuqin_3_6);
+        liuqin_1 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_1);
+        liuqin_2 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_2);
+        liuqin_3 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_3);
+        liuqin_4 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_4);
+        liuqin_5 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_5);
+        liuqin_6 = (TextView) findViewById(R.id.liuyaoresult_liuqin_3_6);
 
         liuqin_list.add(liuqin_1);
         liuqin_list.add(liuqin_2);
@@ -1757,175 +2324,219 @@ public class Suangua_Result extends AppCompatActivity  {
         liuqin_list.add(liuqin_5);
         liuqin_list.add(liuqin_6);
 
-        TextView textView = (TextView)findViewById(R.id.liuyaoresult_ganzhi_year_2);
-        TextView temp = (TextView)findViewById(R.id.liuqin_year);
+        TextView textView = (TextView) findViewById(R.id.liuyaoresult_ganzhi_year_2);
+        TextView temp = (TextView) findViewById(R.id.liuqin_year);
         String part = textView.getText().toString();
-        String full=new String();
-        switch (part){
-            case "丑":full = "丑辰未戌";
+        String full = new String();
+        switch (part) {
+            case "丑":
+                full = "丑辰未戌";
                 break;
-            case "辰":full = "丑辰未戌";
+            case "辰":
+                full = "丑辰未戌";
                 break;
-            case "未":full = "丑辰未戌";
+            case "未":
+                full = "丑辰未戌";
                 break;
-            case "戌":full = "丑辰未戌";
+            case "戌":
+                full = "丑辰未戌";
                 break;
-            case "亥":full = "亥子";
+            case "亥":
+                full = "亥子";
                 break;
-            case "子":full = "亥子";
+            case "子":
+                full = "亥子";
                 break;
-            case "寅":full = "寅卯";
+            case "寅":
+                full = "寅卯";
                 break;
-            case "卯":full = "寅卯";
+            case "卯":
+                full = "寅卯";
                 break;
-            case "巳":full = "巳午";
+            case "巳":
+                full = "巳午";
                 break;
-            case "午":full = "巳午";
+            case "午":
+                full = "巳午";
                 break;
-            case "申":full = "申酉";
+            case "申":
+                full = "申酉";
                 break;
-            case "酉":full = "申酉";
+            case "酉":
+                full = "申酉";
                 break;
             default:
                 break;
         }
-        for (int i = 0;i<6;i++){
-            if(full.contains(fushen_list.get(i).getText())){
-                if(liuqin_list.get(i).getText().toString().equals("子孙")||liuqin_list.get(i).getText().toString().equals("妻财")){
-                    temp.setText(liuqin_list.get(i).getText().toString().substring(1,2));
-                }
-                else {
-                    temp.setText(liuqin_list.get(i).getText().toString().substring(0,1));
+        for (int i = 0; i < 6; i++) {
+            if (full.contains(fushen_list.get(i).getText())) {
+                if (liuqin_list.get(i).getText().toString().equals("子孙") || liuqin_list.get(i).getText().toString().equals("妻财")) {
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(1, 2));
+                } else {
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(0, 1));
                 }
             }
         }
 
-        textView = (TextView)findViewById(R.id.liuyaoresult_ganzhi_month_2);
-        temp = (TextView)findViewById(R.id.liuqin_month);
+        textView = (TextView) findViewById(R.id.liuyaoresult_ganzhi_month_2);
+        temp = (TextView) findViewById(R.id.liuqin_month);
         part = textView.getText().toString();
-        full=new String();
-        switch (part){
-            case "丑":full = "丑辰未戌";
+        full = new String();
+        switch (part) {
+            case "丑":
+                full = "丑辰未戌";
                 break;
-            case "辰":full = "丑辰未戌";
+            case "辰":
+                full = "丑辰未戌";
                 break;
-            case "未":full = "丑辰未戌";
+            case "未":
+                full = "丑辰未戌";
                 break;
-            case "戌":full = "丑辰未戌";
+            case "戌":
+                full = "丑辰未戌";
                 break;
-            case "亥":full = "亥子";
+            case "亥":
+                full = "亥子";
                 break;
-            case "子":full = "亥子";
+            case "子":
+                full = "亥子";
                 break;
-            case "寅":full = "寅卯";
+            case "寅":
+                full = "寅卯";
                 break;
-            case "卯":full = "寅卯";
+            case "卯":
+                full = "寅卯";
                 break;
-            case "巳":full = "巳午";
+            case "巳":
+                full = "巳午";
                 break;
-            case "午":full = "巳午";
+            case "午":
+                full = "巳午";
                 break;
-            case "申":full = "申酉";
+            case "申":
+                full = "申酉";
                 break;
-            case "酉":full = "申酉";
+            case "酉":
+                full = "申酉";
                 break;
             default:
                 break;
         }
-        for (int i = 0;i<6;i++){
-            if(full.contains(fushen_list.get(i).getText())){
-                if(liuqin_list.get(i).getText().toString().equals("子孙")){
-                    temp.setText(liuqin_list.get(i).getText().toString().substring(1,2));
-                }
-                else {
-                    temp.setText(liuqin_list.get(i).getText().toString().substring(0,1));
+        for (int i = 0; i < 6; i++) {
+            if (full.contains(fushen_list.get(i).getText())) {
+                if (liuqin_list.get(i).getText().toString().equals("子孙") || liuqin_list.get(i).getText().toString().equals("妻财")) {
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(1, 2));
+                } else {
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(0, 1));
                 }
             }
         }
 
-        textView = (TextView)findViewById(R.id.liuyaoresult_ganzhi_day_2);
-        temp = (TextView)findViewById(R.id.liuqin_day);
+        textView = (TextView) findViewById(R.id.liuyaoresult_ganzhi_day_2);
+        temp = (TextView) findViewById(R.id.liuqin_day);
         part = textView.getText().toString();
-        full=new String();
-        switch (part){
-            case "丑":full = "丑辰未戌";
+        full = new String();
+        switch (part) {
+            case "丑":
+                full = "丑辰未戌";
                 break;
-            case "辰":full = "丑辰未戌";
+            case "辰":
+                full = "丑辰未戌";
                 break;
-            case "未":full = "丑辰未戌";
+            case "未":
+                full = "丑辰未戌";
                 break;
-            case "戌":full = "丑辰未戌";
+            case "戌":
+                full = "丑辰未戌";
                 break;
-            case "亥":full = "亥子";
+            case "亥":
+                full = "亥子";
                 break;
-            case "子":full = "亥子";
+            case "子":
+                full = "亥子";
                 break;
-            case "寅":full = "寅卯";
+            case "寅":
+                full = "寅卯";
                 break;
-            case "卯":full = "寅卯";
+            case "卯":
+                full = "寅卯";
                 break;
-            case "巳":full = "巳午";
+            case "巳":
+                full = "巳午";
                 break;
-            case "午":full = "巳午";
+            case "午":
+                full = "巳午";
                 break;
-            case "申":full = "申酉";
+            case "申":
+                full = "申酉";
                 break;
-            case "酉":full = "申酉";
+            case "酉":
+                full = "申酉";
                 break;
             default:
                 break;
         }
 
-        for (int i = 0;i<6;i++){
-            if(full.contains(fushen_list.get(i).getText())){
-                if(liuqin_list.get(i).getText().toString().equals("子孙")){
-                    temp.setText(liuqin_list.get(i).getText().toString().substring(1,2));
-                }
-                else {
-                    temp.setText(liuqin_list.get(i).getText().toString().substring(0,1));
+        for (int i = 0; i < 6; i++) {
+            if (full.contains(fushen_list.get(i).getText())) {
+                if (liuqin_list.get(i).getText().toString().equals("子孙") || liuqin_list.get(i).getText().toString().equals("妻财")) {
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(1, 2));
+                } else {
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(0, 1));
                 }
             }
         }
 
-        textView = (TextView)findViewById(R.id.liuyaoresult_ganzhi_hour_2);
-        temp = (TextView)findViewById(R.id.liuqin_hour);
+        textView = (TextView) findViewById(R.id.liuyaoresult_ganzhi_hour_2);
+        temp = (TextView) findViewById(R.id.liuqin_hour);
         part = textView.getText().toString();
-        full=new String();
-        switch (part){
-            case "丑":full = "丑辰未戌";
+        full = new String();
+        switch (part) {
+            case "丑":
+                full = "丑辰未戌";
                 break;
-            case "辰":full = "丑辰未戌";
+            case "辰":
+                full = "丑辰未戌";
                 break;
-            case "未":full = "丑辰未戌";
+            case "未":
+                full = "丑辰未戌";
                 break;
-            case "戌":full = "丑辰未戌";
+            case "戌":
+                full = "丑辰未戌";
                 break;
-            case "亥":full = "亥子";
+            case "亥":
+                full = "亥子";
                 break;
-            case "子":full = "亥子";
+            case "子":
+                full = "亥子";
                 break;
-            case "寅":full = "寅卯";
+            case "寅":
+                full = "寅卯";
                 break;
-            case "卯":full = "寅卯";
+            case "卯":
+                full = "寅卯";
                 break;
-            case "巳":full = "巳午";
+            case "巳":
+                full = "巳午";
                 break;
-            case "午":full = "巳午";
+            case "午":
+                full = "巳午";
                 break;
-            case "申":full = "申酉";
+            case "申":
+                full = "申酉";
                 break;
-            case "酉":full = "申酉";
+            case "酉":
+                full = "申酉";
                 break;
             default:
                 break;
         }
-        for (int i = 0;i<6;i++){
-            if(full.contains(fushen_list.get(i).getText())){
-                if(liuqin_list.get(i).getText().toString().equals("子孙")){
-                    temp.setText(liuqin_list.get(i).getText().toString().substring(1,2));
-                }
-                else {
-                    temp.setText(liuqin_list.get(i).getText().toString().substring(0,1));
+        for (int i = 0; i < 6; i++) {
+            if (full.contains(fushen_list.get(i).getText())) {
+                if (liuqin_list.get(i).getText().toString().equals("子孙") || liuqin_list.get(i).getText().toString().equals("妻财")) {
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(1, 2));
+                } else {
+                    temp.setText(liuqin_list.get(i).getText().toString().substring(0, 1));
                 }
             }
         }

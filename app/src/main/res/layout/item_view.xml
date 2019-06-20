@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignLeft="@id/item_img"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         android:background="#e9e5e5" />
     <ImageView
         android:id="@+id/item_iright"

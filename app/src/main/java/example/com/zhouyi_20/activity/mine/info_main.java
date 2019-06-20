@@ -2,6 +2,7 @@ package example.com.zhouyi_20.activity.mine;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import example.com.zhouyi_20.R;
+import example.com.zhouyi_20.activity.Pwd_Change;
 import example.com.zhouyi_20.tool.HttpsConnect;
 import example.com.zhouyi_20.tool.HttpsListener;
 import example.com.zhouyi_20.object.User;
@@ -67,7 +69,9 @@ public class info_main extends AppCompatActivity {
         birth_edit.setText(User.getBirthday());
         account_edit.setText(User.getAccount());
     }
-
+    /**
+     * 生日设置
+     */
     public void onBirth(View view){
 
         new DatePickerDialog(info_main.this, onDateSetListener, mYear, mMonth, mDay).show();
@@ -83,6 +87,9 @@ public class info_main extends AppCompatActivity {
             birth_edit.setText(days);
         }
     };
+    /**
+     * 保存按钮
+     */
     public void onSave(View view){
         name_change=name_change();
         id=User.getId();
@@ -102,7 +109,14 @@ public class info_main extends AppCompatActivity {
             }
         });
     }
+    /**
+     * 修改密码选项
+     */
+    public void onPassword(View view){
+        Intent to_pwdchange = new Intent(this, Pwd_Change.class);
+        startActivity(to_pwdchange);
 
+    }
     private JSONObject getJsonData() {
         JSONObject jsonObject = new JSONObject();
         try {

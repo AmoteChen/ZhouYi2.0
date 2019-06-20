@@ -20,6 +20,7 @@ public class Zhouyi_fragment extends Fragment implements View.OnClickListener {
     private ImageView bt_guayao;
     private ImageView bt_ziding;
     private ImageView bt_number;
+    private ImageView bt_shijian;
 
 
     @Override
@@ -33,8 +34,12 @@ public class Zhouyi_fragment extends Fragment implements View.OnClickListener {
         bt_number.setOnClickListener(this);
         bt_ziding = (ImageView) view.findViewById(R.id.main_bt_zidingyi);
         bt_ziding.setOnClickListener(this);
-
-
+        bt_shijian = (ImageView) view.findViewById(R.id.main_bt_shijian);
+        
+        bt_shijian.setBackgroundResource(R.color.hui);
+        bt_guayao.setBackgroundResource(R.color.hui);
+        bt_number.setBackgroundResource(R.color.hui);
+        bt_ziding.setBackgroundResource(R.color.hui);
         return view;
     }
 
@@ -62,7 +67,7 @@ public class Zhouyi_fragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.main_bt_zidingyi:
-                if (true) {
+                if (User.getState()) {
                     Intent to_ZidingNewRecord = new Intent(getActivity(), NewRecord.class);
                     to_ZidingNewRecord.putExtra("way", "自定");
                     to_ZidingNewRecord.putExtra("from", "ziding");
@@ -78,4 +83,3 @@ public class Zhouyi_fragment extends Fragment implements View.OnClickListener {
 
 
 }
-

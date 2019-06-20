@@ -3,19 +3,27 @@
     <declare-styleable name="item_view">
         <attr name="show_leftimg" format="integer" />
         <attr name="show_text" format="string" />
-        <attr name="show_login" format="boolean"/>
+        <attr name="show_login" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="info_item_edit">
-        <attr name="show_name" format="string"/>
+        <attr name="show_name" format="string" />
     </declare-styleable>
 
     <declare-styleable name="info_item_jump">
-        <attr name="show_name2" format="string"/>
+        <attr name="show_name2" format="string" />
+        <attr name="show_text2" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="setting_item_jump">
+        <attr name="show_setting_name" format="string" />
+        <attr name="setting_item_zuo" format="string" />
+        <attr name="setting_item_check" format="integer" />
+        <attr name="setting_item_you" format="string" />
     </declare-styleable>
 
     <declare-styleable name="about_item_jump">
-        <attr name="show_about_name" format="string"/>
+        <attr name="show_about_name" format="string" />
     </declare-styleable>
 
 </resources>

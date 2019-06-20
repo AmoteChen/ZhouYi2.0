@@ -2,13 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="example.com.zhouyi_20">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:allowBackup="true"
@@ -16,13 +15,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".activity.Main"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,22 +38,43 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activity.total_result.Suangua_Result"></activity>
-        <activity android:name=".activity.mine.mine_about"/>
-        <activity android:name=".activity.Login" />
-        <activity android:name=".activity.Register" />
-        <activity android:name=".activity.mine.info_main"></activity>
-        <activity android:name=".activity.mine.util.PermissionsActivity"></activity>
+        <activity
+            android:name=".activity.total_result.Suangua_Result"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.mine.mine_about"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Register"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.info_main"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.util.PermissionsActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.NewRecord"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".activity.liuyao.LiuYaoJinqiangua"/>
-        <activity android:name=".activity.Ziding.Zidinggua"/>
-        <activity android:name=".activity.Number.Numbergua"/>
-
-
-
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".activity.liuyao.LiuYaoJinqiangua"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Ziding.Zidinggua"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Number.Numbergua"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.mine_setting"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.Pwd_Change"/>
     </application>
 
 </manifest>

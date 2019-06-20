@@ -16,7 +16,7 @@
                 android:layout_width="match_parent" android:layout_height="0dp" android:orientation="vertical"
                 android:divider="@drawable/liuyao_result_table_line_n" android:showDividers="middle">
                 <TextView
-                    android:id="@+id/liuyaoresult_liushou_caption"
+                    android:id="@+id/liuyaoresult_liushen_caption"
                     android:textColor="#7e7e82" android:gravity="center" android:textStyle="bold"
                     android:autoSizeMaxTextSize="25dp" android:autoSizeMinTextSize="8dp" android:textSize="15dp"
                     android:autoSizeTextType="uniform"
@@ -246,9 +246,9 @@
                 <TextView
                     android:textColor="#7e7e82"
                     android:gravity="center" android:textStyle="bold"
-                    android:autoSizeMaxTextSize="20dp" android:autoSizeMinTextSize="8dp" android:textSize="15dp"
+                    android:textSize="13dp"
                     android:text="本卦"
-                    android:autoSizeTextType="uniform"
+ 
                     android:layout_width="match_parent" android:layout_height="match_parent"
                     android:background="#fbfcfc"/>
             </LinearLayout>
@@ -392,14 +392,12 @@
                     android:id="@+id/result_change_title_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:autoSizeMaxTextSize="20dp"
-                    android:autoSizeMinTextSize="8dp"
-                    android:autoSizeTextType="uniform"
+
                     android:background="#fbfcfc"
                     android:gravity="center"
                     android:text="装卦"
-                    android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textColor="#7e7e82"
+                    android:textSize="13dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -700,14 +698,12 @@
                     android:id="@+id/result_change_title_2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:autoSizeMaxTextSize="25dp"
-                    android:autoSizeMinTextSize="8dp"
-                    android:autoSizeTextType="uniform"
+
                     android:background="#fbfcfc"
                     android:gravity="center"
                     android:text="变卦"
-                    android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textColor="#7e7e82"
+                    android:textSize="13dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -1199,14 +1195,12 @@
                     android:id="@+id/result_change_title_3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:autoSizeMaxTextSize="25dp"
-                    android:autoSizeMinTextSize="8dp"
-                    android:autoSizeTextType="uniform"
+
                     android:background="#fbfcfc"
                     android:gravity="center"
                     android:text="伏神"
                     android:textColor="#7e7e82"
-                    android:textSize="15dp"
+                    android:textSize="13dp"
                     android:textStyle="bold" />
             </LinearLayout>
 

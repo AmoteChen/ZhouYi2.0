@@ -65,7 +65,8 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
     List<Integer> sg_temp = new ArrayList<>();
     List<Integer> xg_temp = new ArrayList<>();
 
-    private int[] remember = new int[4];
+    private int[] remember = new int[4];//记录用户的选择
+    private boolean isUseBiangua;//记录用户有没有使用过变卦
 
 
     private int[] send_list1 = new int[6];
@@ -90,9 +91,16 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        ini2();
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.zd_ok:
+                autoSetBiangua();
                 if (true/*zd_total_1.getText().length() == 18 && zd_total_2.getText().length() == 18*/) {
                     HttpsConnect.sendRequest(getInput, "POST", getJsonData(), new HttpsListener() {
                         @Override
@@ -119,6 +127,7 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
             case R.id.zd_total_2:
 
                 matchOldRecord(2);
+                isUseBiangua = true;//点了当然就用过了
                 break;
             default:
                 break;
@@ -558,6 +567,18 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
         xg_select_1.check(R.id.xg_1_2);
         sg_select_1.check(R.id.sg_1_1);
         xg_select_1.check(R.id.xg_1_1);
+        isUseBiangua = false;//一开始肯定没用过变卦
+    }
+
+    /**
+     * 点确定时用，如果用户没点过变卦，就把变卦设置成和本挂一样
+     */
+    private void autoSetBiangua() {
+        if (isUseBiangua == false) {
+            for (int i = 0; i < 6; i++) {
+                send_list2[i] = send_list1[i];//一定要这样做，不能直接=，因为这两个数组本来就有问题，当然我不可能去找是什么问题
+            }
+        }
     }
 
     /**
@@ -836,4 +857,3 @@ public class Zidinggua extends AppCompatActivity implements View.OnClickListener
     }
 
 }
-

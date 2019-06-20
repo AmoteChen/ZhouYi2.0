@@ -7,6 +7,7 @@
     <color name="colorSelected">#909090</color>
     <color name="white">#fff</color>
     <color name="black">#000000</color>
+    <color name="hui">#E6E6E6</color>
     <color name="zd_selected">#3f82bb</color>
     <color name="zd_Unselected">#d9d9e4</color>
 </resources>

@@ -34,31 +34,36 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="130dp"
             android:layout_marginTop="40dp">
 
             <RadioGroup
                 android:id="@+id/top_total"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="130dp"
                 android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/zd_total_1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/zd_selector"
                     android:button="@null"
                     android:gravity="center_horizontal"
                     android:textSize="14sp" />
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.07" />
+
                 <RadioButton
                     android:id="@+id/zd_total_2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_margin="4dp"
+                    android:layout_marginRight="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/zd_selector"
                     android:button="@null"
@@ -68,21 +73,22 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="130dp"
                 android:orientation="horizontal">
-
+                <!--本-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="25dp"
-                    android:layout_weight="1"
+                    android:layout_marginTop="55dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="0.2"
                     android:text="本"
                     android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="0.5"
                     android:orientation="vertical">
 
 
@@ -104,27 +110,32 @@
                         android:layout_weight="1"
                         android:background="@drawable/qian_path" />
                 </LinearLayout>
-
+                <!--卦-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="25dp"
-                    android:layout_weight="1"
+                    android:layout_marginTop="55dp"
+                    android:layout_weight="0.2"
                     android:text="卦"
                     android:textSize="18sp" />
-
+                <!--分隔-->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7" />
+                <!--变-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="25dp"
-                    android:layout_weight="1"
+                    android:layout_marginTop="55dp"
+                    android:layout_weight="0.2"
                     android:text="变"
                     android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="0.5"
                     android:orientation="vertical">
 
                     <ImageView
@@ -145,12 +156,13 @@
                         android:layout_weight="1"
                         android:background="@drawable/qian_path" />
                 </LinearLayout>
-
+                <!--卦-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="25dp"
-                    android:layout_weight="1"
+                    android:layout_marginTop="55dp"
+                    android:layout_weight="0.2"
+                    android:layout_marginRight="8dp"
                     android:text="卦"
                     android:textSize="18sp" />
 

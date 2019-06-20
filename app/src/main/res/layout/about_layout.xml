@@ -32,11 +32,14 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:id="@+id/banbenhao"
             android:layout_height="wrap_content"
             android:layout_below="@id/about_Name"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
             android:gravity="center"
-            android:text="V 1.1.4.1000" />
+            android:text="V 1.1.6.1000" />
     </RelativeLayout>
 
     <LinearLayout
@@ -104,8 +107,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="1.5"
         android:gravity="center"
-        android:text="Copyright © 1990-2018 Niaoniao. All Rights Reserved." />
+        android:text="©2008-2013 贞明易学文化发展中心 版权所有\nCopyright 2008-2013 © zhen ming yi\nAll rights reserved" />
 
 </LinearLayout>

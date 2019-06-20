@@ -32,7 +32,7 @@ public class History_fragment extends Fragment {
     SlideRecyclerView slideRecyclerView;
     LinearLayoutManager layoutManager;
     private SearchView mSearchView;
-    private List<Divination> divinations = new ArrayList<>();
+    private List<Divination> divinations = new ArrayList<>();//历史记录各项
     private HistoryAdapter historyAdapter;
     private HistoryAdapter searchAdapter;
     private View view;
@@ -70,7 +70,7 @@ public class History_fragment extends Fragment {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
                     if(TextUtils.isEmpty(query)){
-                        Toast.makeText(getContext(),"请输入查找内容", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(),"请输入查找内容", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         search_divinations.clear();
@@ -157,7 +157,7 @@ public class History_fragment extends Fragment {
     private JSONObject getJsonData() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("method", "time_new");
+            jsonObject.put("method", "time_gua");
             jsonObject.put("keyword", "");
             jsonObject.put("page", 1);
         } catch (Exception e) {
@@ -175,7 +175,7 @@ public class History_fragment extends Fragment {
                     Log.e("SSS",response.toString());
                     String result = RootJsonObject.getString("result");
                     String reason = RootJsonObject.getString("reason");
-                    Toast.makeText(getActivity(),reason,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(),reason,Toast.LENGTH_SHORT).show();
                     if(result.compareTo("success")==0){
                         JSONArray record = RootJsonObject.getJSONArray("record");
                         divinations.clear();

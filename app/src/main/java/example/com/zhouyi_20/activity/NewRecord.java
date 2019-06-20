@@ -107,7 +107,8 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
             spinner_init();
             history_init(way, date, reason, name, note);
         }
-
+        shiyou_edit.setText("test");
+        name_edit.setText("test");
     }
 
     /**
@@ -808,8 +809,8 @@ public class NewRecord extends AppCompatActivity implements View.OnClickListener
         for (int i = 0; i < 4; i++) {
             if (input[i] == 6) {
                 input[i] = 9;
-            } else if (input[i]==9){
-                input[i]=6;
+            } else if (input[i] == 9) {
+                input[i] = 6;
             }
         }
         for (int i = 0; i < input.length; i++) {

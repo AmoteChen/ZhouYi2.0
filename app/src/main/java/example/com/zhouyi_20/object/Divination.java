@@ -15,7 +15,7 @@ public class Divination {
     private String name;
     private String yongshen;
     private String note;
-    private JSONArray guaxiang;
+    private JSONArray guaxiang;//这个guaxiang应该就是那6个数
 
     public Divination() {
         this._id = "none";

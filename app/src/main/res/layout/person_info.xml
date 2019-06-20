@@ -59,6 +59,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:show_name2="电话：" />
+        <example.com.zhouyi_20.activity.mine.info_item_jump
+            android:id="@+id/person_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:show_name2="密码设置"
+            android:clickable="true"
+            android:onClick="onPassword"/>
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"

@@ -29,13 +29,13 @@
         android:layout_centerVertical="true">
 
         <EditText
-            android:id="@+id/login_et_name"
+            android:id="@+id/login_et_account"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="用户名"/>
+            android:hint="请输入手机号"/>
 
         <EditText
             android:id="@+id/login_et_password"
@@ -46,41 +46,41 @@
             android:gravity="center"
             android:hint="密码"/>
 
-        <EditText
-            android:id="@+id/login_et_account"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="请输入手机号"/>
+        <!--<EditText-->
+            <!--android:id="@+id/login_et_account"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:hint="请输入手机号"/>-->
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--<LinearLayout-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-            <EditText
-                android:id="@+id/login_et_code"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:hint="请输入验证码"/>
+            <!--<EditText-->
+                <!--android:id="@+id/login_et_code"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="2"-->
+                <!--android:gravity="center"-->
+                <!--android:hint="请输入验证码"/>-->
 
-            <Button
-                android:id="@+id/login_bt_getcode"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="获取验证码"/>
+            <!--<Button-->
+                <!--android:id="@+id/login_bt_getcode"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center"-->
+                <!--android:text="获取验证码"/>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:orientation="horizontal"

@@ -279,34 +279,34 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         });
     }
 
-    JSONObject getJsonData() {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("name", name);
-            jsonObject.put("password", password);
-            jsonObject.put("phone", account);
-        } catch (Exception e) {
-            e.printStackTrace();
+        JSONObject getJsonData() {
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("name", name);
+                jsonObject.put("password", password);
+                jsonObject.put("phone", account);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return jsonObject;
         }
-        return jsonObject;
-    }
 
-    private void catchResponse(final String response) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String result = jsonObject.getString("result");
-                    reason = jsonObject.getString("reason");
-                    realname = jsonObject.getString("realname");
-                    birthYM = jsonObject.getString("birthYM");
-                    name = jsonObject.getString("name");
-                    token = jsonObject.getString("token");
-                    id = jsonObject.getString("userId");
-                    if (result.compareTo("success") == 0) {
-                        Toast.makeText(Main.this, name+"登陆成功", Toast.LENGTH_SHORT).show();
-                        item_view.setState(true);
+        private void catchResponse(final String response) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String result = jsonObject.getString("result");
+                        reason = jsonObject.getString("reason");
+                        realname = jsonObject.getString("realname");
+                        birthYM = jsonObject.getString("birthYM");
+                        name = jsonObject.getString("name");
+                        token = jsonObject.getString("token");
+                        id = jsonObject.getString("userId");
+                        if (result.compareTo("success") == 0) {
+                            Toast.makeText(Main.this, name+"登陆成功", Toast.LENGTH_SHORT).show();
+                            item_view.setState(true);
 
 //                        name = jsonObject.getString("name");
 //                        account = jsonObject.getString("phone");
@@ -314,42 +314,42 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
 //                        User.setName(name);
 //                        User.setAccount(account);
 //                        User.setPassword(password);
-                        User.setName(User.getName());
-                        User.setState(true);
-                        User.setToken(token);
-                        User.setId(id);
-                        User.setTrue_name(realname);
-                        User.setBirthday(birthYM);
+                            User.setName(User.getName());
+                            User.setState(true);
+                            User.setToken(token);
+                            User.setId(id);
+                            User.setTrue_name(realname);
+                            User.setBirthday(birthYM);
 
-                        sp = getSharedPreferences(User.getAccount(), Context.MODE_PRIVATE);
-                        editor = sp.edit();
-                        editor.putString("name", User.getName());
+                            sp = getSharedPreferences(User.getAccount(), Context.MODE_PRIVATE);
+                            editor = sp.edit();
+                            editor.putString("name", User.getName());
 //                        editor.putString("account", User.getAccount());
-                        editor.putString("password", User.getPassword());
-                        editor.putBoolean("state", User.getState());
-                        editor.putString("token", User.getToken());
-                        editor.putString("id", User.getId());
-                        editor.commit();
+                            editor.putString("password", User.getPassword());
+                            editor.putBoolean("state", User.getState());
+                            editor.putString("token", User.getToken());
+                            editor.putString("id", User.getId());
+                            editor.commit();
 
-                        sp = getSharedPreferences("user", Context.MODE_PRIVATE);
-                        editor = sp.edit();
-                        editor.putString("name", User.getName());
+                            sp = getSharedPreferences("user", Context.MODE_PRIVATE);
+                            editor = sp.edit();
+                            editor.putString("name", User.getName());
 //                        editor.putString("account", User.getAccount());
-                        editor.putString("password", User.getPassword());
-                        editor.putBoolean("state", User.getState());
-                        editor.putString("token", User.getToken());
-                        editor.putString("id", User.getId());
-                        editor.commit();
+                            editor.putString("password", User.getPassword());
+                            editor.putBoolean("state", User.getState());
+                            editor.putString("token", User.getToken());
+                            editor.putString("id", User.getId());
+                            editor.commit();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            }
-        });
-    }
+            });
+        }
 
-    public static void setFragment_set(boolean fragment_set1){
-        fragment_set=fragment_set1;
-    }
+        public static void setFragment_set(boolean fragment_set1){
+            fragment_set=fragment_set1;
+        }
 
 }

@@ -31,6 +31,7 @@ public class info_item_jump extends LinearLayout {
         info_name2=findViewById(R.id.super_info_name);
         info_text2=findViewById(R.id.super_info_text);
         info_name2.setText(typedArray.getString(R.styleable.info_item_jump_show_name2));
+        info_text2.setText(typedArray.getString(R.styleable.info_item_jump_show_text2));
         initview();
 
     }

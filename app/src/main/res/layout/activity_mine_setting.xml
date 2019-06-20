@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.mine.mine_setting">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/jiamianyuyan"
+        android:layout_height="wrap_content"
+        android:text="界面语言"
+        android:textSize="18dp" />
+
+    <example.com.zhouyi_20.activity.mine.setting_item_jump
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_item_you="简体中文"
+        app:setting_item_zuo="界面语言" />
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/xianshisheding"
+        android:layout_height="wrap_content"
+        android:text="显示设定"
+        android:textSize="18dp" />
+    <example.com.zhouyi_20.activity.mine.setting_item_jump
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_item_you="全名"
+        app:setting_item_zuo="六兽" />
+    <example.com.zhouyi_20.activity.mine.setting_item_jump
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_item_you="全名"
+        app:setting_item_zuo="六亲" />
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/bugua"
+        android:layout_height="wrap_content"
+        android:text="卜卦"
+        android:textSize="18dp" />
+    <example.com.zhouyi_20.activity.mine.setting_item_jump
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_item_you="。。。"
+        app:setting_item_zuo="数字卦" />
+    <example.com.zhouyi_20.activity.mine.setting_item_jump
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_item_you="使用年干"
+        app:setting_item_zuo="时间卦" />
+    <example.com.zhouyi_20.activity.mine.setting_item_jump
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_item_you="水土共长生"
+        app:setting_item_zuo="长生排法" />
+    <example.com.zhouyi_20.activity.mine.setting_item_jump
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/zaoyezi"
+        app:setting_item_check="0x00000000"
+        app:setting_item_zuo="早夜子" />
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/wannianli"
+        android:layout_height="wrap_content"
+        android:text="万年历"
+        android:textSize="18dp" />
+    <example.com.zhouyi_20.activity.mine.setting_item_jump
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_item_you="中国"
+        app:setting_item_zuo="假期" />
+    <example.com.zhouyi_20.activity.mine.setting_item_jump
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_item_you="拆补法"
+        app:setting_item_zuo="奇门时局" />
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/ziliaoguanli"
+        android:layout_height="wrap_content"
+        android:text="资料管理"
+        android:textSize="18dp" />
+    <example.com.zhouyi_20.activity.mine.setting_item_jump
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_item_zuo="导出" />
+    <example.com.zhouyi_20.activity.mine.setting_item_jump
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_item_zuo="导入" />
+</LinearLayout>

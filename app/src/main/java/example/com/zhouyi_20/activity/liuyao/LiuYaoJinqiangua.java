@@ -135,8 +135,11 @@ public class LiuYaoJinqiangua extends AppCompatActivity implements View.OnClickL
         },accelerationSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
         //随机设置卦象
-        randomSetJinqiangua();
-        
+        //randomSetJinqiangua();
+        settingCase=1;
+        for (int i = 1; i <= 6; i++) {
+            setJinqianguaSingle(i);
+        }
     }
 
     // 结束当前活动，结束活动的时候把起卦界面的信息包装发送
@@ -162,7 +165,7 @@ public class LiuYaoJinqiangua extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.liuyao_jinqiangua_ok_btn:
                 getData();
-                finishJinqiangua();
+                finishJinqiangua();//
                 for(int i = 0;i<6;i++){
                 guaxiang[i]=jinqiangua_Result[i].intValue();
                 }

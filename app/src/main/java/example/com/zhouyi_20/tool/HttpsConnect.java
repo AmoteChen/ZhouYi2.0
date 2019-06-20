@@ -28,14 +28,14 @@ public class HttpsConnect {
             final String method,
             final JSONObject jsonData,
             final HttpsListener listener
-            ) {
+    ) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 HttpURLConnection connection = null;
                 try {
                     URL url = new URL(address);
-                    connection = (HttpURLConnection)url.openConnection();
+                    connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod(method);
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);
@@ -70,6 +70,7 @@ public class HttpsConnect {
             }
         }).start();
     }
+
     public static void sendRequest(
             final String address,
             final String method,
@@ -82,7 +83,7 @@ public class HttpsConnect {
                 HttpURLConnection connection = null;
                 try {
                     URL url = new URL(address);
-                    connection = (HttpURLConnection)url.openConnection();
+                    connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod(method);
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);
